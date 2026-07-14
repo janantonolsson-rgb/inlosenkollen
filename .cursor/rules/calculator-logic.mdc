@@ -1,0 +1,35 @@
+---
+description: Kalkylator- och routinglogik
+globs: src/lib/**,src/types/**,src/data/**,src/context/**
+alwaysApply: false
+---
+
+# Kalkylatorlogik
+
+## Kostnadsformel
+
+```
+kostnad = volym × (procent / 100) + transaktioner × fast_avgift
+```
+
+## Mix → priskategori
+
+Mappning i `MIX_TO_PRICING` (`src/types/calculator.ts`). Ändra mixkategori här först, sedan beräkningar.
+
+## Routing
+
+Regler i `src/lib/routing/engine.ts`. Lägre `priority` = körs först.
+Returnera `null` för att delegera till nästa regel.
+
+```typescript
+// Ny regel – registrera i defaultRoutingRules
+export const myRule: RoutingRule = {
+  id: 'my-rule',
+  priority: 50,
+  apply(ctx) { return null },
+}
+```
+
+## Defaults
+
+Exempeldata i `src/data/defaults.ts` – illustrationer, inte faktiska avtalspriser.

@@ -1,0 +1,22 @@
+---
+description: React-komponentmönster för UI
+globs: src/**/*.tsx
+alwaysApply: false
+---
+
+# React-komponenter
+
+- Funktionella komponenter, inga klasser
+- Affärslogik i `src/lib/`, inte i komponenter
+- Använd `CalculatorContext` för kalkylatordata
+- Delade UI: `src/components/shared/` (Button, Card)
+- Formatering: `formatters.ts`, validering: `validation.ts`
+
+## Tailwind
+
+Använd temavariabler: `text-primary`, `bg-accent`, `text-muted`, `border-border`.
+Minsta touch-target: `min-h-[44px]` på interaktiva element.
+
+## Texter
+
+All användartext på svenska. Undvik "garanterad besparing" – skriv "uppskattning" / "potentiell besparing".

@@ -1,0 +1,26 @@
+---
+description: Kärnkontext för Westpay routing-kalkylatorn
+alwaysApply: true
+---
+
+# Projekt
+
+Westpay intelligent routing-kalkylator – svensk B2B-webbapp (React 19, Vite, Tailwind 4).
+
+## Affärsregler
+
+- UI-text på svenska
+- Besparingar är **uppskattningar**, aldrig garanterade
+- Behåll disclaimer i `src/components/layout/Disclaimer.tsx`
+- Westpay = betalväxel/PSP, inte inlösare
+
+## Arkitektur
+
+- State: `CalculatorContext` (useReducer)
+- Logik: `src/lib/calculations.ts` + `src/lib/routing/engine.ts`
+- Typer: `src/types/calculator.ts`
+- Research: `payment_providers/` (markdown, separerad från appkod)
+
+## Stil
+
+Tailwind `@theme` i `src/index.css`: `primary`, `accent`, `surface`, `success`, `muted`.

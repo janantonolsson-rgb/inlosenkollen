@@ -1,0 +1,111 @@
+import { useCalculator } from '../../context/CalculatorContext'
+import { Card } from '../ui/Card'
+import { AcquirerCard } from './AcquirerCard'
+import { AcquirerCatalogPicker } from './AcquirerCatalogPicker'
+import { PricingModeToggle } from './PricingModeToggle'
+import { StepNavigation } from './shared/StepNavigation'
+
+export function StepAcquirers() {
+  const { state, dispatch } = useCalculator()
+  const isSimplified = state.pricingMode === 'simplified'
+  const hasAcquirers = state.acquirers.length > 0
+  const canCalculate = isSimplified || hasAcquirers
+
+  const handleCalculate = () => {
+    dispatch({ type: 'SHOW_RESULTS', payload: true })
+    dispatch({ type: 'SET_STEP', payload: 4 })
+    setTimeout(() => {
+      document.getElementById('resultat')?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
+  }
+
+  return (
+    <Card padding="lg">
+      <h2 className="text-lg font-semibold text-primary">Steg 3: Inlösenavtal</h2>
+      <p className="mt-2 text-sm text-muted">
+        Lägg till inlösare med priser per korttyp, importera etablerade aktörer, eller
+        använd ert genomsnittliga pris från steg 1.
+      </p>
+
+      <div className="mt-8">
+        <PricingModeToggle
+          mode={state.pricingMode}
+          onChange={(mode) => dispatch({ type: 'SET_PRICING_MODE', payload: mode })}
+        />
+      </div>
+
+      {isSimplified && (
+        <p className="mt-6 rounded-lg border border-border-subtle bg-surface px-4 py-3 text-sm text-muted">
+          I förenklat läge används det genomsnittliga pris ni angav i steg 1. Routing per
+          korttyp kräver detaljerade priser hos minst en inlösare.
+        </p>
+      )}
+
+      {state.pricingMode === 'catalog' && (
+        <div className="mt-8">
+          <AcquirerCatalogPicker
+            acquirers={state.acquirers}
+            onImport={(catalogId) =>
+              dispatch({ type: 'IMPORT_CATALOG_ACQUIRER', payload: catalogId })
+            }
+          />
+        </div>
+      )}
+
+      {!isSimplified && hasAcquirers && (
+        <div className="mt-8 space-y-6">
+          <h3 className="text-sm font-semibold text-primary">
+            {state.pricingMode === 'catalog' ? 'Importerade inlösare' : 'Era inlösare'}
+          </h3>
+          {state.acquirers.map((acquirer) => (
+            <AcquirerCard
+              key={acquirer.id}
+              id={acquirer.id}
+              name={acquirer.name}
+              pricing={acquirer.pricing}
+              canRemove={state.acquirers.length > 1}
+              onNameChange={(name) =>
+                dispatch({
+                  type: 'UPDATE_ACQUIRER_NAME',
+                  payload: { id: acquirer.id, name },
+                })
+              }
+              onRemove={() =>
+                dispatch({ type: 'REMOVE_ACQUIRER', payload: acquirer.id })
+              }
+              onPricingChange={(category, field, value) =>
+                dispatch({
+                  type: 'UPDATE_ACQUIRER_PRICING',
+                  payload: { id: acquirer.id, category, field, value },
+                })
+              }
+            />
+          ))}
+        </div>
+      )}
+
+      {state.pricingMode === 'manual' && (
+        <button
+          type="button"
+          onClick={() => dispatch({ type: 'ADD_ACQUIRER' })}
+          className="mt-6 flex w-full items-center justify-center rounded-lg border border-dashed border-border px-4 py-3 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          + Lägg till inlösare
+        </button>
+      )}
+
+      {!isSimplified && !hasAcquirers && state.pricingMode === 'manual' && (
+        <p className="mt-6 rounded-lg border border-border-subtle bg-surface px-4 py-3 text-sm text-muted">
+          Lägg till minst en inlösare med priser per korttyp, eller välj ett annat prisläge.
+        </p>
+      )}
+
+      <StepNavigation
+        onBack={() => dispatch({ type: 'SET_STEP', payload: 2 })}
+        onNext={handleCalculate}
+        nextLabel="Beräkna besparing"
+        nextDisabled={!canCalculate}
+      />
+    </Card>
+  )
+}

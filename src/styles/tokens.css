@@ -1,0 +1,58 @@
+/*
+ * Westpay design tokens
+ * Swap brand values here when official brand kit is provided.
+ */
+@theme {
+  /* Brand */
+  --color-primary: #0f172a;
+  --color-primary-light: #1e293b;
+  --color-accent: #863bff;
+  --color-accent-light: #a366ff;
+  --color-accent-muted: #ede6ff;
+  --color-surface: #fafafa;
+  --color-surface-elevated: #ffffff;
+  --color-card: #ffffff;
+  --color-success: #0d7c4e;
+  --color-success-light: #ecfdf5;
+  --color-muted: #64748b;
+  --color-muted-light: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
+
+  /* Chart */
+  --color-chart-current: #94a3b8;
+  --color-chart-routed: #863bff;
+  --color-chart-savings: #0d7c4e;
+  --color-chart-1: #863bff;
+  --color-chart-2: #0d7c4e;
+  --color-chart-3: #0f172a;
+  --color-chart-4: #64748b;
+  --color-chart-5: #a366ff;
+
+  /* Spacing */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 4rem;
+  --spacing-block: 1.5rem;
+  --spacing-block-lg: 2rem;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+
+  /* Shadow */
+  --shadow-subtle: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --shadow-card: 0 1px 3px 0 rgb(15 23 42 / 0.06), 0 1px 2px -1px rgb(15 23 42 / 0.06);
+  --shadow-elevated: 0 4px 6px -1px rgb(15 23 42 / 0.06), 0 2px 4px -2px rgb(15 23 42 / 0.06);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --text-display: 3rem;
+  --text-display-sm: 2.25rem;
+  --text-heading: 1.875rem;
+  --text-heading-sm: 1.5rem;
+  --text-body: 1rem;
+  --text-caption: 0.875rem;
+  --text-micro: 0.75rem;
+}

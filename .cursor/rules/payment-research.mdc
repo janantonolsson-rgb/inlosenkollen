@@ -1,0 +1,30 @@
+---
+description: Marknadsundersökning i payment_providers/
+globs: payment_providers/**
+alwaysApply: false
+---
+
+# payment_providers/
+
+Research om svenska betalningsaktörer – **inte appkod**.
+
+## Filstruktur
+
+- `README.md` – översikt, jämförelse, rekommendationer
+- `avgifter.md` – procent, fasta avgifter, månadskostnad
+- `villkor.md` – bindning, uppsägning, utbetalning
+- `*.md` – profil per bolag
+
+## Klassificering
+
+| Typ | Exempel | Inlösare? |
+|---|---|---|
+| Inlösare | Swedbank Pay, Nets/Nexi | Ja |
+| PSP/betalväxel | Stripe, Klarna, Westpay | Nej/indirekt |
+| Kortnätverk | Visa, Mastercard | Nej |
+
+## Vid uppdatering
+
+- Ange källa och datum (`Senast uppdaterad`)
+- Priser → `avgifter.md`, villkor → `villkor.md`
+- Uppdatera `README.md` tabeller vid nya profiler
