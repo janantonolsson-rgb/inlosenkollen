@@ -1,13 +1,16 @@
 import { Logo } from '../brand/Logo'
 import { Disclaimer } from './Disclaimer'
-
-const footerLinks = [
-  { href: '#kalkylator', label: 'Kalkylator' },
-  { href: '#hur-det-fungerar', label: 'Så fungerar det' },
-  { href: '#kontakt', label: 'Kontakt' },
-]
+import { useLanguage } from '../../i18n/LanguageContext'
 
 export function Footer() {
+  const { t, language } = useLanguage()
+
+  const footerLinks = [
+    { href: '#kalkylator', label: t.nav.calculator },
+    { href: '#hur-det-fungerar', label: t.nav.howItWorks },
+    { href: '#kontakt', label: t.nav.contact },
+  ]
+
   return (
     <footer className="border-t border-border bg-primary text-white">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
@@ -15,7 +18,9 @@ export function Footer() {
           <div className="max-w-sm">
             <Logo showWordmark variant="inverse" />
             <p className="mt-4 text-sm leading-relaxed text-white/70">
-              Intelligent betalningsrouting för nordiska handlare och retailföretag.
+              {language === 'sv'
+                ? 'Intelligent betalningsrouting för nordiska handlare och retailföretag.'
+                : 'Intelligent payment routing for Nordic merchants and retail companies.'}
             </p>
           </div>
           <nav className="flex flex-col gap-2.5" aria-label="Sidfotsnavigation">
@@ -36,7 +41,7 @@ export function Footer() {
         </div>
 
         <p className="mt-8 text-xs text-white/50">
-          © {new Date().getFullYear()} Alla rättigheter förbehållna.
+          © {new Date().getFullYear()} {t.footer.rights}
         </p>
       </div>
     </footer>

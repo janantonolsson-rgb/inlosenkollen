@@ -34,7 +34,7 @@ export function Logo({ className, showWordmark = true, size = 'md', variant = 'd
             size === 'sm' ? 'text-base' : 'text-lg',
           )}
         >
-          Routingkalkylatorn
+          Inlösenkollen
         </span>
       )}
     </span>

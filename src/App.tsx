@@ -9,8 +9,11 @@ import { ApmSection } from './components/marketing/ApmSection'
 import { HeroSection } from './components/marketing/HeroSection'
 import { HowItWorks } from './components/marketing/HowItWorks'
 import { Section, SectionHeader } from './components/ui/Section'
+import { LanguageProvider, useLanguage } from './i18n/LanguageContext'
 
-function App() {
+function AppContent() {
+  const { t } = useLanguage()
+
   return (
     <CalculatorProvider>
       <Header />
@@ -22,7 +25,7 @@ function App() {
             <SectionHeader
               align="center"
               className="mx-auto"
-              eyebrow="Kalkylator"
+              eyebrow={t.nav.calculator}
               title="Besparingskalkylator"
               description="Fyll i era uppgifter i tre steg för att se en uppskattning av er potentiella besparing. Alla siffror är exempeldata tills ni anger egna värden."
             />
@@ -48,6 +51,14 @@ function App() {
       </main>
       <Footer />
     </CalculatorProvider>
+  )
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   )
 }
 

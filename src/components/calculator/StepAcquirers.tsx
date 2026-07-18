@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useCalculator } from '../../context/CalculatorContext'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 import { AcquirerCard } from './AcquirerCard'
 import { AcquirerCatalogPicker } from './AcquirerCatalogPicker'
@@ -8,10 +9,12 @@ import { StepNavigation } from './shared/StepNavigation'
 
 export function StepAcquirers() {
   const { state, dispatch } = useCalculator()
+  const { t, language } = useLanguage()
   const isSimplified = state.pricingMode === 'simplified'
   const hasAcquirers = state.acquirers.length > 0
   const canCalculate = isSimplified || hasAcquirers
   const [showFixedFee, setShowFixedFee] = useState(false)
+  const [openAcquirerId, setOpenAcquirerId] = useState<string | null>(null)
 
   const handleCalculate = () => {
     dispatch({ type: 'SHOW_RESULTS', payload: true })
@@ -23,10 +26,9 @@ export function StepAcquirers() {
 
   return (
     <Card padding="lg">
-      <h2 className="text-lg font-semibold text-primary">Steg 3: Inlösenavtal</h2>
+      <h2 className="text-lg font-semibold text-primary">{t.calculator.step3Title}</h2>
       <p className="mt-2 text-sm text-muted">
-        Använd ert ungefärliga pris, importera etablerade inlösare med kända avgifter,
-        eller ange exakta priser per korttyp om ni har dem.
+        {t.calculator.step3Description}
       </p>
 
       <div className="mt-8">
@@ -38,8 +40,9 @@ export function StepAcquirers() {
 
       {isSimplified && (
         <p className="mt-6 rounded-lg border border-border-subtle bg-surface px-4 py-3 text-sm text-muted">
-          I förenklat läge används det genomsnittliga pris ni angav i steg 1. Routing per
-          korttyp kräver detaljerade priser hos minst en inlösare.
+          {language === 'sv'
+            ? 'I förenklat läge används det genomsnittliga pris ni angav i steg 1. Routing per korttyp kräver detaljerade priser hos minst en inlösare.'
+            : 'In simplified mode, the average price you entered in step 1 is used. Routing per card type requires detailed prices for at least one acquirer.'}
         </p>
       )}
 
@@ -58,14 +61,18 @@ export function StepAcquirers() {
         <div className="mt-8 space-y-6">
           <div className="flex items-center justify-between gap-4">
             <h3 className="text-sm font-semibold text-primary">
-              {state.pricingMode === 'catalog' ? 'Importerade inlösare' : 'Era inlösare'}
+              {state.pricingMode === 'catalog'
+                ? language === 'sv' ? 'Importerade inlösare' : 'Imported acquirers'
+                : language === 'sv' ? 'Era inlösare' : 'Your acquirers'}
             </h3>
             <button
               type="button"
               onClick={() => setShowFixedFee((v) => !v)}
               className="text-xs font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              {showFixedFee ? '− Dölj fasta avgifter' : '+ Visa fasta avgifter (avancerat)'}
+              {showFixedFee
+                ? language === 'sv' ? '− Dölj fasta avgifter' : '− Hide fixed fees'
+                : language === 'sv' ? '+ Visa fasta avgifter (avancerat)' : '+ Show fixed fees (advanced)'}
             </button>
           </div>
           {state.acquirers.map((acquirer) => (
@@ -75,6 +82,10 @@ export function StepAcquirers() {
               name={acquirer.name}
               pricing={acquirer.pricing}
               showFixedFee={showFixedFee}
+              isOpen={openAcquirerId === acquirer.id}
+              onToggle={() =>
+                setOpenAcquirerId((current) => (current === acquirer.id ? null : acquirer.id))
+              }
               canRemove={state.acquirers.length > 1}
               onNameChange={(name) =>
                 dispatch({
@@ -102,20 +113,22 @@ export function StepAcquirers() {
           onClick={() => dispatch({ type: 'ADD_ACQUIRER' })}
           className="mt-6 flex w-full items-center justify-center rounded-lg border border-dashed border-border px-4 py-3 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          + Lägg till inlösare
+          {language === 'sv' ? '+ Lägg till inlösare' : '+ Add acquirer'}
         </button>
       )}
 
       {!isSimplified && !hasAcquirers && state.pricingMode === 'manual' && (
         <p className="mt-6 rounded-lg border border-border-subtle bg-surface px-4 py-3 text-sm text-muted">
-          Lägg till minst en inlösare med priser per korttyp, eller välj ett annat prisläge.
+          {language === 'sv'
+            ? 'Lägg till minst en inlösare med priser per korttyp, eller välj ett annat prisläge.'
+            : 'Add at least one acquirer with prices per card type, or choose a different pricing mode.'}
         </p>
       )}
 
       <StepNavigation
         onBack={() => dispatch({ type: 'SET_STEP', payload: 2 })}
         onNext={handleCalculate}
-        nextLabel="Visa min besparing"
+        nextLabel={t.calculator.ctaCalculate}
         nextDisabled={!canCalculate}
       />
     </Card>

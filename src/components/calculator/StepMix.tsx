@@ -1,6 +1,7 @@
 import { useCalculator } from '../../context/CalculatorContext'
 import { getMixError, sumMix } from '../../lib/validation'
 import { MIX_CATEGORY_LABELS, type MixCategory } from '../../types/calculator'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { Button } from '../ui/Button'
 import { Badge } from '../ui/Badge'
 import { Card } from '../ui/Card'
@@ -21,6 +22,7 @@ const MIX_GROUPS: { title: string; categories: MixCategory[] }[] = [
 
 export function StepMix() {
   const { state, dispatch } = useCalculator()
+  const { t } = useLanguage()
   const mixError = getMixError(state.mix)
   const total = sumMix(state.mix)
 
@@ -32,7 +34,7 @@ export function StepMix() {
     <Card padding="lg">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-primary">Steg 2: Transaktionsmix</h2>
+          <h2 className="text-lg font-semibold text-primary">{t.calculator.step2Title}</h2>
           <p className="mt-2 text-sm text-muted">
             Ange hur stor andel av er volym som består av respektive korttyp. Summan ska
             vara 100 %.

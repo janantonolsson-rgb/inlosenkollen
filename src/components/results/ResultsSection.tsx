@@ -1,4 +1,5 @@
 import { useCalculator } from '../../context/CalculatorContext'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { CtaBand } from '../marketing/CtaBand'
 import { Disclaimer } from '../layout/Disclaimer'
 import { SectionHeader } from '../ui/Section'
@@ -12,6 +13,7 @@ import { VolumeDistributionChart } from './VolumeDistributionChart'
 
 export function ResultsSection() {
   const { state, results } = useCalculator()
+  const { t } = useLanguage()
 
   if (!state.showResults) return null
 
@@ -20,9 +22,9 @@ export function ResultsSection() {
   return (
     <section id="resultat" className="scroll-mt-20">
       <SectionHeader
-        eyebrow="Resultat"
-        title="Er uppskattade besparing"
-        description="Resultat baserat på angivna priser och volymer. Alla siffror är uppskattningar."
+        eyebrow={t.results.eyebrow}
+        title={t.results.title}
+        description={t.results.description}
       />
 
       <SavingsHero
@@ -35,9 +37,8 @@ export function ResultsSection() {
         <>
           <div className="mt-8">
             <MetricCards
-              currentMonthlyCost={results.currentMonthlyCost}
-              routedMonthlyCost={results.routedMonthlyCost}
-              monthlySavings={results.monthlySavings}
+              currentAnnualCost={results.currentAnnualCost}
+              routedAnnualCost={results.routedAnnualCost}
               annualSavings={results.annualSavings}
               percentSavings={results.percentSavings}
               threeYearSavings={results.threeYearSavings}
@@ -46,8 +47,8 @@ export function ResultsSection() {
 
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
             <BeforeAfterChart
-              currentMonthlyCost={results.currentMonthlyCost}
-              routedMonthlyCost={results.routedMonthlyCost}
+              currentAnnualCost={results.currentAnnualCost}
+              routedAnnualCost={results.routedAnnualCost}
             />
             <SavingsOverTimeChart data={results.accumulatedSavings} />
           </div>
@@ -57,9 +58,8 @@ export function ResultsSection() {
       {results.isSimplifiedMode && (
         <div className="mt-8">
           <MetricCards
-            currentMonthlyCost={results.currentMonthlyCost}
-            routedMonthlyCost={results.currentMonthlyCost}
-            monthlySavings={0}
+            currentAnnualCost={results.currentAnnualCost}
+            routedAnnualCost={results.currentAnnualCost}
             annualSavings={0}
             percentSavings={0}
             threeYearSavings={0}

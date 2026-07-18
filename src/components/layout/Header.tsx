@@ -2,12 +2,7 @@ import { useState } from 'react'
 import { Logo } from '../brand/Logo'
 import { Button } from '../ui/Button'
 import { cn } from '../../lib/cn'
-
-const navLinks = [
-  { href: '#kalkylator', label: 'Kalkylator' },
-  { href: '#hur-det-fungerar', label: 'Så fungerar det' },
-  { href: '#kontakt', label: 'Kontakt' },
-]
+import { useLanguage } from '../../i18n/LanguageContext'
 
 const scrollTo = (id: string) => {
   document.getElementById(id.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' })
@@ -15,6 +10,13 @@ const scrollTo = (id: string) => {
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { language, setLanguage, t } = useLanguage()
+
+  const navLinks = [
+    { href: '#kalkylator', label: t.nav.calculator },
+    { href: '#hur-det-fungerar', label: t.nav.howItWorks },
+    { href: '#kontakt', label: t.nav.contact },
+  ]
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false)
@@ -45,12 +47,21 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setLanguage(language === 'sv' ? 'en' : 'sv')}
+            className="hidden rounded-lg border border-border px-2.5 py-1.5 text-xs font-medium text-muted transition-colors hover:border-accent hover:text-accent sm:inline-flex"
+            aria-label="Byt språk / Switch language"
+          >
+            {language === 'sv' ? 'EN' : 'SV'}
+          </button>
+
           <Button
             size="sm"
             className="hidden sm:inline-flex"
             onClick={() => scrollTo('kontakt')}
           >
-            Boka analys
+            {t.leadForm.submit}
           </Button>
 
           <button
@@ -92,8 +103,15 @@ export function Header() {
               {link.label}
             </button>
           ))}
+          <button
+            type="button"
+            onClick={() => setLanguage(language === 'sv' ? 'en' : 'sv')}
+            className="mt-2 min-h-[44px] rounded-lg px-3 text-left text-sm font-medium text-muted hover:bg-surface"
+          >
+            {language === 'sv' ? 'Switch to English' : 'Byt till svenska'}
+          </button>
           <Button className="mt-2 w-full" onClick={() => handleNavClick('#kontakt')}>
-            Boka analys
+            {t.leadForm.submit}
           </Button>
         </nav>
       </div>

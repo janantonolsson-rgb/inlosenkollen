@@ -3,26 +3,23 @@ import { Card } from '../ui/Card'
 import { Metric, MetricGrid } from '../ui/Metric'
 
 interface MetricCardsProps {
-  currentMonthlyCost: number
-  routedMonthlyCost: number
-  monthlySavings: number
+  currentAnnualCost: number
+  routedAnnualCost: number
   annualSavings: number
   percentSavings: number
   threeYearSavings: number
 }
 
 export function MetricCards({
-  currentMonthlyCost,
-  routedMonthlyCost,
-  monthlySavings,
+  currentAnnualCost,
+  routedAnnualCost,
   annualSavings,
   percentSavings,
   threeYearSavings,
 }: MetricCardsProps) {
   const metrics: { label: string; value: string; highlight?: boolean }[] = [
-    { label: 'Nuvarande kostnad per månad', value: formatSEK(currentMonthlyCost) },
-    { label: 'Kostnad med intelligent routing', value: formatSEK(routedMonthlyCost) },
-    { label: 'Besparing per månad', value: formatSEK(monthlySavings), highlight: true },
+    { label: 'Nuvarande kostnad per år', value: formatSEK(currentAnnualCost) },
+    { label: 'Kostnad med intelligent routing', value: formatSEK(routedAnnualCost) },
     { label: 'Besparing per år', value: formatSEK(annualSavings), highlight: true },
     { label: 'Procentuell kostnadsminskning', value: formatPercent(percentSavings), highlight: true },
     { label: 'Beräknad besparing över tre år', value: formatSEK(threeYearSavings), highlight: true },

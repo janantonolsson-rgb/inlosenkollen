@@ -1,4 +1,5 @@
 import { cn } from '../../lib/cn'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 interface DisclaimerProps {
   compact?: boolean
@@ -6,6 +7,8 @@ interface DisclaimerProps {
 }
 
 export function Disclaimer({ compact = false, variant = 'default' }: DisclaimerProps) {
+  const { t } = useLanguage()
+
   return (
     <p
       className={cn(
@@ -15,10 +18,7 @@ export function Disclaimer({ compact = false, variant = 'default' }: DisclaimerP
         variant === 'inverse' && 'text-white/70',
       )}
     >
-      Beräkningen är en uppskattning och baseras helt på den information som anges.
-      Faktiska kostnader och besparingar påverkas bland annat av kortmix, interchange,
-      scheme fees, inlösenavtal, valutaväxling, minimikostnader, teknisk uppsättning och
-      övriga avtalsvillkor. Vi garanterar inte ett visst pris eller en viss besparing.
+      {t.disclaimer}
     </p>
   )
 }

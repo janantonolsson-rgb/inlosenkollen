@@ -12,12 +12,12 @@ import { formatSEK } from '../../lib/formatters'
 import { Card } from '../ui/Card'
 
 interface SavingsOverTimeChartProps {
-  data: { months: number; savings: number }[]
+  data: { years: number; savings: number }[]
 }
 
 export function SavingsOverTimeChart({ data }: SavingsOverTimeChartProps) {
   const chartData = data.map((d) => ({
-    label: d.months === 1 ? '1 mån' : `${d.months} mån`,
+    label: d.years === 1 ? 'År 1' : `År ${d.years}`,
     besparing: d.savings,
   }))
 
@@ -25,7 +25,7 @@ export function SavingsOverTimeChart({ data }: SavingsOverTimeChartProps) {
     <Card padding="lg">
       <h3 className="text-base font-semibold text-primary">Besparing över tid</h3>
       <p className="mt-1 text-sm text-muted">
-        Ackumulerad uppskattad besparing efter 1, 6, 12, 24 och 36 månader
+        Ackumulerad uppskattad besparing efter 1, 2 och 3 år
       </p>
       <div className="mt-8 h-64" aria-label="Linjediagram: ackumulerad besparing över tid">
         <ResponsiveContainer width="100%" height="100%">

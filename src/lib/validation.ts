@@ -17,7 +17,7 @@ export function getMixError(mix: TransactionMix): string | null {
 }
 
 export function validateVolume(volume: number, transactions: number): string | null {
-  if (volume <= 0) return 'Ange en positiv månatlig omsättning'
+  if (volume <= 0) return 'Ange en positiv årlig omsättning'
   if (transactions <= 0) return 'Ange ett positivt antal transaktioner'
   return null
 }

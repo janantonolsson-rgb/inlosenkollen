@@ -49,11 +49,11 @@ export function SensitivityPanel() {
                   <PresetChip
                     key={preset.value}
                     label={preset.label}
-                    selected={state.volume.monthlyVolume === preset.value}
+                    selected={state.volume.annualVolume === preset.value}
                     onClick={() =>
                       dispatch({
                         type: 'SET_VOLUME',
-                        payload: { monthlyVolume: preset.value },
+                        payload: { annualVolume: preset.value },
                       })
                     }
                   />
@@ -61,18 +61,18 @@ export function SensitivityPanel() {
               </PresetChipGroup>
               <CurrencyInput
                 id="sens-volume"
-                label="Månatlig omsättning"
-                value={state.volume.monthlyVolume}
+                label="Årlig omsättning"
+                value={state.volume.annualVolume}
                 onChange={(v) =>
-                  dispatch({ type: 'SET_VOLUME', payload: { monthlyVolume: v } })
+                  dispatch({ type: 'SET_VOLUME', payload: { annualVolume: v } })
                 }
               />
               <CurrencyInput
                 id="sens-transactions"
                 label="Antal transaktioner"
-                value={state.volume.monthlyTransactions}
+                value={state.volume.annualTransactions}
                 onChange={(v) =>
-                  dispatch({ type: 'SET_VOLUME', payload: { monthlyTransactions: v } })
+                  dispatch({ type: 'SET_VOLUME', payload: { annualTransactions: v } })
                 }
                 suffix="st"
               />
@@ -114,10 +114,10 @@ export function SensitivityPanel() {
               }
             />
             <div className="rounded-lg border border-border-subtle bg-surface px-4 py-4">
-              <p className="text-sm text-muted">Uppdaterad månatlig besparing</p>
+              <p className="text-sm text-muted">Uppdaterad årlig besparing</p>
               <p className="mt-1 text-2xl font-semibold tabular-nums text-success">
-                {results.monthlySavings > 0
-                  ? `${Math.round(results.monthlySavings).toLocaleString('sv-SE')} kr`
+                {results.annualSavings > 0
+                  ? `${Math.round(results.annualSavings).toLocaleString('sv-SE')} kr`
                   : '—'}
               </p>
             </div>

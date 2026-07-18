@@ -20,6 +20,14 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
         Välj etablerade kortinlösare och PSP:er med publicerade eller uppskattade avgifter
         från vår marknadsresearch. Priserna är illustrationer — inte garanti för ert avtal.
       </p>
+      <p className="mt-3 rounded-lg border border-border-subtle bg-surface px-3.5 py-2.5 text-sm text-muted">
+        Har ert företag redan ett förmånligt inlösenavtal via en branschorganisation, t.ex.
+        <strong className="font-medium text-primary"> Svensk Handel, Martin &amp; Servera</strong> eller
+        <strong className="font-medium text-primary"> Visita</strong>? Sådana medlemsavtal fungerar
+        precis lika bra tillsammans med intelligent routing — lägg helt enkelt till era exakta
+        priser under &quot;Detaljerade priser&quot; nedan. Lösningen är inte begränsad till ett
+        fåtal inlösare, utan fungerar med era befintliga och framtida avtal.
+      </p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         {[...acquirerCatalog]

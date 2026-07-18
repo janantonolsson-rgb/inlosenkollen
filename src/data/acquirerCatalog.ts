@@ -26,13 +26,13 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     name: 'Elavon',
     providerType: 'inlösare',
     description:
-      'Global kortinlösare. Via vårt partnerskap kan vi som mest erbjuda kunder Elavons ordinarie priser — ofta förmånligare än vad ett enskilt företag förhandlar fram själv.',
+      'Global kortinlösare. Genom vårt partnerskap med Elavon kan vi i många fall erbjuda mer fördelaktiga inlösenkostnader än vad många företag själva kan förhandla fram.',
     source: 'Partneravtal (kontakta oss för aktuella villkor)',
     highlight: 'Förvalt via partnerskap',
     isDefault: true,
     url: 'https://www.elavon.com',
     partnershipNote:
-      'Via vårt partnerskap med Elavon betalar våra kunder som mest Elavons ordinarie priser.',
+      'Genom vårt partnerskap med Elavon kan vi i många fall erbjuda mer fördelaktiga inlösenkostnader än vad många företag själva kan förhandla fram på egen hand.',
     // OBS (dev): priserna nedan är illustrativa platshållare — ersätt med de faktiska
     // partnervillkoren ni kan erbjuda via Elavon innan verktyget används skarpt.
     pricing: {
@@ -49,7 +49,8 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     name: 'Swedbank Pay',
     providerType: 'inlösare',
     description: 'Sveriges största kortinlösare. Kampanjpris från 0,79 %.',
-    source: 'payment_providers/swedbank-pay.md',
+    source: 'Publikt listpris',
+    url: 'https://www.swedbankpay.se/foretag',
     highlight: 'Från 0,79 %',
     pricing: {
       swedishDebit: { percent: 0.79, fixed: 0 },
@@ -65,7 +66,8 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     name: 'Stripe',
     providerType: 'psp',
     description: 'Publicerade kortpriser för EES debit/kredit och internationella kort.',
-    source: 'payment_providers/stripe.md',
+    source: 'Publikt listpris',
+    url: 'https://stripe.com/en-se/pricing',
     highlight: '1,5 % + 1,80 kr',
     pricing: {
       swedishDebit: { percent: 1.5, fixed: 1.8 },
@@ -81,7 +83,8 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     name: 'Worldline',
     providerType: 'inlösare',
     description: 'Worldline Checkout med publicerat paketpris från 1,95 %.',
-    source: 'payment_providers/worldline.md',
+    source: 'Publikt listpris',
+    url: 'https://worldline.com/en/home/campaign/checkout-lp',
     highlight: 'Från 1,95 %',
     pricing: {
       swedishDebit: { percent: 1.95, fixed: 0 },
@@ -97,7 +100,8 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     name: 'Nets / Nexi',
     providerType: 'inlösare',
     description: 'Offertbaserad prissättning. Uppskattat mellanläge för jämförelse.',
-    source: 'payment_providers/nets-nexi.md',
+    source: 'Uppskattning — bekräfta med aktuell offert innan kundmöte',
+    url: 'https://www.nexigroup.com/en/nets/',
     highlight: 'ca 1,5 % (uppskattning)',
     pricing: {
       swedishDebit: { percent: 1.5, fixed: 0.25 },

@@ -4,6 +4,7 @@ import { getAvgTransactionAmount } from '../../lib/calculations'
 import { formatSEK } from '../../lib/formatters'
 import { validateVolume } from '../../lib/validation'
 import { VOLUME_PRESETS } from '../../data/defaults'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 import { PresetChip, PresetChipGroup } from '../ui/PresetChip'
 import { CurrencyInput } from './shared/CurrencyInput'
@@ -12,39 +13,39 @@ import { StepNavigation } from './shared/StepNavigation'
 
 export function StepVolume() {
   const { state, dispatch } = useCalculator()
+  const { t, language } = useLanguage()
   const { volume } = state
   const avgAmount = getAvgTransactionAmount(volume)
-  const volumeError = validateVolume(volume.monthlyVolume, volume.monthlyTransactions)
+  const volumeError = validateVolume(volume.annualVolume, volume.annualTransactions)
   const [showAdvanced, setShowAdvanced] = useState(false)
 
   return (
     <Card padding="lg">
-      <h2 className="text-lg font-semibold text-primary">Steg 1: Företagets betalningsvolym</h2>
+      <h2 className="text-lg font-semibold text-primary">{t.calculator.step1Title}</h2>
       <p className="mt-2 text-sm text-muted">
-        Ange er nuvarande kortomsättning och ungefärliga inlösenkostnad. Kör ni bara med en
-        ungefärlig procentsats idag räcker det gott för en första uppskattning.
+        {t.calculator.step1Description}
       </p>
 
       <div className="mt-8">
-        <PresetChipGroup label="Snabbval">
+        <PresetChipGroup label={language === 'sv' ? 'Snabbval' : 'Quick select'}>
           {VOLUME_PRESETS.map((preset) => (
             <PresetChip
               key={preset.value}
-              label={`${preset.label}/mån`}
-              selected={volume.monthlyVolume === preset.value}
+              label={preset.label}
+              selected={volume.annualVolume === preset.value}
               onClick={() =>
                 dispatch({
                   type: 'SET_VOLUME',
-                  payload: { monthlyVolume: preset.value },
+                  payload: { annualVolume: preset.value },
                 })
               }
             />
           ))}
           <PresetChip
-            label="Annat belopp"
-            selected={!VOLUME_PRESETS.some((p) => p.value === volume.monthlyVolume)}
+            label={language === 'sv' ? 'Annat belopp' : 'Custom amount'}
+            selected={!VOLUME_PRESETS.some((p) => p.value === volume.annualVolume)}
             onClick={() => {
-              document.getElementById('monthlyVolume')?.focus()
+              document.getElementById('annualVolume')?.focus()
             }}
           />
         </PresetChipGroup>
@@ -52,37 +53,45 @@ export function StepVolume() {
 
       <div className="mt-8 grid gap-8 sm:grid-cols-2">
         <CurrencyInput
-          id="monthlyVolume"
-          label="Total kortomsättning per månad"
-          value={volume.monthlyVolume}
-          onChange={(v) => dispatch({ type: 'SET_VOLUME', payload: { monthlyVolume: v } })}
+          id="annualVolume"
+          label={t.calculator.annualVolume}
+          value={volume.annualVolume}
+          onChange={(v) => dispatch({ type: 'SET_VOLUME', payload: { annualVolume: v } })}
         />
         <CurrencyInput
-          id="monthlyTransactions"
-          label="Antal transaktioner per månad"
-          value={volume.monthlyTransactions}
+          id="annualTransactions"
+          label={t.calculator.annualTransactions}
+          value={volume.annualTransactions}
           onChange={(v) =>
-            dispatch({ type: 'SET_VOLUME', payload: { monthlyTransactions: v } })
+            dispatch({ type: 'SET_VOLUME', payload: { annualTransactions: v } })
           }
           suffix="st"
         />
         <PercentInput
           id="currentPercentFee"
-          label="Nuvarande genomsnittlig procentuell inlösenavgift"
-          hint="Den viktigaste siffran — de allra flesta känner till ungefär den här procentsatsen."
+          label={t.calculator.currentFee}
+          hint={
+            language === 'sv'
+              ? 'Den viktigaste siffran — de allra flesta känner till ungefär den här procentsatsen.'
+              : 'The most important figure — most people know roughly this percentage.'
+          }
           value={volume.currentPercentFee}
           onChange={(v) =>
             dispatch({ type: 'SET_VOLUME', payload: { currentPercentFee: v } })
           }
         />
         <div>
-          <p className="mb-1.5 text-sm font-medium text-primary">Genomsnittligt transaktionsbelopp</p>
+          <p className="mb-1.5 text-sm font-medium text-primary">
+            {language === 'sv' ? 'Genomsnittligt transaktionsbelopp' : 'Average transaction amount'}
+          </p>
           <div className="rounded-lg border border-border-subtle bg-surface px-3.5 py-2.5">
             <p className="text-sm font-semibold tabular-nums text-primary">
               {formatSEK(avgAmount, true)}
             </p>
             <p className="mt-0.5 text-xs text-muted">
-              Beräknas automatiskt: omsättning ÷ antal transaktioner
+              {language === 'sv'
+                ? 'Beräknas automatiskt: omsättning ÷ antal transaktioner'
+                : 'Calculated automatically: turnover ÷ number of transactions'}
             </p>
           </div>
         </div>
@@ -95,14 +104,20 @@ export function StepVolume() {
           className="text-sm font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-expanded={showAdvanced}
         >
-          {showAdvanced ? '− Dölj avancerade inställningar' : '+ Avancerade inställningar (fast avgift)'}
+          {showAdvanced
+            ? language === 'sv' ? '− Dölj avancerade inställningar' : '− Hide advanced settings'
+            : language === 'sv' ? '+ Avancerade inställningar (fast avgift)' : '+ Advanced settings (fixed fee)'}
         </button>
         {showAdvanced && (
           <div className="mt-4 max-w-xs">
             <CurrencyInput
               id="currentFixedFee"
-              label="Nuvarande fast avgift per transaktion"
-              hint="Används sällan — lämna på 0 om ni inte har en fast avgift per transaktion."
+              label={language === 'sv' ? 'Nuvarande fast avgift per transaktion' : 'Current fixed fee per transaction'}
+              hint={
+                language === 'sv'
+                  ? 'Används sällan — lämna på 0 om ni inte har en fast avgift per transaktion.'
+                  : 'Rarely used — leave at 0 if you don\u2019t have a fixed fee per transaction.'
+              }
               value={volume.currentFixedFee}
               onChange={(v) => dispatch({ type: 'SET_VOLUME', payload: { currentFixedFee: v } })}
               decimals

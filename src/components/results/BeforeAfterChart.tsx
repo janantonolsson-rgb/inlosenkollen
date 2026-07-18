@@ -13,19 +13,19 @@ import { formatSEK } from '../../lib/formatters'
 import { Card } from '../ui/Card'
 
 interface BeforeAfterChartProps {
-  currentMonthlyCost: number
-  routedMonthlyCost: number
+  currentAnnualCost: number
+  routedAnnualCost: number
 }
 
 export function BeforeAfterChart({
-  currentMonthlyCost,
-  routedMonthlyCost,
+  currentAnnualCost,
+  routedAnnualCost,
 }: BeforeAfterChartProps) {
   const data = [
     {
-      name: 'Månadskostnad',
-      nuvarande: currentMonthlyCost,
-      medRouting: routedMonthlyCost,
+      name: 'Årskostnad',
+      nuvarande: currentAnnualCost,
+      medRouting: routedAnnualCost,
     },
   ]
 

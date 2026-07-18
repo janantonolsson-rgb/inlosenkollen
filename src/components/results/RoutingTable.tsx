@@ -14,8 +14,8 @@ function RoutingRow({ row }: { row: CategoryRoutingResult }) {
       <p className="font-medium text-primary">{row.label}</p>
       <dl className="mt-3 space-y-2 text-sm">
         <div className="flex justify-between">
-          <dt className="text-muted">Omsättning</dt>
-          <dd className="tabular-nums text-primary">{formatSEK(row.monthlyVolume)}</dd>
+          <dt className="text-muted">Årlig omsättning</dt>
+          <dd className="tabular-nums text-primary">{formatSEK(row.annualVolume)}</dd>
         </div>
         <div className="flex justify-between">
           <dt className="text-muted">Nuvarande kostnad</dt>
@@ -35,7 +35,7 @@ function RoutingRow({ row }: { row: CategoryRoutingResult }) {
         </div>
         <div className="flex justify-between border-t border-border-subtle pt-2">
           <dt className="font-medium text-primary">Besparing</dt>
-          <dd className="font-semibold tabular-nums text-success">{formatSEK(row.monthlySavings)}</dd>
+          <dd className="font-semibold tabular-nums text-success">{formatSEK(row.annualSavings)}</dd>
         </div>
       </dl>
     </div>
@@ -65,11 +65,11 @@ export function RoutingTable({ categories, canRoute }: RoutingTableProps) {
           <thead className="sticky top-0 bg-surface-elevated">
             <tr className="border-b border-border text-xs text-muted">
               <th className="px-6 py-3 font-medium">Transaktionstyp</th>
-              <th className="px-6 py-3 font-medium">Månatlig omsättning</th>
+              <th className="px-6 py-3 font-medium">Årlig omsättning</th>
               <th className="px-6 py-3 font-medium">Nuvarande kostnad</th>
               <th className="px-6 py-3 font-medium">Rekommenderad inlösare</th>
               <th className="px-6 py-3 font-medium">Ny kostnad</th>
-              <th className="px-6 py-3 font-medium">Månatlig besparing</th>
+              <th className="px-6 py-3 font-medium">Årlig besparing</th>
             </tr>
           </thead>
           <tbody>
@@ -79,7 +79,7 @@ export function RoutingTable({ categories, canRoute }: RoutingTableProps) {
                 className="border-b border-border-subtle transition-colors last:border-0 hover:bg-surface"
               >
                 <td className="px-6 py-4 font-medium text-primary">{row.label}</td>
-                <td className="px-6 py-4 tabular-nums">{formatSEK(row.monthlyVolume)}</td>
+                <td className="px-6 py-4 tabular-nums">{formatSEK(row.annualVolume)}</td>
                 <td className="px-6 py-4 tabular-nums">{formatSEK(row.currentCost)}</td>
                 <td className="px-6 py-4">
                   <Badge variant="accent">
@@ -88,7 +88,7 @@ export function RoutingTable({ categories, canRoute }: RoutingTableProps) {
                 </td>
                 <td className="px-6 py-4 tabular-nums">{formatSEK(row.routedCost)}</td>
                 <td className="px-6 py-4 font-semibold tabular-nums text-success">
-                  {formatSEK(row.monthlySavings)}
+                  {formatSEK(row.annualSavings)}
                 </td>
               </tr>
             ))}

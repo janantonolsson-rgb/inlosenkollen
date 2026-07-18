@@ -19,6 +19,8 @@ interface AcquirerCardProps {
   pricing: AcquirerPricing
   canRemove: boolean
   showFixedFee?: boolean
+  isOpen: boolean
+  onToggle: () => void
   onNameChange: (name: string) => void
   onRemove: () => void
   onPricingChange: (
@@ -33,10 +35,15 @@ export function AcquirerCard({
   pricing,
   canRemove,
   showFixedFee = false,
+  isOpen,
+  onToggle,
   onNameChange,
   onRemove,
   onPricingChange,
 }: AcquirerCardProps) {
+  const avgPercent =
+    PRICING_CATEGORIES.reduce((sum, c) => sum + pricing[c].percent, 0) / PRICING_CATEGORIES.length
+
   return (
     <div className="rounded-xl border border-border bg-surface-elevated">
       <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4">
@@ -61,51 +68,67 @@ export function AcquirerCard({
         )}
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[480px] text-sm">
-          <thead>
-            <tr className="border-b border-border text-left text-xs text-muted">
-              <th className="px-5 py-3 font-medium">Korttyp</th>
-              <th className="px-5 py-3 font-medium">Procent</th>
-              {showFixedFee && (
-                <th className="px-5 py-3 font-medium text-muted-light">Fast avgift</th>
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {PRICING_CATEGORIES.map((category) => (
-              <tr key={category} className="border-b border-border-subtle last:border-0">
-                <td className="px-5 py-3 font-medium text-primary">
-                  {PRICING_CATEGORY_LABELS[category]}
-                </td>
-                <td className="px-5 py-2">
-                  <PercentInput
-                    id={`${name}-${category}-percent`}
-                    label={PRICING_CATEGORY_LABELS[category]}
-                    hideLabel
-                    inputSize="sm"
-                    value={pricing[category].percent}
-                    onChange={(v) => onPricingChange(category, 'percent', v)}
-                  />
-                </td>
+      <div className="flex items-center justify-between gap-4 px-5 py-3">
+        <p className="text-xs text-muted">
+          Snittavgift ca {avgPercent.toFixed(2).replace('.', ',')} % — 6 korttyper konfigurerade
+        </p>
+        <button
+          type="button"
+          onClick={onToggle}
+          className="shrink-0 text-xs font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          aria-expanded={isOpen}
+        >
+          {isOpen ? '− Dölj prisuppgifter' : 'Visa/redigera prisuppgifter'}
+        </button>
+      </div>
+
+      {isOpen && (
+        <div className="overflow-x-auto border-t border-border-subtle">
+          <table className="w-full min-w-[480px] text-sm">
+            <thead>
+              <tr className="border-b border-border text-left text-xs text-muted">
+                <th className="px-5 py-3 font-medium">Korttyp</th>
+                <th className="px-5 py-3 font-medium">Procent</th>
                 {showFixedFee && (
+                  <th className="px-5 py-3 font-medium text-muted-light">Fast avgift</th>
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {PRICING_CATEGORIES.map((category) => (
+                <tr key={category} className="border-b border-border-subtle last:border-0">
+                  <td className="px-5 py-3 font-medium text-primary">
+                    {PRICING_CATEGORY_LABELS[category]}
+                  </td>
                   <td className="px-5 py-2">
-                    <CurrencyInput
-                      id={`${name}-${category}-fixed`}
+                    <PercentInput
+                      id={`${name}-${category}-percent`}
                       label={PRICING_CATEGORY_LABELS[category]}
                       hideLabel
                       inputSize="sm"
-                      value={pricing[category].fixed}
-                      onChange={(v) => onPricingChange(category, 'fixed', v)}
-                      decimals
+                      value={pricing[category].percent}
+                      onChange={(v) => onPricingChange(category, 'percent', v)}
                     />
                   </td>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  {showFixedFee && (
+                    <td className="px-5 py-2">
+                      <CurrencyInput
+                        id={`${name}-${category}-fixed`}
+                        label={PRICING_CATEGORY_LABELS[category]}
+                        hideLabel
+                        inputSize="sm"
+                        value={pricing[category].fixed}
+                        onChange={(v) => onPricingChange(category, 'fixed', v)}
+                        decimals
+                      />
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   )
 }

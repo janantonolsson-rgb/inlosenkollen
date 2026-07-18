@@ -39,8 +39,8 @@ export interface Acquirer {
 export type TransactionMix = Record<MixCategory, number>
 
 export interface VolumeData {
-  monthlyVolume: number
-  monthlyTransactions: number
+  annualVolume: number
+  annualTransactions: number
   currentFixedFee: number
   currentPercentFee: number
 }
@@ -60,24 +60,23 @@ export interface CategoryRoutingResult {
   mixCategory: MixCategory
   label: string
   pricingCategory: PricingCategory
-  monthlyVolume: number
-  monthlyTransactions: number
+  annualVolume: number
+  annualTransactions: number
   currentCost: number
   routedCost: number
-  monthlySavings: number
+  annualSavings: number
   recommendedAcquirerId: string
   recommendedAcquirerName: string
 }
 
 export interface CalculationResult {
-  currentMonthlyCost: number
-  routedMonthlyCost: number
-  monthlySavings: number
+  currentAnnualCost: number
+  routedAnnualCost: number
   annualSavings: number
   percentSavings: number
   threeYearSavings: number
   categoryResults: CategoryRoutingResult[]
-  accumulatedSavings: { months: number; savings: number }[]
+  accumulatedSavings: { years: number; savings: number }[]
   acquirerVolumeDistribution: { acquirerId: string; acquirerName: string; volume: number; percentage: number }[]
   canRoute: boolean
   isSimplifiedMode: boolean

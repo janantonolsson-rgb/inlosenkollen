@@ -24,8 +24,8 @@ function defaultPricing(overrides: Partial<AcquirerPricing> = {}): AcquirerPrici
 }
 
 export const defaultVolume: VolumeData = {
-  monthlyVolume: 10_000_000,
-  monthlyTransactions: 250_000,
+  annualVolume: 250_000_000,
+  annualTransactions: 3_000_000,
   currentFixedFee: 0.25,
   currentPercentFee: 0.65,
 }
@@ -84,8 +84,9 @@ export const defaultCalculatorState: CalculatorState = {
 }
 
 export const VOLUME_PRESETS = [
-  { label: '10 M kr', value: 10_000_000 },
-  { label: '50 M kr', value: 50_000_000 },
-  { label: '250 M kr', value: 250_000_000 },
-  { label: '1 md kr', value: 1_000_000_000 },
+  { label: '50 Mkr', value: 50_000_000 },
+  { label: '250 Mkr', value: 250_000_000 },
+  { label: '1 Mdkr', value: 1_000_000_000 },
+  { label: '5 Mdkr', value: 5_000_000_000 },
+  { label: '10 Mdkr', value: 10_000_000_000 },
 ]
