@@ -22,11 +22,18 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
       </p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        {acquirerCatalog.map((entry) => {
+        {[...acquirerCatalog]
+          .sort((a, b) => (b.isDefault ? 1 : 0) - (a.isDefault ? 1 : 0))
+          .map((entry) => {
           const isImported = importedCatalogIds.has(entry.id)
 
           return (
-            <Card key={entry.id} padding="sm" variant="elevated" className="flex flex-col">
+            <Card
+              key={entry.id}
+              padding="sm"
+              variant="elevated"
+              className={`flex flex-col ${entry.isDefault ? 'ring-1 ring-accent' : ''}`}
+            >
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h3 className="font-semibold text-primary">{entry.name}</h3>
@@ -35,11 +42,29 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
                       {entry.providerType === 'inlösare' ? 'Inlösare' : 'PSP'}
                     </Badge>
                     <Badge variant="success">{entry.highlight}</Badge>
+                    {entry.isDefault && <Badge variant="accent">Rekommenderad</Badge>}
                   </div>
                 </div>
               </div>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">{entry.description}</p>
-              <p className="mt-2 text-xs text-muted-light">Källa: {entry.source}</p>
+              {entry.partnershipNote && (
+                <p className="mt-2 rounded-md bg-accent-muted/30 px-2.5 py-2 text-xs leading-relaxed text-primary">
+                  {entry.partnershipNote}
+                </p>
+              )}
+              <div className="mt-2 flex items-center justify-between gap-2">
+                <p className="text-xs text-muted-light">Källa: {entry.source}</p>
+                {entry.url && (
+                  <a
+                    href={entry.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-medium text-accent hover:underline"
+                  >
+                    Läs mer ↗
+                  </a>
+                )}
+              </div>
               <Button
                 type="button"
                 variant={isImported ? 'secondary' : 'primary'}

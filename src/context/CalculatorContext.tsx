@@ -72,11 +72,10 @@ function reducer(state: CalculatorState, action: Action): CalculatorState {
       }
     }
     case 'ADD_ACQUIRER': {
-      const count = state.acquirers.length
-      const letter = String.fromCharCode(65 + count)
+      const count = state.acquirers.filter((a) => !a.catalogId).length + 1
       return {
         ...state,
-        acquirers: [...state.acquirers, createAcquirer(`Inlösare ${letter}`)],
+        acquirers: [...state.acquirers, createAcquirer(`Ny inlösare ${count}`)],
       }
     }
     case 'REMOVE_ACQUIRER':

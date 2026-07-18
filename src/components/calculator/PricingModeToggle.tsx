@@ -8,19 +8,19 @@ interface PricingModeToggleProps {
 
 const options: { value: PricingMode; label: string; description: string }[] = [
   {
-    value: 'manual',
-    label: 'Detaljerade priser',
-    description: 'Ange priser per korttyp hos flera inlösare',
-  },
-  {
     value: 'simplified',
     label: 'Genomsnittspris',
-    description: 'Jag känner bara till mitt genomsnittliga pris',
+    description: 'Jag känner bara till mitt ungefärliga pris idag',
   },
   {
     value: 'catalog',
     label: 'Importera inlösare',
     description: 'Välj etablerade aktörer med publicerade avgifter',
+  },
+  {
+    value: 'manual',
+    label: 'Detaljerade priser',
+    description: 'Ange exakta priser per korttyp hos flera inlösare',
   },
 ]
 

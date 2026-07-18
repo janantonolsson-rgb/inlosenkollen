@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useCalculator } from '../../context/CalculatorContext'
 import { Card } from '../ui/Card'
 import { AcquirerCard } from './AcquirerCard'
@@ -10,6 +11,7 @@ export function StepAcquirers() {
   const isSimplified = state.pricingMode === 'simplified'
   const hasAcquirers = state.acquirers.length > 0
   const canCalculate = isSimplified || hasAcquirers
+  const [showFixedFee, setShowFixedFee] = useState(false)
 
   const handleCalculate = () => {
     dispatch({ type: 'SHOW_RESULTS', payload: true })
@@ -23,8 +25,8 @@ export function StepAcquirers() {
     <Card padding="lg">
       <h2 className="text-lg font-semibold text-primary">Steg 3: Inlösenavtal</h2>
       <p className="mt-2 text-sm text-muted">
-        Lägg till inlösare med priser per korttyp, importera etablerade aktörer, eller
-        använd ert genomsnittliga pris från steg 1.
+        Använd ert ungefärliga pris, importera etablerade inlösare med kända avgifter,
+        eller ange exakta priser per korttyp om ni har dem.
       </p>
 
       <div className="mt-8">
@@ -54,15 +56,25 @@ export function StepAcquirers() {
 
       {!isSimplified && hasAcquirers && (
         <div className="mt-8 space-y-6">
-          <h3 className="text-sm font-semibold text-primary">
-            {state.pricingMode === 'catalog' ? 'Importerade inlösare' : 'Era inlösare'}
-          </h3>
+          <div className="flex items-center justify-between gap-4">
+            <h3 className="text-sm font-semibold text-primary">
+              {state.pricingMode === 'catalog' ? 'Importerade inlösare' : 'Era inlösare'}
+            </h3>
+            <button
+              type="button"
+              onClick={() => setShowFixedFee((v) => !v)}
+              className="text-xs font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              {showFixedFee ? '− Dölj fasta avgifter' : '+ Visa fasta avgifter (avancerat)'}
+            </button>
+          </div>
           {state.acquirers.map((acquirer) => (
             <AcquirerCard
               key={acquirer.id}
               id={acquirer.id}
               name={acquirer.name}
               pricing={acquirer.pricing}
+              showFixedFee={showFixedFee}
               canRemove={state.acquirers.length > 1}
               onNameChange={(name) =>
                 dispatch({
@@ -103,7 +115,7 @@ export function StepAcquirers() {
       <StepNavigation
         onBack={() => dispatch({ type: 'SET_STEP', payload: 2 })}
         onNext={handleCalculate}
-        nextLabel="Beräkna besparing"
+        nextLabel="Visa min besparing"
         nextDisabled={!canCalculate}
       />
     </Card>

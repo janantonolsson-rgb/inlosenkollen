@@ -117,8 +117,8 @@ export function LeadForm() {
             required
           />
           <span className="text-sm leading-relaxed text-muted">
-            Jag godkänner att Westpay behandlar mina personuppgifter för att kontakta mig
-            angående en kostnadsanalys.
+            Jag godkänner att mina personuppgifter behandlas för att kontakta mig angående en
+            kostnadsanalys.
           </span>
         </label>
 

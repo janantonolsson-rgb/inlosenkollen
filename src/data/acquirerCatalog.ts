@@ -8,6 +8,12 @@ export interface CatalogAcquirer {
   source: string
   pricing: AcquirerPricing
   highlight: string
+  /** Extern länk till inlösarens webbplats, visas i katalogkortet. */
+  url?: string
+  /** Kort text om ett ev. partnerskap/avtal som ger kunden bättre villkor. */
+  partnershipNote?: string
+  /** Om true visas kortet som förvalt/rekommenderat i katalogen. */
+  isDefault?: boolean
 }
 
 /**
@@ -15,6 +21,29 @@ export interface CatalogAcquirer {
  * Inte faktiska avtalspriser — används som utgångspunkt i kalkylatorn.
  */
 export const acquirerCatalog: CatalogAcquirer[] = [
+  {
+    id: 'elavon',
+    name: 'Elavon',
+    providerType: 'inlösare',
+    description:
+      'Global kortinlösare. Via vårt partnerskap kan vi som mest erbjuda kunder Elavons ordinarie priser — ofta förmånligare än vad ett enskilt företag förhandlar fram själv.',
+    source: 'Partneravtal (kontakta oss för aktuella villkor)',
+    highlight: 'Förvalt via partnerskap',
+    isDefault: true,
+    url: 'https://www.elavon.com',
+    partnershipNote:
+      'Via vårt partnerskap med Elavon betalar våra kunder som mest Elavons ordinarie priser.',
+    // OBS (dev): priserna nedan är illustrativa platshållare — ersätt med de faktiska
+    // partnervillkoren ni kan erbjuda via Elavon innan verktyget används skarpt.
+    pricing: {
+      swedishDebit: { percent: 0.55, fixed: 0.1 },
+      swedishCredit: { percent: 0.65, fixed: 0.1 },
+      corporate: { percent: 1.35, fixed: 0.1 },
+      euEes: { percent: 0.8, fixed: 0.1 },
+      international: { percent: 1.8, fixed: 0.1 },
+      amex: { percent: 1.6, fixed: 0.1 },
+    },
+  },
   {
     id: 'swedbank-pay',
     name: 'Swedbank Pay',
@@ -77,6 +106,40 @@ export const acquirerCatalog: CatalogAcquirer[] = [
       euEes: { percent: 1.5, fixed: 0.25 },
       international: { percent: 2.5, fixed: 0.25 },
       amex: { percent: 2.5, fixed: 0.25 },
+    },
+  },
+  {
+    id: 'ecentric',
+    name: 'Ecentric',
+    providerType: 'inlösare',
+    description: 'Sydafrikansk/europeisk betalningsleverantör med fokus på fysisk handel. Offertbaserad prissättning.',
+    source: 'Uppskattning — bekräfta med aktuell offert innan kundmöte',
+    highlight: 'ca 1,6 % (uppskattning)',
+    url: 'https://www.ecentric.co.za',
+    pricing: {
+      swedishDebit: { percent: 1.6, fixed: 0.2 },
+      swedishCredit: { percent: 1.6, fixed: 0.2 },
+      corporate: { percent: 2.1, fixed: 0.2 },
+      euEes: { percent: 1.6, fixed: 0.2 },
+      international: { percent: 2.6, fixed: 0.2 },
+      amex: { percent: 2.6, fixed: 0.2 },
+    },
+  },
+  {
+    id: 'tietoevry',
+    name: 'Tietoevry',
+    providerType: 'inlösare',
+    description: 'Nordisk teknik- och betalningsleverantör. Offertbaserad prissättning, ofta paketerad med annan infrastruktur.',
+    source: 'Uppskattning — bekräfta med aktuell offert innan kundmöte',
+    highlight: 'ca 1,55 % (uppskattning)',
+    url: 'https://www.tietoevry.com',
+    pricing: {
+      swedishDebit: { percent: 1.55, fixed: 0.2 },
+      swedishCredit: { percent: 1.55, fixed: 0.2 },
+      corporate: { percent: 2.05, fixed: 0.2 },
+      euEes: { percent: 1.55, fixed: 0.2 },
+      international: { percent: 2.55, fixed: 0.2 },
+      amex: { percent: 2.55, fixed: 0.2 },
     },
   },
 ]

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useCalculator } from '../../context/CalculatorContext'
 import { getAvgTransactionAmount } from '../../lib/calculations'
 import { formatSEK } from '../../lib/formatters'
@@ -14,12 +15,14 @@ export function StepVolume() {
   const { volume } = state
   const avgAmount = getAvgTransactionAmount(volume)
   const volumeError = validateVolume(volume.monthlyVolume, volume.monthlyTransactions)
+  const [showAdvanced, setShowAdvanced] = useState(false)
 
   return (
     <Card padding="lg">
       <h2 className="text-lg font-semibold text-primary">Steg 1: Företagets betalningsvolym</h2>
       <p className="mt-2 text-sm text-muted">
-        Ange er nuvarande kortomsättning och genomsnittliga inlösenkostnader.
+        Ange er nuvarande kortomsättning och ungefärliga inlösenkostnad. Kör ni bara med en
+        ungefärlig procentsats idag räcker det gott för en första uppskattning.
       </p>
 
       <div className="mt-8">
@@ -37,6 +40,13 @@ export function StepVolume() {
               }
             />
           ))}
+          <PresetChip
+            label="Annat belopp"
+            selected={!VOLUME_PRESETS.some((p) => p.value === volume.monthlyVolume)}
+            onClick={() => {
+              document.getElementById('monthlyVolume')?.focus()
+            }}
+          />
         </PresetChipGroup>
       </div>
 
@@ -56,6 +66,15 @@ export function StepVolume() {
           }
           suffix="st"
         />
+        <PercentInput
+          id="currentPercentFee"
+          label="Nuvarande genomsnittlig procentuell inlösenavgift"
+          hint="Den viktigaste siffran — de allra flesta känner till ungefär den här procentsatsen."
+          value={volume.currentPercentFee}
+          onChange={(v) =>
+            dispatch({ type: 'SET_VOLUME', payload: { currentPercentFee: v } })
+          }
+        />
         <div>
           <p className="mb-1.5 text-sm font-medium text-primary">Genomsnittligt transaktionsbelopp</p>
           <div className="rounded-lg border border-border-subtle bg-surface px-3.5 py-2.5">
@@ -67,21 +86,29 @@ export function StepVolume() {
             </p>
           </div>
         </div>
-        <CurrencyInput
-          id="currentFixedFee"
-          label="Nuvarande fast avgift per transaktion"
-          value={volume.currentFixedFee}
-          onChange={(v) => dispatch({ type: 'SET_VOLUME', payload: { currentFixedFee: v } })}
-          decimals
-        />
-        <PercentInput
-          id="currentPercentFee"
-          label="Nuvarande genomsnittlig procentuell inlösenavgift"
-          value={volume.currentPercentFee}
-          onChange={(v) =>
-            dispatch({ type: 'SET_VOLUME', payload: { currentPercentFee: v } })
-          }
-        />
+      </div>
+
+      <div className="mt-6">
+        <button
+          type="button"
+          onClick={() => setShowAdvanced((v) => !v)}
+          className="text-sm font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          aria-expanded={showAdvanced}
+        >
+          {showAdvanced ? '− Dölj avancerade inställningar' : '+ Avancerade inställningar (fast avgift)'}
+        </button>
+        {showAdvanced && (
+          <div className="mt-4 max-w-xs">
+            <CurrencyInput
+              id="currentFixedFee"
+              label="Nuvarande fast avgift per transaktion"
+              hint="Används sällan — lämna på 0 om ni inte har en fast avgift per transaktion."
+              value={volume.currentFixedFee}
+              onChange={(v) => dispatch({ type: 'SET_VOLUME', payload: { currentFixedFee: v } })}
+              decimals
+            />
+          </div>
+        )}
       </div>
 
       {volumeError && (

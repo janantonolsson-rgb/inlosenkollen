@@ -14,11 +14,11 @@ export function RoutingIllustration() {
 
   return (
     <svg
-      viewBox="0 0 620 340"
+      viewBox="0 0 780 340"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="h-auto w-full"
-      aria-label="Illustration av intelligent routing: betalningar från olika kortnätverk skickas till olika kortinlösare"
+      aria-label="Illustration av intelligent routing: betalningar från olika kortnätverk skickas via routing till olika inlösare, som tillsammans avgör den totala transaktionskostnaden"
       role="img"
     >
       <defs>
@@ -38,6 +38,9 @@ export function RoutingIllustration() {
       </text>
       <text x="500" y="28" textAnchor="middle" fill="#94A3B8" fontSize="11" fontWeight="500" letterSpacing="0.08em">
         INLÖSARE
+      </text>
+      <text x="700" y="28" textAnchor="middle" fill="#94A3B8" fontSize="11" fontWeight="500" letterSpacing="0.08em">
+        RESULTAT
       </text>
 
       {cardSources.map((card, i) => (
@@ -108,6 +111,29 @@ export function RoutingIllustration() {
       <path d="M336 156 C380 120, 410 100, 428 100" stroke="#0D7C4E" strokeWidth="1.5" opacity="0.7" />
       <path d="M336 170 C390 170, 415 196, 428 196" stroke="#0D7C4E" strokeWidth="1.5" opacity="0.7" />
       <path d="M336 184 C380 220, 410 292, 428 292" stroke="#0D7C4E" strokeWidth="1.5" opacity="0.7" />
+
+      {/* Alla inlösare mynnar ut i en gemensam ruta: Totalkostnad */}
+      <path d="M612 100 C650 100, 660 150, 684 168" stroke="#0F172A" strokeWidth="1.5" opacity="0.55" />
+      <path d="M612 196 C650 196, 660 180, 684 172" stroke="#0F172A" strokeWidth="1.5" opacity="0.55" />
+      <path d="M612 292 C650 292, 660 210, 684 176" stroke="#0F172A" strokeWidth="1.5" opacity="0.55" />
+
+      <rect
+        x="684"
+        y="132"
+        width="88"
+        height="76"
+        rx="10"
+        fill="#0F172A"
+      />
+      <text x="728" y="164" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">
+        Total-
+      </text>
+      <text x="728" y="180" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">
+        kostnad
+      </text>
+      <text x="728" y="196" textAnchor="middle" fill="white" fillOpacity="0.6" fontSize="8">
+        per transaktion
+      </text>
     </svg>
   )
 }

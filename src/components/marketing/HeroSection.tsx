@@ -31,7 +31,7 @@ export function HeroSection() {
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button size="lg" onClick={() => scrollTo('kalkylator')}>
-                Beräkna min besparing
+                Se vad ni kan spara
               </Button>
               <Button
                 variant="secondary"

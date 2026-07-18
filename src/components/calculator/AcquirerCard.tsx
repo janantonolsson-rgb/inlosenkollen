@@ -18,6 +18,7 @@ interface AcquirerCardProps {
   name: string
   pricing: AcquirerPricing
   canRemove: boolean
+  showFixedFee?: boolean
   onNameChange: (name: string) => void
   onRemove: () => void
   onPricingChange: (
@@ -31,6 +32,7 @@ export function AcquirerCard({
   name,
   pricing,
   canRemove,
+  showFixedFee = false,
   onNameChange,
   onRemove,
   onPricingChange,
@@ -65,7 +67,9 @@ export function AcquirerCard({
             <tr className="border-b border-border text-left text-xs text-muted">
               <th className="px-5 py-3 font-medium">Korttyp</th>
               <th className="px-5 py-3 font-medium">Procent</th>
-              <th className="px-5 py-3 font-medium">Fast avgift</th>
+              {showFixedFee && (
+                <th className="px-5 py-3 font-medium text-muted-light">Fast avgift</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -84,17 +88,19 @@ export function AcquirerCard({
                     onChange={(v) => onPricingChange(category, 'percent', v)}
                   />
                 </td>
-                <td className="px-5 py-2">
-                  <CurrencyInput
-                    id={`${name}-${category}-fixed`}
-                    label={PRICING_CATEGORY_LABELS[category]}
-                    hideLabel
-                    inputSize="sm"
-                    value={pricing[category].fixed}
-                    onChange={(v) => onPricingChange(category, 'fixed', v)}
-                    decimals
-                  />
-                </td>
+                {showFixedFee && (
+                  <td className="px-5 py-2">
+                    <CurrencyInput
+                      id={`${name}-${category}-fixed`}
+                      label={PRICING_CATEGORY_LABELS[category]}
+                      hideLabel
+                      inputSize="sm"
+                      value={pricing[category].fixed}
+                      onChange={(v) => onPricingChange(category, 'fixed', v)}
+                      decimals
+                    />
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

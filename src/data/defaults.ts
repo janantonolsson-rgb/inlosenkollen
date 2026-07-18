@@ -5,7 +5,7 @@ import type {
   TransactionMix,
   VolumeData,
 } from '../types/calculator'
-import { type CatalogAcquirer } from './acquirerCatalog'
+import { acquirerCatalog, type CatalogAcquirer } from './acquirerCatalog'
 
 function createId(): string {
   return crypto.randomUUID()
@@ -24,8 +24,8 @@ function defaultPricing(overrides: Partial<AcquirerPricing> = {}): AcquirerPrici
 }
 
 export const defaultVolume: VolumeData = {
-  monthlyVolume: 5_000_000,
-  monthlyTransactions: 125_000,
+  monthlyVolume: 10_000_000,
+  monthlyTransactions: 250_000,
   currentFixedFee: 0.25,
   currentPercentFee: 0.65,
 }
@@ -42,35 +42,18 @@ export const defaultMix: TransactionMix = {
 
 export const exampleMix: TransactionMix = { ...defaultMix }
 
+const elavonCatalogEntry = acquirerCatalog.find((entry) => entry.id === 'elavon')!
+
+/**
+ * Standardinlösare vid sidladdning: Elavon, importerad från katalogen så att
+ * priserna alltid är i synk med acquirerCatalog.ts. Redigera priserna där, inte här.
+ */
 export const defaultAcquirers: Acquirer[] = [
   {
-    id: 'acquirer-a',
-    name: 'Inlösare A',
-    pricing: defaultPricing(),
-  },
-  {
-    id: 'acquirer-b',
-    name: 'Inlösare B',
-    pricing: defaultPricing({
-      swedishDebit: { percent: 0.38, fixed: 0.25 },
-      swedishCredit: { percent: 0.55, fixed: 0.25 },
-      corporate: { percent: 1.25, fixed: 0.25 },
-      euEes: { percent: 0.78, fixed: 0.25 },
-      international: { percent: 1.75, fixed: 0.25 },
-      amex: { percent: 1.55, fixed: 0.25 },
-    }),
-  },
-  {
-    id: 'acquirer-c',
-    name: 'Inlösare C',
-    pricing: defaultPricing({
-      swedishDebit: { percent: 0.42, fixed: 0.18 },
-      swedishCredit: { percent: 0.58, fixed: 0.18 },
-      corporate: { percent: 1.35, fixed: 0.18 },
-      euEes: { percent: 0.72, fixed: 0.18 },
-      international: { percent: 1.65, fixed: 0.18 },
-      amex: { percent: 1.45, fixed: 0.18 },
-    }),
+    id: 'default-elavon',
+    catalogId: elavonCatalogEntry.id,
+    name: elavonCatalogEntry.name,
+    pricing: structuredClone(elavonCatalogEntry.pricing),
   },
 ]
 
@@ -95,14 +78,14 @@ export const defaultCalculatorState: CalculatorState = {
   volume: defaultVolume,
   mix: defaultMix,
   acquirers: defaultAcquirers,
-  pricingMode: 'manual',
+  pricingMode: 'catalog',
   currentStep: 1,
   showResults: false,
 }
 
 export const VOLUME_PRESETS = [
-  { label: '1 M kr', value: 1_000_000 },
-  { label: '5 M kr', value: 5_000_000 },
-  { label: '20 M kr', value: 20_000_000 },
-  { label: '100 M kr', value: 100_000_000 },
+  { label: '10 M kr', value: 10_000_000 },
+  { label: '50 M kr', value: 50_000_000 },
+  { label: '250 M kr', value: 250_000_000 },
+  { label: '1 md kr', value: 1_000_000_000 },
 ]

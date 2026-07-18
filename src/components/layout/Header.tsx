@@ -27,7 +27,7 @@ export function Header() {
         <a
           href="#"
           className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-          aria-label="Westpay startsida"
+          aria-label="Till startsidan"
         >
           <Logo size="sm" />
         </a>

@@ -18,8 +18,7 @@ export function Disclaimer({ compact = false, variant = 'default' }: DisclaimerP
       Beräkningen är en uppskattning och baseras helt på den information som anges.
       Faktiska kostnader och besparingar påverkas bland annat av kortmix, interchange,
       scheme fees, inlösenavtal, valutaväxling, minimikostnader, teknisk uppsättning och
-      övriga avtalsvillkor. Westpay garanterar inte ett visst pris eller en viss
-      besparing.
+      övriga avtalsvillkor. Vi garanterar inte ett visst pris eller en viss besparing.
     </p>
   )
 }

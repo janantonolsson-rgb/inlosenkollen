@@ -36,7 +36,7 @@ export function Footer() {
         </div>
 
         <p className="mt-8 text-xs text-white/50">
-          © {new Date().getFullYear()} Westpay. Alla rättigheter förbehållna.
+          © {new Date().getFullYear()} Alla rättigheter förbehållna.
         </p>
       </div>
     </footer>

@@ -1,6 +1,6 @@
 import { parseSwedishNumber } from '../../../lib/formatters'
 import { Input } from '../../ui/Input'
-import { Label } from '../../ui/Field'
+import { Label, FieldHint } from '../../ui/Field'
 
 interface PercentInputProps {
   id: string
@@ -11,6 +11,7 @@ interface PercentInputProps {
   max?: number
   hideLabel?: boolean
   inputSize?: 'default' | 'sm'
+  hint?: string
 }
 
 export function PercentInput({
@@ -22,6 +23,7 @@ export function PercentInput({
   max = 100,
   hideLabel = false,
   inputSize = 'default',
+  hint,
 }: PercentInputProps) {
   return (
     <div>
@@ -37,7 +39,9 @@ export function PercentInput({
           const parsed = parseSwedishNumber(e.target.value)
           onChange(Math.min(max, Math.max(min, parsed)))
         }}
+        aria-describedby={hint ? `${id}-hint` : undefined}
       />
+      {hint && <FieldHint id={`${id}-hint`}>{hint}</FieldHint>}
     </div>
   )
 }

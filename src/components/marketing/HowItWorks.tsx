@@ -24,10 +24,26 @@ const steps = [
 ]
 
 const benefits = [
-  'Lägre transaktionskostnader genom optimerad prissättning',
-  'Bättre redundans vid driftstörning hos en enskild inlösare',
-  'Minskat beroende av en enskild leverantör',
-  'Möjlighet att optimera olika korttyper separat',
+  {
+    title: 'Lägre kostnad',
+    description: 'Varje transaktion routas till det avtal som ger bäst pris för just den korttypen.',
+  },
+  {
+    title: 'Högre driftsäkerhet',
+    description: 'Flera parallella inlösenavtal minskar risken att en enskild driftstörning stoppar betalningar helt.',
+  },
+  {
+    title: 'Redundans vid driftstopp',
+    description: 'Ligger en inlösare nere kan trafiken automatiskt styras om till en annan, utan manuellt ingrepp.',
+  },
+  {
+    title: 'Smart styrning av transaktioner',
+    description: 'Regler kan anpassas efter korttyp, belopp eller andra kriterier — inte bara lägsta pris.',
+  },
+  {
+    title: 'Flexibilitet över tid',
+    description: 'Nya inlösare kan läggas till eller viktas om i takt med att verksamheten och avtalen förändras.',
+  },
 ]
 
 export function HowItWorks() {
@@ -52,14 +68,20 @@ export function HowItWorks() {
       </div>
 
       <Card className="mt-8" padding="lg">
-        <h3 className="text-base font-semibold text-primary">Routing kan bidra till</h3>
-        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+        <h3 className="text-base font-semibold text-primary">Mer än bara lägre pris</h3>
+        <p className="mt-2 text-sm text-muted">
+          Intelligent routing handlar om att sänka kostnaden — men värdet stannar inte där.
+        </p>
+        <ul className="mt-5 grid gap-4 sm:grid-cols-2">
           {benefits.map((benefit) => (
-            <li key={benefit} className="flex items-start gap-2.5 text-sm text-muted">
+            <li key={benefit.title} className="flex items-start gap-2.5">
               <svg className="mt-0.5 h-4 w-4 shrink-0 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              {benefit}
+              <div>
+                <p className="text-sm font-medium text-primary">{benefit.title}</p>
+                <p className="mt-0.5 text-sm leading-relaxed text-muted">{benefit.description}</p>
+              </div>
             </li>
           ))}
         </ul>
