@@ -45,6 +45,9 @@ export interface TranslationDict {
     eyebrow: string
     title: string
     description: string
+    exampleDataTitle: string
+    exampleDataBody: string
+    exampleDataDismiss: string
   }
   leadForm: {
     title: string
@@ -121,6 +124,10 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Resultat',
       title: 'Er uppskattade besparing',
       description: 'Resultat baserat på angivna priser och årsvolymer. Alla siffror är uppskattningar.',
+      exampleDataTitle: 'Det här är en branschuppskattning, inte en verklig kalkyl',
+      exampleDataBody:
+        'Resultatet bygger just nu på exempeldata och/eller allmänna branschpriser. För en verklig beräkning av vad ni faktiskt kan spara — fyll i er egen omsättning, transaktionsmix och nuvarande pris i steg 1–2, och hör av er till de inlösare ni vill jämföra för att få deras faktiska villkor i steg 3. Det gör det till en riktig kalkyl, inte en gissning.',
+      exampleDataDismiss: 'Jag förstår, visa resultatet ändå',
     },
     leadForm: {
       title: 'Vill du veta vad ni faktiskt kan spara?',
@@ -191,6 +198,10 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Results',
       title: 'Your estimated savings',
       description: 'Results based on the prices and annual volumes provided. All figures are estimates.',
+      exampleDataTitle: 'This is an industry estimate, not a real calculation',
+      exampleDataBody:
+        'The result is currently based on example data and/or general industry prices. For a real calculation of what you could actually save — fill in your own turnover, transaction mix and current price in steps 1–2, and contact the acquirers you want to compare to get their actual terms in step 3. That turns this into a real calculation, not a guess.',
+      exampleDataDismiss: 'Got it, show the result anyway',
     },
     leadForm: {
       title: 'Want to know what you could actually save?',

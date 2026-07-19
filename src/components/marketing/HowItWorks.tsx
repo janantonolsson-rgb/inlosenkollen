@@ -2,7 +2,6 @@ import type { ReactElement } from 'react'
 import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
 import { SectionHeader } from '../ui/Section'
-import { RoutingIllustration } from './RoutingIllustration'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 type Step = {
@@ -109,12 +108,14 @@ const benefitsByLanguage: Record<'sv' | 'en', Benefit[]> = {
     },
     {
       title: 'Högre driftsäkerhet',
-      description: 'Flera parallella inlösenavtal minskar risken att en enskild driftstörning stoppar betalningar helt.',
+      description:
+        'Flera parallella inlösenavtal minskar risken att en enskild driftstörning stoppar betalningar helt. Internationella mätningar av kortbetalningstjänster visar exempel på runt 99 % upptid över flera år — vilket ändå innebär hundratals timmars nedgång som drabbar handlare med bara en inlösare.',
       icon: icons.shield,
     },
     {
       title: 'Redundans vid driftstopp',
-      description: 'Ligger en inlösare nere kan trafiken automatiskt styras om till en annan, utan manuellt ingrepp.',
+      description:
+        'Ligger en inlösare nere kan trafiken automatiskt styras om till en annan, utan manuellt ingrepp. I Storbritannien registrerade nio storbanker tillsammans över 33 dagars oplanerade tekniska driftstopp på två år — tid då handlare utan redundans inte kunde ta betalt alls.',
       icon: icons.redundancy,
     },
     {
@@ -136,12 +137,14 @@ const benefitsByLanguage: Record<'sv' | 'en', Benefit[]> = {
     },
     {
       title: 'Higher reliability',
-      description: 'Several parallel acquiring agreements reduce the risk that a single outage stops payments entirely.',
+      description:
+        'Several parallel acquiring agreements reduce the risk that a single outage stops payments entirely. International measurements of card payment services show examples of around 99% uptime over several years — which still adds up to hundreds of hours of downtime affecting merchants with only one acquirer.',
       icon: icons.shield,
     },
     {
       title: 'Redundancy during downtime',
-      description: 'If one acquirer is down, traffic can automatically be redirected to another, with no manual intervention.',
+      description:
+        'If one acquirer is down, traffic can automatically be redirected to another, with no manual intervention. In the UK, nine major banks together recorded more than 33 days of unplanned technical outages over two years — time during which merchants without redundancy couldn\u2019t take payments at all.',
       icon: icons.redundancy,
     },
     {
@@ -203,20 +206,6 @@ export function HowItWorks() {
       </div>
 
       <Card className="mt-8" padding="lg">
-        <div className="text-center">
-          <h3 className="text-base font-semibold text-primary">
-            {t.howItWorks.diagramTitle}
-          </h3>
-          <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
-            {t.howItWorks.diagramSubtitle}
-          </p>
-        </div>
-        <div className="mx-auto mt-8 max-w-3xl">
-          <RoutingIllustration />
-        </div>
-      </Card>
-
-      <Card className="mt-8" padding="lg">
         <h3 className="text-base font-semibold text-primary">{t.howItWorks.valueTitle}</h3>
         <p className="mt-2 text-sm text-muted">
           {t.howItWorks.valueSubtitle}
@@ -236,6 +225,11 @@ export function HowItWorks() {
         </ul>
         <p className="mt-6 rounded-lg border border-border-subtle bg-surface px-4 py-3 text-sm text-muted">
           {t.howItWorks.valueFootnote}
+        </p>
+        <p className="mt-2 text-xs text-muted-light">
+          {language === 'sv'
+            ? 'Källa driftstatistik: Shopify, "Payment Processing Outages" (2026), baserat på mätningar i Australien och Storbritannien. Svenska/nordiska siffror saknas ännu, men mönstret är representativt för branschen internationellt.'
+            : 'Uptime statistics source: Shopify, "Payment Processing Outages" (2026), based on measurements in Australia and the UK. Swedish/Nordic figures are not yet available, but the pattern is representative of the industry internationally.'}
         </p>
       </Card>
 

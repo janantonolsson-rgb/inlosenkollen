@@ -83,6 +83,16 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
               >
                 {isImported ? 'Importerad' : 'Importera'}
               </Button>
+              {entry.applyUrl && (
+                <a
+                  href={entry.applyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 block text-center text-xs font-medium text-accent hover:underline"
+                >
+                  {entry.applyLabel ?? `Ansök / bli kund hos ${entry.name}`} ↗
+                </a>
+              )}
             </Card>
           )
         })}

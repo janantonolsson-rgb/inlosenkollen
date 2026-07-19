@@ -73,7 +73,7 @@ export function calculateResults(
   const currentAnnualCost = calculateCurrentAnnualCost(volume)
   const annualTransactions = getAnnualTransactions(volume)
   const isSimplifiedMode = pricingMode === 'simplified'
-  const canRoute = !isSimplifiedMode && acquirers.length > 0
+  const canRoute = !isSimplifiedMode
 
   if (!canRoute) {
     return {

@@ -12,7 +12,7 @@ export function StepAcquirers() {
   const { t, language } = useLanguage()
   const isSimplified = state.pricingMode === 'simplified'
   const hasAcquirers = state.acquirers.length > 0
-  const canCalculate = isSimplified || hasAcquirers
+  const canCalculate = true
   const [showFixedFee, setShowFixedFee] = useState(false)
   const [openAcquirerId, setOpenAcquirerId] = useState<string | null>(null)
 
@@ -117,11 +117,11 @@ export function StepAcquirers() {
         </button>
       )}
 
-      {!isSimplified && !hasAcquirers && state.pricingMode === 'manual' && (
+      {!isSimplified && !hasAcquirers && (
         <p className="mt-6 rounded-lg border border-border-subtle bg-surface px-4 py-3 text-sm text-muted">
           {language === 'sv'
-            ? 'Lägg till minst en inlösare med priser per korttyp, eller välj ett annat prisläge.'
-            : 'Add at least one acquirer with prices per card type, or choose a different pricing mode.'}
+            ? 'Ingen inlösare vald ännu. Ni kan fortsätta utan att lägga till någon — resultatet visar då 0 kr i besparing eftersom det inte finns något att jämföra mot.'
+            : 'No acquirer added yet. You can continue without adding one — the result will then show 0 SEK in savings since there is nothing to compare against.'}
         </p>
       )}
 

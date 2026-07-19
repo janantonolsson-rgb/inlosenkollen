@@ -1,6 +1,7 @@
 import { Button } from '../ui/Button'
 import { PageContainer } from '../layout/PageContainer'
 import { useLanguage } from '../../i18n/LanguageContext'
+import { RoutingIllustration } from './RoutingIllustration'
 
 const scrollTo = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -18,7 +19,7 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-accent-muted/20 via-transparent to-transparent" />
       </div>
 
-      <PageContainer className="relative py-20 sm:py-28">
+      <PageContainer className="relative py-16 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
           <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-accent">
             {t.hero.eyebrow}
@@ -34,8 +35,24 @@ export function HeroSection() {
             <strong className="font-medium text-primary">{t.hero.acquirerExplainerTitle}</strong>{' '}
             {t.hero.acquirerExplainer}
           </div>
+        </div>
 
-          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
+        <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border-subtle bg-surface p-6 sm:p-8">
+          <div className="text-center">
+            <h2 className="text-base font-semibold text-primary">
+              {t.howItWorks.diagramTitle}
+            </h2>
+            <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
+              {t.howItWorks.diagramSubtitle}
+            </p>
+          </div>
+          <div className="mt-6">
+            <RoutingIllustration />
+          </div>
+        </div>
+
+        <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center">
+          <div className="flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
             <Button size="lg" onClick={() => scrollTo('kalkylator')}>
               {t.hero.ctaPrimary}
             </Button>

@@ -10,6 +10,10 @@ export interface CatalogAcquirer {
   highlight: string
   /** Extern länk till inlösarens webbplats, visas i katalogkortet. */
   url?: string
+  /** Länk dit man skickar in en ansökan / kommer igång som kund hos inlösaren. */
+  applyUrl?: string
+  /** Anpassad text för ansökningslänken, t.ex. när anslutning sker via en partner. */
+  applyLabel?: string
   /** Kort text om ett ev. partnerskap/avtal som ger kunden bättre villkor. */
   partnershipNote?: string
   /** Om true visas kortet som förvalt/rekommenderat i katalogen. */
@@ -28,21 +32,24 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     description:
       'Global kortinlösare. Genom vårt partnerskap med Elavon kan vi i många fall erbjuda mer fördelaktiga inlösenkostnader än vad många företag själva kan förhandla fram.',
     source: 'Partneravtal (kontakta oss för aktuella villkor)',
-    highlight: 'Förvalt via partnerskap',
+    highlight: 'Rekommenderas via partnerskap',
     isDefault: true,
     url: 'https://www.elavon.com',
+    applyUrl: 'https://www.westpay.se/terminals',
+    applyLabel: 'Anslut via Westpay',
     partnershipNote:
       'Genom vårt partnerskap med Elavon kan vi i många fall erbjuda mer fördelaktiga inlösenkostnader än vad många företag själva kan förhandla fram på egen hand.',
     // Exakta priser (från Westpay, 2026-07): VISA/Mastercard Debit och Credit.
-    // Övriga kategorier (Corporate, EU/EES, Internationella, Amex) saknar ännu bekräftade
-    // partnervillkor och är uppskattade branschtal — bekräfta med Elavon innan skarp visning.
+    // Corporate/EU-EES/Internationell/Amex saknar ännu bekräftade partnervillkor och är
+    // uppskattningar grundade i verkliga branschtal (Stripes officiellt publicerade
+    // EES-/utanför EES-priser, se Stripe-posten nedan) — bekräfta med Elavon innan skarp visning.
     pricing: {
       swedishDebit: { percent: 0.45, fixed: 0.1 },
       swedishCredit: { percent: 0.55, fixed: 0.1 },
-      corporate: { percent: 1.75, fixed: 0.1 }, // uppskattning
-      euEes: { percent: 0.75, fixed: 0.1 }, // uppskattning
-      international: { percent: 2.1, fixed: 0.1 }, // uppskattning
-      amex: { percent: 2.75, fixed: 0.1 }, // uppskattning
+      corporate: { percent: 1.9, fixed: 0.1 }, // uppskattning, ankrad i verkligt branschtal
+      euEes: { percent: 0.55, fixed: 0.1 }, // uppskattning — EU/EES-kort prissätts under IFR normalt som inhemska
+      international: { percent: 3.0, fixed: 0.1 }, // uppskattning, ankrad i verkligt branschtal
+      amex: { percent: 2.5, fixed: 0.1 }, // uppskattning, ankrad i verkligt branschtal
     },
   },
   {
@@ -52,6 +59,7 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     description: 'Sveriges största kortinlösare. Kampanjpris från 0,79 %.',
     source: 'Publikt listpris',
     url: 'https://www.swedbankpay.se/foretag',
+    applyUrl: 'https://www.swedbankpay.se/vara-losningar/intresserad',
     highlight: 'Från 0,79 %',
     pricing: {
       swedishDebit: { percent: 0.79, fixed: 0 },
@@ -66,17 +74,18 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     id: 'stripe',
     name: 'Stripe',
     providerType: 'psp',
-    description: 'Publicerade kortpriser för EES debit/kredit och internationella kort.',
-    source: 'Publikt listpris',
+    description: 'Officiellt publicerade priser: EES-kort, premiumkort (företag), Amex och kort utanför EES.',
+    source: 'Stripes officiella prislista (2026-07)',
     url: 'https://stripe.com/en-se/pricing',
-    highlight: '1,5 % + 1,80 kr',
+    applyUrl: 'https://dashboard.stripe.com/register',
+    highlight: '1,5 % (EES) – 3,25 % (utanför EES)',
     pricing: {
       swedishDebit: { percent: 1.5, fixed: 1.8 },
-      swedishCredit: { percent: 1.9, fixed: 1.8 },
+      swedishCredit: { percent: 1.5, fixed: 1.8 },
       corporate: { percent: 1.9, fixed: 1.8 },
       euEes: { percent: 1.5, fixed: 1.8 },
       international: { percent: 3.25, fixed: 1.8 },
-      amex: { percent: 3.25, fixed: 1.8 },
+      amex: { percent: 2.5, fixed: 1.8 }, // uppskattning inom Stripes typiska Amex-spann (Amex har högre interchange)
     },
   },
   {
@@ -86,6 +95,7 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     description: 'Worldline Checkout med publicerat paketpris från 1,95 %.',
     source: 'Publikt listpris',
     url: 'https://worldline.com/en/home/campaign/checkout-lp',
+    applyUrl: 'https://worldline.com/en/home/campaign/checkout-lp',
     highlight: 'Från 1,95 %',
     pricing: {
       swedishDebit: { percent: 1.95, fixed: 0 },
@@ -103,6 +113,7 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     description: 'Offertbaserad prissättning. Uppskattat mellanläge för jämförelse.',
     source: 'Uppskattning — bekräfta med aktuell offert innan kundmöte',
     url: 'https://www.nexigroup.com/en/nets/',
+    applyUrl: 'https://payments.nets.eu/payment-terminals',
     highlight: 'ca 1,5 % (uppskattning)',
     pricing: {
       swedishDebit: { percent: 1.5, fixed: 0.25 },
@@ -121,6 +132,7 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     source: 'Uppskattning — bekräfta med aktuell offert innan kundmöte',
     highlight: 'ca 1,6 % (uppskattning)',
     url: 'https://www.ecentric.co.za',
+    applyUrl: 'https://www.ecentric.co.za',
     pricing: {
       swedishDebit: { percent: 1.6, fixed: 0.2 },
       swedishCredit: { percent: 1.6, fixed: 0.2 },
@@ -138,6 +150,7 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     source: 'Uppskattning — bekräfta med aktuell offert innan kundmöte',
     highlight: 'ca 1,55 % (uppskattning)',
     url: 'https://www.tietoevry.com',
+    applyUrl: 'https://www.tietoevry.com',
     pricing: {
       swedishDebit: { percent: 1.55, fixed: 0.2 },
       swedishCredit: { percent: 1.55, fixed: 0.2 },

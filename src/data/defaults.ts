@@ -5,7 +5,7 @@ import type {
   TransactionMix,
   VolumeData,
 } from '../types/calculator'
-import { acquirerCatalog, type CatalogAcquirer } from './acquirerCatalog'
+import type { CatalogAcquirer } from './acquirerCatalog'
 
 function createId(): string {
   return crypto.randomUUID()
@@ -42,20 +42,7 @@ export const defaultMix: TransactionMix = {
 
 export const exampleMix: TransactionMix = { ...defaultMix }
 
-const elavonCatalogEntry = acquirerCatalog.find((entry) => entry.id === 'elavon')!
-
-/**
- * Standardinlösare vid sidladdning: Elavon, importerad från katalogen så att
- * priserna alltid är i synk med acquirerCatalog.ts. Redigera priserna där, inte här.
- */
-export const defaultAcquirers: Acquirer[] = [
-  {
-    id: 'default-elavon',
-    catalogId: elavonCatalogEntry.id,
-    name: elavonCatalogEntry.name,
-    pricing: structuredClone(elavonCatalogEntry.pricing),
-  },
-]
+export const defaultAcquirers: Acquirer[] = []
 
 export function createAcquirerFromCatalog(entry: CatalogAcquirer): Acquirer {
   return {
