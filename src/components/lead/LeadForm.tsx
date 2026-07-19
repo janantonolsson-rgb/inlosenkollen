@@ -8,7 +8,7 @@ import { Input, Textarea } from '../ui/Input'
 import { SectionHeader } from '../ui/Section'
 
 const initialForm: LeadFormData = {
-  companyName: '',
+  orgNumber: '',
   contactName: '',
   email: '',
   phone: '',
@@ -21,7 +21,7 @@ const initialForm: LeadFormData = {
 }
 
 export function LeadForm() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const [form, setForm] = useState<LeadFormData>(initialForm)
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -36,11 +36,7 @@ export function LeadForm() {
     setError(null)
 
     if (!form.consent) {
-      setError(
-        language === 'sv'
-          ? 'Du måste godkänna behandling av personuppgifter'
-          : 'You must consent to the processing of personal data',
-      )
+      setError(t.misc.consentError)
       return
     }
 
@@ -50,11 +46,7 @@ export function LeadForm() {
       setSubmitted(true)
       setForm(initialForm)
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : language === 'sv' ? 'Något gick fel. Försök igen senare.' : 'Something went wrong. Please try again later.',
-      )
+      setError(err instanceof Error ? err.message : t.misc.genericError)
     } finally {
       setSubmitting(false)
     }
@@ -73,7 +65,7 @@ export function LeadForm() {
           {t.leadForm.thanksBody}
         </p>
         <Button className="mt-8" variant="secondary" onClick={() => setSubmitted(false)}>
-          {language === 'sv' ? 'Skicka ny förfrågan' : 'Send another inquiry'}
+          {t.misc.sendAnotherInquiry}
         </Button>
       </Card>
     )
@@ -89,28 +81,35 @@ export function LeadForm() {
 
       <form onSubmit={handleSubmit} className="mt-10 space-y-6">
         <div className="grid gap-6 sm:grid-cols-2">
-          <Field id="companyName" label={language === 'sv' ? 'Företagsnamn' : 'Company name'} required value={form.companyName} onChange={(v) => update('companyName', v)} />
-          <Field id="contactName" label={language === 'sv' ? 'Namn' : 'Name'} required value={form.contactName} onChange={(v) => update('contactName', v)} />
-          <Field id="email" label={language === 'sv' ? 'E-post' : 'Email'} type="email" required value={form.email} onChange={(v) => update('email', v)} />
-          <Field id="phone" label={language === 'sv' ? 'Telefonnummer' : 'Phone number'} type="tel" value={form.phone} onChange={(v) => update('phone', v)} />
-          <Field id="annualVolume" label={language === 'sv' ? 'Ungefärlig kortomsättning per år' : 'Approximate annual card turnover'} placeholder={language === 'sv' ? 't.ex. 60 M kr' : 'e.g. 60M SEK'} value={form.annualVolume} onChange={(v) => update('annualVolume', v)} />
-          <Field id="currentAcquirer" label={language === 'sv' ? 'Nuvarande inlösare' : 'Current acquirer'} value={form.currentAcquirer} onChange={(v) => update('currentAcquirer', v)} />
-          <Field id="posSystem" label={language === 'sv' ? 'POS-/kassasystem ni använder idag' : 'POS/checkout system you use today'} placeholder={language === 'sv' ? 't.ex. Zettle, Shopify POS, egen kassa' : 'e.g. Zettle, Shopify POS, in-house system'} value={form.posSystem} onChange={(v) => update('posSystem', v)} />
+          <Field
+            id="orgNumber"
+            label={t.leadForm.orgNumberLabel}
+            required
+            placeholder={t.leadForm.orgNumberPlaceholder}
+            value={form.orgNumber}
+            onChange={(v) => update('orgNumber', v)}
+          />
+          <Field id="contactName" label={t.misc.contactNameLabel} required value={form.contactName} onChange={(v) => update('contactName', v)} />
+          <Field id="email" label={t.misc.emailLabel} type="email" required value={form.email} onChange={(v) => update('email', v)} />
+          <Field id="phone" label={t.misc.phoneLabel} type="tel" value={form.phone} onChange={(v) => update('phone', v)} />
+          <Field id="annualVolume" label={t.misc.annualVolumeApproxLabel} placeholder={t.misc.annualVolumeApproxPlaceholder} value={form.annualVolume} onChange={(v) => update('annualVolume', v)} />
+          <Field id="currentAcquirer" label={t.misc.currentAcquirerLabel} value={form.currentAcquirer} onChange={(v) => update('currentAcquirer', v)} />
+          <Field id="posSystem" label={t.misc.posSystemLabel} placeholder={t.misc.posSystemPlaceholder} value={form.posSystem} onChange={(v) => update('posSystem', v)} />
         </div>
 
         <div>
-          <Label htmlFor="message">{language === 'sv' ? 'Meddelande' : 'Message'}</Label>
+          <Label htmlFor="message">{t.misc.messageLabel}</Label>
           <Textarea
             id="message"
             rows={4}
             value={form.message}
             onChange={(e) => update('message', e.target.value)}
-            placeholder={language === 'sv' ? 'Berätta gärna mer om er betalningsuppsättning...' : 'Feel free to tell us more about your payment setup...'}
+            placeholder={t.misc.messagePlaceholder}
           />
         </div>
 
         <div>
-          <Label htmlFor="attachment">{language === 'sv' ? 'Bifoga prislista eller faktura (valfritt)' : 'Attach a price list or invoice (optional)'}</Label>
+          <Label htmlFor="attachment">{t.misc.attachmentLabel}</Label>
           <input
             id="attachment"
             type="file"
@@ -129,9 +128,7 @@ export function LeadForm() {
             required
           />
           <span className="text-sm leading-relaxed text-muted">
-            {language === 'sv'
-              ? 'Jag godkänner att mina personuppgifter behandlas för att kontakta mig angående en kostnadsanalys.'
-              : 'I consent to my personal data being processed to be contacted regarding a cost analysis.'}
+            {t.misc.consentText}
           </span>
         </label>
 

@@ -3,7 +3,7 @@ import { Disclaimer } from './Disclaimer'
 import { useLanguage } from '../../i18n/LanguageContext'
 
 export function Footer() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
 
   const footerLinks = [
     { href: '#kalkylator', label: t.nav.calculator },
@@ -18,9 +18,7 @@ export function Footer() {
           <div className="max-w-sm">
             <Logo showWordmark variant="inverse" />
             <p className="mt-4 text-sm leading-relaxed text-white/70">
-              {language === 'sv'
-                ? 'Intelligent betalningsrouting för nordiska handlare och retailföretag.'
-                : 'Intelligent payment routing for Nordic merchants and retail companies.'}
+              {t.footer.description}
             </p>
           </div>
           <nav className="flex flex-col gap-2.5" aria-label="Sidfotsnavigation">
@@ -41,7 +39,7 @@ export function Footer() {
         </div>
 
         <p className="mt-8 text-xs text-white/50">
-          © {new Date().getFullYear()} {t.footer.rights}
+          © {new Date().getFullYear()} {t.footer.rights} {t.footer.developedBy}
         </p>
       </div>
     </footer>

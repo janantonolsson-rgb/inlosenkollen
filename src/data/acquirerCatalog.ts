@@ -29,8 +29,7 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     id: 'elavon',
     name: 'Elavon',
     providerType: 'inlösare',
-    description:
-      'Global kortinlösare. Genom vårt partnerskap med Elavon kan vi i många fall erbjuda mer fördelaktiga inlösenkostnader än vad många företag själva kan förhandla fram.',
+    description: 'Global kortinlösare, tillgänglig för er genom Westpays partnerskap.',
     source: 'Partneravtal (kontakta oss för aktuella villkor)',
     highlight: 'Rekommenderas via partnerskap',
     isDefault: true,

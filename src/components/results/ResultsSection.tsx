@@ -80,6 +80,7 @@ export function ResultsSection() {
               annualSavings={results.annualSavings}
               percentSavings={results.percentSavings}
               threeYearSavings={results.threeYearSavings}
+              tenYearSavings={results.tenYearSavings}
             />
           </div>
 
@@ -101,6 +102,7 @@ export function ResultsSection() {
             annualSavings={0}
             percentSavings={0}
             threeYearSavings={0}
+            tenYearSavings={0}
           />
         </div>
       )}

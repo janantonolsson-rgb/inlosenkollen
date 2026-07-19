@@ -9,7 +9,7 @@ import { StepNavigation } from './shared/StepNavigation'
 
 export function StepAcquirers() {
   const { state, dispatch } = useCalculator()
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
   const isSimplified = state.pricingMode === 'simplified'
   const hasAcquirers = state.acquirers.length > 0
   const canCalculate = true
@@ -40,9 +40,7 @@ export function StepAcquirers() {
 
       {isSimplified && (
         <p className="mt-6 rounded-lg border border-border-subtle bg-surface px-4 py-3 text-sm text-muted">
-          {language === 'sv'
-            ? 'I förenklat läge används det genomsnittliga pris ni angav i steg 1. Routing per korttyp kräver detaljerade priser hos minst en inlösare.'
-            : 'In simplified mode, the average price you entered in step 1 is used. Routing per card type requires detailed prices for at least one acquirer.'}
+          {t.misc.simplifiedModeNotice}
         </p>
       )}
 
@@ -62,17 +60,15 @@ export function StepAcquirers() {
           <div className="flex items-center justify-between gap-4">
             <h3 className="text-sm font-semibold text-primary">
               {state.pricingMode === 'catalog'
-                ? language === 'sv' ? 'Importerade inlösare' : 'Imported acquirers'
-                : language === 'sv' ? 'Era inlösare' : 'Your acquirers'}
+                ? t.misc.importedAcquirersHeading
+                : t.misc.yourAcquirersHeading}
             </h3>
             <button
               type="button"
               onClick={() => setShowFixedFee((v) => !v)}
               className="text-xs font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              {showFixedFee
-                ? language === 'sv' ? '− Dölj fasta avgifter' : '− Hide fixed fees'
-                : language === 'sv' ? '+ Visa fasta avgifter (avancerat)' : '+ Show fixed fees (advanced)'}
+              {showFixedFee ? t.calculator.hideFixedFees : t.calculator.showFixedFees}
             </button>
           </div>
           {state.acquirers.map((acquirer) => (
@@ -113,15 +109,13 @@ export function StepAcquirers() {
           onClick={() => dispatch({ type: 'ADD_ACQUIRER' })}
           className="mt-6 flex w-full items-center justify-center rounded-lg border border-dashed border-border px-4 py-3 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          {language === 'sv' ? '+ Lägg till inlösare' : '+ Add acquirer'}
+          {t.misc.addAcquirerButton}
         </button>
       )}
 
       {!isSimplified && !hasAcquirers && (
         <p className="mt-6 rounded-lg border border-border-subtle bg-surface px-4 py-3 text-sm text-muted">
-          {language === 'sv'
-            ? 'Ingen inlösare vald ännu. Ni kan fortsätta utan att lägga till någon — resultatet visar då 0 kr i besparing eftersom det inte finns något att jämföra mot.'
-            : 'No acquirer added yet. You can continue without adding one — the result will then show 0 SEK in savings since there is nothing to compare against.'}
+          {t.misc.noAcquirerNotice}
         </p>
       )}
 

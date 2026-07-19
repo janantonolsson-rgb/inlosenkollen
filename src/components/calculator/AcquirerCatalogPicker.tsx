@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/LanguageContext'
 import { acquirerCatalog } from '../../data/acquirerCatalog'
 import type { Acquirer } from '../../types/calculator'
 import { Badge } from '../ui/Badge'
@@ -10,6 +11,7 @@ interface AcquirerCatalogPickerProps {
 }
 
 export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPickerProps) {
+  const { t } = useLanguage()
   const importedCatalogIds = new Set(
     acquirers.map((a) => a.catalogId).filter(Boolean) as string[],
   )
@@ -90,7 +92,7 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
                   rel="noopener noreferrer"
                   className="mt-2 block text-center text-xs font-medium text-accent hover:underline"
                 >
-                  {entry.applyLabel ?? `Ansök / bli kund hos ${entry.name}`} ↗
+                  {entry.applyLabel ?? t.catalog.applyTemplate.replace('{name}', entry.name)} ↗
                 </a>
               )}
             </Card>

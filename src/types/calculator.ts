@@ -75,6 +75,7 @@ export interface CalculationResult {
   annualSavings: number
   percentSavings: number
   threeYearSavings: number
+  tenYearSavings: number
   categoryResults: CategoryRoutingResult[]
   accumulatedSavings: { years: number; savings: number }[]
   acquirerVolumeDistribution: { acquirerId: string; acquirerName: string; volume: number; percentage: number }[]

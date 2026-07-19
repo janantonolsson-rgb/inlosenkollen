@@ -3,22 +3,21 @@ import { Button } from '../ui/Button'
 import { Card } from '../ui/Card'
 import { SectionHeader } from '../ui/Section'
 import { useLanguage } from '../../i18n/LanguageContext'
+import type { Language } from '../../i18n/translations'
 
 type Step = {
   number: number
   title: string
   description: string
-  link?: { href: string; label: string }
 }
 
-const stepsByLanguage: Record<'sv' | 'en', Step[]> = {
+const stepsByLanguage: Record<Language, Step[]> = {
   sv: [
     {
       number: 1,
       title: 'Betalterminaler med Multi Acquirer Routing',
       description:
-        'Kunden använder betalterminaler som stödjer Multi Acquirer Routing (MAR) — till exempel Westpays betalterminaler — där flera olika inlösenavtal kan kopplas in samtidigt.',
-      link: { href: 'https://www.westpay.se/terminals', label: 'Westpays betalterminaler' },
+        'Kunden använder betalterminaler som stödjer Multi Acquirer Routing (MAR), där flera olika inlösenavtal kan kopplas in samtidigt.',
     },
     {
       number: 2,
@@ -38,8 +37,7 @@ const stepsByLanguage: Record<'sv' | 'en', Step[]> = {
       number: 1,
       title: 'Payment terminals with Multi Acquirer Routing',
       description:
-        'The customer uses payment terminals that support Multi Acquirer Routing (MAR) — for example Westpay\u2019s payment terminals — where several different acquiring agreements can be connected at the same time.',
-      link: { href: 'https://www.westpay.se/terminals', label: 'Westpay\u2019s payment terminals' },
+        'The customer uses payment terminals that support Multi Acquirer Routing (MAR), where several different acquiring agreements can be connected at the same time.',
     },
     {
       number: 2,
@@ -52,6 +50,66 @@ const stepsByLanguage: Record<'sv' | 'en', Step[]> = {
       title: 'Automatic routing',
       description:
         'The terminal automatically selects the most cost-effective acquiring agreement based on the company\u2019s configuration and rules.',
+    },
+  ],
+  no: [
+    {
+      number: 1,
+      title: 'Betalingsterminaler med Multi Acquirer Routing',
+      description:
+        'Kunden bruker betalingsterminaler som støtter Multi Acquirer Routing (MAR), der flere ulike innløsningsavtaler kan kobles inn samtidig.',
+    },
+    {
+      number: 2,
+      title: 'Analyse per transaksjon',
+      description:
+        'Hver betaling analyseres basert på korttype, kortnettverk, utstederland og beregnet kostnad.',
+    },
+    {
+      number: 3,
+      title: 'Automatisk ruting',
+      description:
+        'Terminalen velger automatisk den mest kostnadseffektive innløsningsavtalen basert på bedriftens konfigurasjon og regler.',
+    },
+  ],
+  da: [
+    {
+      number: 1,
+      title: 'Betalingsterminaler med Multi Acquirer Routing',
+      description:
+        'Kunden bruger betalingsterminaler, der understøtter Multi Acquirer Routing (MAR), hvor flere forskellige indløsningsaftaler kan tilsluttes samtidig.',
+    },
+    {
+      number: 2,
+      title: 'Analyse pr. transaktion',
+      description:
+        'Hver betaling analyseres ud fra korttype, kortnetværk, udstederland og beregnet omkostning.',
+    },
+    {
+      number: 3,
+      title: 'Automatisk routing',
+      description:
+        'Terminalen vælger automatisk den mest omkostningseffektive indløsningsaftale ud fra virksomhedens konfiguration og regler.',
+    },
+  ],
+  fi: [
+    {
+      number: 1,
+      title: 'Maksupäätteet, jotka tukevat Multi Acquirer Routingia',
+      description:
+        'Asiakas käyttää maksupäätteitä, jotka tukevat Multi Acquirer Routing -toimintoa (MAR) ja joihin voidaan liittää useita eri vastaanottosopimuksia samanaikaisesti.',
+    },
+    {
+      number: 2,
+      title: 'Analyysi per tapahtuma',
+      description:
+        'Jokainen maksu analysoidaan korttityypin, korttiverkon, myöntäjämaan ja lasketun kustannuksen perusteella.',
+    },
+    {
+      number: 3,
+      title: 'Automaattinen reititys',
+      description:
+        'Maksupääte valitsee automaattisesti kustannustehokkaimman vastaanottosopimuksen yrityksen asetusten ja sääntöjen perusteella.',
     },
   ],
 }
@@ -99,7 +157,7 @@ const icons = {
   ),
 }
 
-const benefitsByLanguage: Record<'sv' | 'en', Benefit[]> = {
+const benefitsByLanguage: Record<Language, Benefit[]> = {
   sv: [
     {
       title: 'Lägre kostnad',
@@ -109,13 +167,13 @@ const benefitsByLanguage: Record<'sv' | 'en', Benefit[]> = {
     {
       title: 'Högre driftsäkerhet',
       description:
-        'Flera parallella inlösenavtal minskar risken att en enskild driftstörning stoppar betalningar helt. Internationella mätningar av kortbetalningstjänster visar exempel på runt 99 % upptid över flera år — vilket ändå innebär hundratals timmars nedgång som drabbar handlare med bara en inlösare.',
+        'Flera parallella inlösenavtal minskar risken att en enskild driftstörning stoppar betalningar helt.',
       icon: icons.shield,
     },
     {
       title: 'Redundans vid driftstopp',
       description:
-        'Ligger en inlösare nere kan trafiken automatiskt styras om till en annan, utan manuellt ingrepp. I Storbritannien registrerade nio storbanker tillsammans över 33 dagars oplanerade tekniska driftstopp på två år — tid då handlare utan redundans inte kunde ta betalt alls.',
+        'Om en inlösare får ett driftstopp kan betalningarna automatiskt styras om till en annan – utan manuellt ingrepp. Det minskar risken för avbrott och gör att ni kan fortsätta ta betalt även om en leverantör får problem.',
       icon: icons.redundancy,
     },
     {
@@ -138,13 +196,13 @@ const benefitsByLanguage: Record<'sv' | 'en', Benefit[]> = {
     {
       title: 'Higher reliability',
       description:
-        'Several parallel acquiring agreements reduce the risk that a single outage stops payments entirely. International measurements of card payment services show examples of around 99% uptime over several years — which still adds up to hundreds of hours of downtime affecting merchants with only one acquirer.',
+        'Several parallel acquiring agreements reduce the risk that a single outage stops payments entirely.',
       icon: icons.shield,
     },
     {
       title: 'Redundancy during downtime',
       description:
-        'If one acquirer is down, traffic can automatically be redirected to another, with no manual intervention. In the UK, nine major banks together recorded more than 33 days of unplanned technical outages over two years — time during which merchants without redundancy couldn\u2019t take payments at all.',
+        'If one acquirer experiences an outage, payments can automatically be redirected to another — with no manual intervention. This reduces the risk of disruption and lets you keep taking payments even if one provider has problems.',
       icon: icons.redundancy,
     },
     {
@@ -155,6 +213,93 @@ const benefitsByLanguage: Record<'sv' | 'en', Benefit[]> = {
     {
       title: 'Flexibility over time',
       description: 'New acquirers can be added or reweighted as the business and its agreements evolve.',
+      icon: icons.flexibility,
+    },
+  ],
+  no: [
+    {
+      title: 'Lavere kostnad',
+      description: 'Hver transaksjon rutes til avtalen som gir best pris for nettopp den korttypen.',
+      icon: icons.cost,
+    },
+    {
+      title: 'Høyere driftssikkerhet',
+      description:
+        'Flere parallelle innløsningsavtaler reduserer risikoen for at ett enkelt driftsavbrudd stopper betalinger helt.',
+      icon: icons.shield,
+    },
+    {
+      title: 'Redundans ved driftsstans',
+      description:
+        'Får en innløser et driftsavbrudd, kan betalingene automatisk rutes om til en annen – uten manuelt inngrep. Det reduserer risikoen for avbrudd og gjør at dere kan fortsette å ta betalt selv om én leverandør får problemer.',
+      icon: icons.redundancy,
+    },
+    {
+      title: 'Smart styring av transaksjoner',
+      description: 'Regler kan tilpasses etter korttype, beløp eller andre kriterier — ikke bare laveste pris.',
+      icon: icons.smart,
+    },
+    {
+      title: 'Fleksibilitet over tid',
+      description: 'Nye innløsere kan legges til eller vektes om i takt med at virksomheten og avtalene endrer seg.',
+      icon: icons.flexibility,
+    },
+  ],
+  da: [
+    {
+      title: 'Lavere omkostning',
+      description: 'Hver transaktion routes til den aftale, der giver den bedste pris for netop den korttype.',
+      icon: icons.cost,
+    },
+    {
+      title: 'Højere driftssikkerhed',
+      description:
+        'Flere parallelle indløsningsaftaler reducerer risikoen for, at ét enkelt driftsstop stopper betalinger helt.',
+      icon: icons.shield,
+    },
+    {
+      title: 'Redundans ved driftsstop',
+      description:
+        'Får en indløser et driftsstop, kan betalingerne automatisk omdirigeres til en anden – uden manuel indgriben. Det mindsker risikoen for afbrydelser og gør, at I kan fortsætte med at tage imod betaling, selv hvis én leverandør får problemer.',
+      icon: icons.redundancy,
+    },
+    {
+      title: 'Smart styring af transaktioner',
+      description: 'Regler kan tilpasses efter korttype, beløb eller andre kriterier — ikke kun laveste pris.',
+      icon: icons.smart,
+    },
+    {
+      title: 'Fleksibilitet over tid',
+      description: 'Nye indløsere kan tilføjes eller vægtes om, i takt med at virksomheden og aftalerne ændrer sig.',
+      icon: icons.flexibility,
+    },
+  ],
+  fi: [
+    {
+      title: 'Alhaisempi kustannus',
+      description: 'Jokainen tapahtuma reititetään sopimukseen, joka tarjoaa parhaan hinnan juuri kyseiselle korttityypille.',
+      icon: icons.cost,
+    },
+    {
+      title: 'Korkeampi käyttövarmuus',
+      description:
+        'Useat rinnakkaiset vastaanottosopimukset pienentävät riskiä, että yksittäinen häiriö pysäyttää maksut kokonaan.',
+      icon: icons.shield,
+    },
+    {
+      title: 'Redundanssi häiriötilanteissa',
+      description:
+        'Jos maksunvälittäjällä on käyttökatko, maksut voidaan ohjata automaattisesti toiselle – ilman manuaalista toimenpidettä. Tämä vähentää keskeytysten riskiä ja mahdollistaa maksujen vastaanottamisen jatkumisen, vaikka yhdellä toimittajalla olisi ongelmia.',
+      icon: icons.redundancy,
+    },
+    {
+      title: 'Älykäs tapahtumien ohjaus',
+      description: 'Sääntöjä voidaan mukauttaa korttityypin, summan tai muiden kriteerien mukaan — ei vain alimman hinnan.',
+      icon: icons.smart,
+    },
+    {
+      title: 'Joustavuus ajan myötä',
+      description: 'Uusia maksunvälittäjiä voidaan lisätä tai painottaa uudelleen liiketoiminnan ja sopimusten kehittyessä.',
       icon: icons.flexibility,
     },
   ],
@@ -183,34 +328,17 @@ export function HowItWorks() {
               {step.number}
             </div>
             <h3 className="text-base font-semibold text-primary">{step.title}</h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
-              {step.link ? (
-                <>
-                  {step.description.split(step.link.label)[0]}
-                  <a
-                    href={step.link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-accent hover:underline"
-                  >
-                    {step.link.label}
-                  </a>
-                  {step.description.split(step.link.label)[1]}
-                </>
-              ) : (
-                step.description
-              )}
-            </p>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{step.description}</p>
           </Card>
         ))}
       </div>
 
       <Card className="mt-8" padding="lg">
-        <h3 className="text-base font-semibold text-primary">{t.howItWorks.valueTitle}</h3>
+        <h3 className="text-xl font-bold text-primary sm:text-2xl">{t.howItWorks.valueTitle}</h3>
         <p className="mt-2 text-sm text-muted">
           {t.howItWorks.valueSubtitle}
         </p>
-        <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+        <ul className="mt-5 grid items-start gap-x-6 gap-y-5 sm:grid-cols-2">
           {benefits.map((benefit) => (
             <li key={benefit.title} className="flex items-start gap-3">
               <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface text-primary">
@@ -225,11 +353,6 @@ export function HowItWorks() {
         </ul>
         <p className="mt-6 rounded-lg border border-border-subtle bg-surface px-4 py-3 text-sm text-muted">
           {t.howItWorks.valueFootnote}
-        </p>
-        <p className="mt-2 text-xs text-muted-light">
-          {language === 'sv'
-            ? 'Källa driftstatistik: Shopify, "Payment Processing Outages" (2026), baserat på mätningar i Australien och Storbritannien. Svenska/nordiska siffror saknas ännu, men mönstret är representativt för branschen internationellt.'
-            : 'Uptime statistics source: Shopify, "Payment Processing Outages" (2026), based on measurements in Australia and the UK. Swedish/Nordic figures are not yet available, but the pattern is representative of the industry internationally.'}
         </p>
       </Card>
 

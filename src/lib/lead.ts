@@ -1,5 +1,5 @@
 export interface LeadFormData {
-  companyName: string
+  orgNumber: string
   contactName: string
   email: string
   phone: string
@@ -24,7 +24,7 @@ export async function submitLead(data: LeadFormData): Promise<void> {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       formName: 'Vill du veta vad ni faktiskt kan spara?',
-      Företagsnamn: data.companyName,
+      Organisationsnummer: data.orgNumber,
       Kontaktperson: data.contactName,
       'E-post': data.email,
       Telefon: data.phone,

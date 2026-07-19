@@ -51,19 +51,21 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center">
-          <div className="flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
-            <Button size="lg" onClick={() => scrollTo('kalkylator')}>
-              {t.hero.ctaPrimary}
-            </Button>
-            <Button
-              variant="secondary"
-              size="lg"
-              onClick={() => scrollTo('hur-det-fungerar')}
-            >
-              {t.hero.ctaSecondary}
-            </Button>
-          </div>
+        <div className="mx-auto mt-12 flex max-w-2xl flex-col items-center">
+          <Button
+            size="lg"
+            className="px-10 py-4 text-lg shadow-lg transition-all duration-200 hover:scale-[1.02] hover:shadow-xl"
+            onClick={() => scrollTo('kalkylator')}
+          >
+            {t.hero.ctaPrimary}
+          </Button>
+          <button
+            type="button"
+            onClick={() => scrollTo('hur-det-fungerar')}
+            className="mt-4 text-sm font-medium text-muted underline-offset-4 hover:text-accent hover:underline"
+          >
+            {t.hero.ctaSecondary}
+          </button>
           <p className="mt-8 text-sm text-muted">
             {t.hero.footnote}
           </p>
