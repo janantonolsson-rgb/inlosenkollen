@@ -36,7 +36,8 @@ export interface TranslationDict {
     step3Title: string
     step3Description: string
     annualVolume: string
-    annualTransactions: string
+    averageOrderValue: string
+    annualTransactionsComputed: string
     currentFee: string
     ctaCalculate: string
   }
@@ -111,7 +112,8 @@ export const translations: Record<Language, TranslationDict> = {
       step3Description:
         'Använd ert ungefärliga pris, importera etablerade inlösare med kända avgifter, eller ange exakta priser per korttyp om ni har dem.',
       annualVolume: 'Total kortomsättning per år',
-      annualTransactions: 'Antal transaktioner per år',
+      averageOrderValue: 'Genomsnittligt ordervärde (AoV)',
+      annualTransactionsComputed: 'Antal transaktioner per år (beräknas automatiskt)',
       currentFee: 'Nuvarande genomsnittlig procentuell inlösenavgift',
       ctaCalculate: 'Visa min besparing',
     },
@@ -180,7 +182,8 @@ export const translations: Record<Language, TranslationDict> = {
       step3Description:
         'Use your approximate price, import established acquirers with known fees, or enter exact prices per card type if you have them.',
       annualVolume: 'Total card turnover per year',
-      annualTransactions: 'Number of transactions per year',
+      averageOrderValue: 'Average Order Value (AoV)',
+      annualTransactionsComputed: 'Transactions per year (calculated automatically)',
       currentFee: 'Current average percentage acquiring fee',
       ctaCalculate: 'Show my savings',
     },

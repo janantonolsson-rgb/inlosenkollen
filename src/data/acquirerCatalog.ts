@@ -33,15 +33,16 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     url: 'https://www.elavon.com',
     partnershipNote:
       'Genom vårt partnerskap med Elavon kan vi i många fall erbjuda mer fördelaktiga inlösenkostnader än vad många företag själva kan förhandla fram på egen hand.',
-    // OBS (dev): priserna nedan är illustrativa platshållare — ersätt med de faktiska
-    // partnervillkoren ni kan erbjuda via Elavon innan verktyget används skarpt.
+    // Exakta priser (från Westpay, 2026-07): VISA/Mastercard Debit och Credit.
+    // Övriga kategorier (Corporate, EU/EES, Internationella, Amex) saknar ännu bekräftade
+    // partnervillkor och är uppskattade branschtal — bekräfta med Elavon innan skarp visning.
     pricing: {
-      swedishDebit: { percent: 0.55, fixed: 0.1 },
-      swedishCredit: { percent: 0.65, fixed: 0.1 },
-      corporate: { percent: 1.35, fixed: 0.1 },
-      euEes: { percent: 0.8, fixed: 0.1 },
-      international: { percent: 1.8, fixed: 0.1 },
-      amex: { percent: 1.6, fixed: 0.1 },
+      swedishDebit: { percent: 0.45, fixed: 0.1 },
+      swedishCredit: { percent: 0.55, fixed: 0.1 },
+      corporate: { percent: 1.75, fixed: 0.1 }, // uppskattning
+      euEes: { percent: 0.75, fixed: 0.1 }, // uppskattning
+      international: { percent: 2.1, fixed: 0.1 }, // uppskattning
+      amex: { percent: 2.75, fixed: 0.1 }, // uppskattning
     },
   },
   {

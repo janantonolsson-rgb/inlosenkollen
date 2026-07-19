@@ -40,7 +40,7 @@ export type TransactionMix = Record<MixCategory, number>
 
 export interface VolumeData {
   annualVolume: number
-  annualTransactions: number
+  averageOrderValue: number
   currentFixedFee: number
   currentPercentFee: number
 }

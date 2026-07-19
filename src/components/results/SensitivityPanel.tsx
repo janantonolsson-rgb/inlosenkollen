@@ -68,13 +68,13 @@ export function SensitivityPanel() {
                 }
               />
               <CurrencyInput
-                id="sens-transactions"
-                label="Antal transaktioner"
-                value={state.volume.annualTransactions}
+                id="sens-aov"
+                label="Genomsnittligt ordervärde (AoV)"
+                value={state.volume.averageOrderValue}
                 onChange={(v) =>
-                  dispatch({ type: 'SET_VOLUME', payload: { annualTransactions: v } })
+                  dispatch({ type: 'SET_VOLUME', payload: { averageOrderValue: v } })
                 }
-                suffix="st"
+                decimals
               />
             </div>
 

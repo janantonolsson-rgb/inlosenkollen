@@ -25,7 +25,7 @@ function defaultPricing(overrides: Partial<AcquirerPricing> = {}): AcquirerPrici
 
 export const defaultVolume: VolumeData = {
   annualVolume: 250_000_000,
-  annualTransactions: 3_000_000,
+  averageOrderValue: 650,
   currentFixedFee: 0.25,
   currentPercentFee: 0.65,
 }

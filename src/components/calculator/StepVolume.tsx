@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useCalculator } from '../../context/CalculatorContext'
-import { getAvgTransactionAmount } from '../../lib/calculations'
-import { formatSEK } from '../../lib/formatters'
+import { getAnnualTransactions } from '../../lib/calculations'
 import { validateVolume } from '../../lib/validation'
 import { VOLUME_PRESETS } from '../../data/defaults'
 import { useLanguage } from '../../i18n/LanguageContext'
@@ -15,8 +14,8 @@ export function StepVolume() {
   const { state, dispatch } = useCalculator()
   const { t, language } = useLanguage()
   const { volume } = state
-  const avgAmount = getAvgTransactionAmount(volume)
-  const volumeError = validateVolume(volume.annualVolume, volume.annualTransactions)
+  const annualTransactions = getAnnualTransactions(volume)
+  const volumeError = validateVolume(volume.annualVolume, volume.averageOrderValue)
   const [showAdvanced, setShowAdvanced] = useState(false)
 
   return (
@@ -59,13 +58,16 @@ export function StepVolume() {
           onChange={(v) => dispatch({ type: 'SET_VOLUME', payload: { annualVolume: v } })}
         />
         <CurrencyInput
-          id="annualTransactions"
-          label={t.calculator.annualTransactions}
-          value={volume.annualTransactions}
-          onChange={(v) =>
-            dispatch({ type: 'SET_VOLUME', payload: { annualTransactions: v } })
+          id="averageOrderValue"
+          label={t.calculator.averageOrderValue}
+          hint={
+            language === 'sv'
+              ? 'Genomsnittligt belopp per kortköp — de flesta känner till detta bättre än exakt antal transaktioner.'
+              : 'Average amount per card purchase — most people know this better than the exact number of transactions.'
           }
-          suffix="st"
+          value={volume.averageOrderValue}
+          onChange={(v) => dispatch({ type: 'SET_VOLUME', payload: { averageOrderValue: v } })}
+          decimals
         />
         <PercentInput
           id="currentPercentFee"
@@ -82,16 +84,16 @@ export function StepVolume() {
         />
         <div>
           <p className="mb-1.5 text-sm font-medium text-primary">
-            {language === 'sv' ? 'Genomsnittligt transaktionsbelopp' : 'Average transaction amount'}
+            {t.calculator.annualTransactionsComputed}
           </p>
           <div className="rounded-lg border border-border-subtle bg-surface px-3.5 py-2.5">
             <p className="text-sm font-semibold tabular-nums text-primary">
-              {formatSEK(avgAmount, true)}
+              {Math.round(annualTransactions).toLocaleString(language === 'sv' ? 'sv-SE' : 'en-US')} st
             </p>
             <p className="mt-0.5 text-xs text-muted">
               {language === 'sv'
-                ? 'Beräknas automatiskt: omsättning ÷ antal transaktioner'
-                : 'Calculated automatically: turnover ÷ number of transactions'}
+                ? 'Beräknas automatiskt: årlig omsättning ÷ AoV'
+                : 'Calculated automatically: annual turnover ÷ AoV'}
             </p>
           </div>
         </div>

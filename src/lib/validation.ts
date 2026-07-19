@@ -16,8 +16,8 @@ export function getMixError(mix: TransactionMix): string | null {
   return `Transaktionsmixen måste summera till 100 %. Nuvarande summa: ${total.toFixed(1)} %`
 }
 
-export function validateVolume(volume: number, transactions: number): string | null {
+export function validateVolume(volume: number, averageOrderValue: number): string | null {
   if (volume <= 0) return 'Ange en positiv årlig omsättning'
-  if (transactions <= 0) return 'Ange ett positivt antal transaktioner'
+  if (averageOrderValue <= 0) return 'Ange ett positivt genomsnittligt ordervärde (AoV)'
   return null
 }
