@@ -3,6 +3,7 @@ import { useCalculator } from '../../context/CalculatorContext'
 import { getMixError } from '../../lib/validation'
 import { MIX_CATEGORIES, MIX_CATEGORY_LABELS } from '../../types/calculator'
 import { VOLUME_PRESETS } from '../../data/defaults'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 import { PresetChip, PresetChipGroup } from '../ui/PresetChip'
 import { CurrencyInput } from '../calculator/shared/CurrencyInput'
@@ -11,6 +12,7 @@ import { SliderField } from '../calculator/shared/SliderField'
 
 export function SensitivityPanel() {
   const { state, dispatch, results } = useCalculator()
+  const { t, formatMoney } = useLanguage()
   const mixError = getMixError(state.mix)
   const [open, setOpen] = useState(false)
 
@@ -23,9 +25,9 @@ export function SensitivityPanel() {
         aria-expanded={open}
       >
         <div>
-          <h3 className="text-base font-semibold text-primary">Känslighetsanalys</h3>
+          <h3 className="text-base font-semibold text-primary">{t.misc.sensitivityTitle}</h3>
           <p className="mt-1 text-sm text-muted">
-            Justera parametrar och se hur resultatet uppdateras direkt
+            {t.misc.sensitivitySubtitle}
           </p>
         </div>
         <svg
@@ -43,7 +45,7 @@ export function SensitivityPanel() {
         <div className="mt-8 border-t border-border pt-8">
           <div className="grid gap-10 lg:grid-cols-2">
             <div className="space-y-6">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">Volym</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">{t.misc.volumeLabel}</h4>
               <PresetChipGroup>
                 {VOLUME_PRESETS.map((preset) => (
                   <PresetChip
@@ -61,7 +63,7 @@ export function SensitivityPanel() {
               </PresetChipGroup>
               <CurrencyInput
                 id="sens-volume"
-                label="Årlig omsättning"
+                label={t.calculator.annualVolume}
                 value={state.volume.annualVolume}
                 onChange={(v) =>
                   dispatch({ type: 'SET_VOLUME', payload: { annualVolume: v } })
@@ -69,7 +71,7 @@ export function SensitivityPanel() {
               />
               <CurrencyInput
                 id="sens-aov"
-                label="Genomsnittligt ordervärde (AoV)"
+                label={t.calculator.averageOrderValue}
                 value={state.volume.averageOrderValue}
                 onChange={(v) =>
                   dispatch({ type: 'SET_VOLUME', payload: { averageOrderValue: v } })
@@ -80,7 +82,7 @@ export function SensitivityPanel() {
 
             <div className="space-y-6">
               <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">
-                Transaktionsmix
+                {t.calculator.step2Title.replace(/^[^:]*:\s*/, '')}
               </h4>
               {MIX_CATEGORIES.slice(0, 4).map((category) => (
                 <SliderField
@@ -107,18 +109,16 @@ export function SensitivityPanel() {
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
             <PercentInput
               id="sens-percent"
-              label="Nuvarande procentuell avgift"
+              label={t.misc.currentPercentFeeLabel}
               value={state.volume.currentPercentFee}
               onChange={(v) =>
                 dispatch({ type: 'SET_VOLUME', payload: { currentPercentFee: v } })
               }
             />
             <div className="rounded-lg border border-border-subtle bg-surface px-4 py-4">
-              <p className="text-sm text-muted">Uppdaterad årlig besparing</p>
+              <p className="text-sm text-muted">{t.misc.updatedAnnualSavingsLabel}</p>
               <p className="mt-1 text-2xl font-semibold tabular-nums text-success">
-                {results.annualSavings > 0
-                  ? `${Math.round(results.annualSavings).toLocaleString('sv-SE')} kr`
-                  : '—'}
+                {results.annualSavings > 0 ? formatMoney(results.annualSavings) : '—'}
               </p>
             </div>
           </div>

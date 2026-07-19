@@ -31,13 +31,13 @@ export const defaultVolume: VolumeData = {
 }
 
 export const defaultMix: TransactionMix = {
-  visaDebit: 30,
-  mastercardDebit: 25,
-  swedishCredit: 15,
-  corporate: 8,
-  euEes: 10,
-  international: 7,
-  amex: 5,
+  visaDebit: 38,
+  mastercardDebit: 32,
+  swedishCredit: 12,
+  corporate: 6,
+  euEes: 6,
+  international: 4,
+  amex: 2,
 }
 
 export const exampleMix: TransactionMix = { ...defaultMix }

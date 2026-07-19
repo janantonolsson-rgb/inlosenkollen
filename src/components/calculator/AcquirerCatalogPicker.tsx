@@ -18,41 +18,27 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
 
   return (
     <div>
-      <p className="text-sm text-muted">
-        Välj etablerade kortinlösare och PSP:er med publicerade eller uppskattade avgifter
-        från vår marknadsresearch. Priserna är illustrationer — inte garanti för ert avtal.
-      </p>
-      <p className="mt-3 rounded-lg border border-border-subtle bg-surface px-3.5 py-2.5 text-sm text-muted">
-        Har ert företag redan ett förmånligt inlösenavtal via en branschorganisation, t.ex.
-        <strong className="font-medium text-primary"> Svensk Handel, Martin &amp; Servera</strong> eller
-        <strong className="font-medium text-primary"> Visita</strong>? Sådana medlemsavtal fungerar
-        precis lika bra tillsammans med intelligent routing — lägg helt enkelt till era exakta
-        priser under &quot;Detaljerade priser&quot; nedan. Lösningen är inte begränsad till ett
-        fåtal inlösare, utan fungerar med era befintliga och framtida avtal.
+      <p className="text-sm text-muted">{t.catalog.introText}</p>
+      <p
+        className="mt-3 rounded-lg border border-border-subtle bg-surface px-3.5 py-2.5 text-sm text-muted"
+      >
+        {t.catalog.membershipNote}
       </p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        {[...acquirerCatalog]
-          .sort((a, b) => (b.isDefault ? 1 : 0) - (a.isDefault ? 1 : 0))
-          .map((entry) => {
+        {acquirerCatalog.map((entry) => {
           const isImported = importedCatalogIds.has(entry.id)
 
           return (
-            <Card
-              key={entry.id}
-              padding="sm"
-              variant="elevated"
-              className={`flex flex-col ${entry.isDefault ? 'ring-1 ring-accent' : ''}`}
-            >
+            <Card key={entry.id} padding="sm" variant="elevated" className="flex flex-col">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h3 className="font-semibold text-primary">{entry.name}</h3>
                   <div className="mt-1.5 flex flex-wrap gap-2">
                     <Badge variant={entry.providerType === 'inlösare' ? 'accent' : 'muted'}>
-                      {entry.providerType === 'inlösare' ? 'Inlösare' : 'PSP'}
+                      {entry.providerType === 'inlösare' ? t.catalog.acquirerTypeLabel : t.catalog.pspTypeLabel}
                     </Badge>
                     <Badge variant="success">{entry.highlight}</Badge>
-                    {entry.isDefault && <Badge variant="accent">Rekommenderad</Badge>}
                   </div>
                 </div>
               </div>
@@ -63,7 +49,7 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
                 </p>
               )}
               <div className="mt-2 flex items-center justify-between gap-2">
-                <p className="text-xs text-muted-light">Källa: {entry.source}</p>
+                <p className="text-xs text-muted-light">{t.catalog.sourceLabel} {entry.source}</p>
                 {entry.url && (
                   <a
                     href={entry.url}
@@ -71,7 +57,7 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
                     rel="noopener noreferrer"
                     className="text-xs font-medium text-accent hover:underline"
                   >
-                    Läs mer ↗
+                    {t.catalog.readMoreLabel} ↗
                   </a>
                 )}
               </div>
@@ -80,10 +66,9 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
                 variant={isImported ? 'secondary' : 'primary'}
                 size="sm"
                 className="mt-4 w-full"
-                disabled={isImported}
                 onClick={() => onImport(entry.id)}
               >
-                {isImported ? 'Importerad' : 'Importera'}
+                {isImported ? t.catalog.removeButton : t.catalog.addButton}
               </Button>
               {entry.applyUrl && (
                 <a

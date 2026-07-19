@@ -1,4 +1,5 @@
 import { parseSwedishNumber, formatInputNumber } from '../../../lib/formatters'
+import { useLanguage } from '../../../i18n/LanguageContext'
 import { Input } from '../../ui/Input'
 import { Label, FieldHint } from '../../ui/Field'
 
@@ -20,11 +21,14 @@ export function CurrencyInput({
   value,
   onChange,
   hint,
-  suffix = 'kr',
+  suffix,
   decimals = false,
   hideLabel = false,
   inputSize = 'default',
 }: CurrencyInputProps) {
+  const { currency } = useLanguage()
+  const resolvedSuffix = suffix ?? currency.symbol
+
   return (
     <div>
       {!hideLabel && <Label htmlFor={id}>{label}</Label>}
@@ -33,7 +37,7 @@ export function CurrencyInput({
         type="text"
         inputMode="decimal"
         inputSize={inputSize}
-        suffix={suffix}
+        suffix={resolvedSuffix}
         value={decimals ? value.toString().replace('.', ',') : formatInputNumber(value)}
         onChange={(e) => onChange(parseSwedishNumber(e.target.value))}
         aria-describedby={hint ? `${id}-hint` : undefined}

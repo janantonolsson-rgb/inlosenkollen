@@ -65,7 +65,14 @@ function reducer(state: CalculatorState, action: Action): CalculatorState {
     case 'IMPORT_CATALOG_ACQUIRER': {
       const entry = getCatalogAcquirer(action.payload)
       if (!entry) return state
-      if (state.acquirers.some((a) => a.catalogId === entry.id)) return state
+      const existing = state.acquirers.find((a) => a.catalogId === entry.id)
+      if (existing) {
+        // Redan tillagd — klick igen tar bort den (toggle).
+        return {
+          ...state,
+          acquirers: state.acquirers.filter((a) => a.id !== existing.id),
+        }
+      }
       return {
         ...state,
         acquirers: [...state.acquirers, createAcquirerFromCatalog(entry)],

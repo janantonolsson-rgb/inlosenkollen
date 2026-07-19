@@ -1,4 +1,4 @@
-import { formatPercent, formatSEK } from '../../lib/formatters'
+import { formatPercent } from '../../lib/formatters'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 import { Metric, MetricGrid } from '../ui/Metric'
@@ -20,15 +20,15 @@ export function MetricCards({
   threeYearSavings,
   tenYearSavings,
 }: MetricCardsProps) {
-  const { t } = useLanguage()
+  const { t, formatMoney } = useLanguage()
 
   const metrics: { label: string; value: string; highlight?: boolean }[] = [
-    { label: t.metrics.currentCost, value: formatSEK(currentAnnualCost) },
-    { label: t.metrics.routedCost, value: formatSEK(routedAnnualCost) },
-    { label: t.metrics.annualSavings, value: formatSEK(annualSavings), highlight: true },
+    { label: t.metrics.currentCost, value: formatMoney(currentAnnualCost) },
+    { label: t.metrics.routedCost, value: formatMoney(routedAnnualCost) },
+    { label: t.metrics.annualSavings, value: formatMoney(annualSavings), highlight: true },
     { label: t.metrics.percentSavings, value: formatPercent(percentSavings), highlight: true },
-    { label: t.metrics.threeYearSavings, value: formatSEK(threeYearSavings), highlight: true },
-    { label: t.metrics.tenYearSavings, value: formatSEK(tenYearSavings), highlight: true },
+    { label: t.metrics.threeYearSavings, value: formatMoney(threeYearSavings), highlight: true },
+    { label: t.metrics.tenYearSavings, value: formatMoney(tenYearSavings), highlight: true },
   ]
 
   return (

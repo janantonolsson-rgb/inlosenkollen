@@ -9,7 +9,8 @@ import {
   YAxis,
 } from 'recharts'
 import { chartAxis, chartColors, chartTooltipStyle } from '../../lib/chartTheme'
-import { formatSEK, formatPercent } from '../../lib/formatters'
+import { formatPercent } from '../../lib/formatters'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 
 interface VolumeDistributionChartProps {
@@ -17,15 +18,17 @@ interface VolumeDistributionChartProps {
 }
 
 export function VolumeDistributionChart({ data }: VolumeDistributionChartProps) {
+  const { t, formatMoney } = useLanguage()
+
   if (data.length === 0) return null
 
   return (
     <Card padding="lg">
-      <h3 className="text-base font-semibold text-primary">Kostnadsfördelning</h3>
+      <h3 className="text-base font-semibold text-primary">{t.results.volumeDistributionTitle}</h3>
       <p className="mt-1 text-sm text-muted">
-        Hur betalningsvolymen fördelas mellan inlösare efter optimal routing
+        {t.results.volumeDistributionSubtitle}
       </p>
-      <div className="mt-8 h-64" aria-label="Stapeldiagram: volymfördelning per inlösare">
+      <div className="mt-8 h-64" aria-label={t.results.volumeDistributionTitle}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical">
             <CartesianGrid {...chartAxis.grid} horizontal={false} />
@@ -48,8 +51,8 @@ export function VolumeDistributionChart({ data }: VolumeDistributionChartProps) 
               formatter={(value, _name, props) => {
                 const item = props.payload as { percentage: number }
                 return [
-                  `${formatSEK(Number(value))} (${formatPercent(item.percentage)})`,
-                  'Volym',
+                  `${formatMoney(Number(value))} (${formatPercent(item.percentage)})`,
+                  t.results.volumeLabel,
                 ]
               }}
               contentStyle={chartTooltipStyle}

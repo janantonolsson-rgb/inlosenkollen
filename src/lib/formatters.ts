@@ -30,6 +30,33 @@ export function formatSEK(value: number, decimals = false): string {
   return sekFormatter.format(value)
 }
 
+interface CurrencyLike {
+  code: string
+  locale: string
+}
+
+const moneyFormatterCache = new Map<string, Intl.NumberFormat>()
+
+function getMoneyFormatter(currency: CurrencyLike, decimals: boolean): Intl.NumberFormat {
+  const key = `${currency.code}-${currency.locale}-${decimals ? 'dec' : 'int'}`
+  let formatter = moneyFormatterCache.get(key)
+  if (!formatter) {
+    formatter = new Intl.NumberFormat(currency.locale, {
+      style: 'currency',
+      currency: currency.code,
+      minimumFractionDigits: decimals ? 2 : 0,
+      maximumFractionDigits: decimals ? 2 : 0,
+    })
+    moneyFormatterCache.set(key, formatter)
+  }
+  return formatter
+}
+
+/** Valuteoberoende motsvarighet till formatSEK — används tillsammans med useLanguage(). */
+export function formatMoney(value: number, currency: CurrencyLike, decimals = false): string {
+  return getMoneyFormatter(currency, decimals).format(value)
+}
+
 export function formatPercent(value: number): string {
   return percentFormatter.format(value / 100)
 }
@@ -45,7 +72,7 @@ export function parseSwedishNumber(input: string): number {
   const cleaned = input
     .replace(/\s/g, '')
     .replace(/kr/gi, '')
-    .replace(/%/g, '')
+    .replace(/[€%]/g, '')
     .replace(',', '.')
     .trim()
 

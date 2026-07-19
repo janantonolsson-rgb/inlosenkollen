@@ -8,7 +8,7 @@ import {
   YAxis,
 } from 'recharts'
 import { chartAxis, chartColors, chartTooltipStyle } from '../../lib/chartTheme'
-import { formatSEK } from '../../lib/formatters'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 
 interface SavingsOverTimeChartProps {
@@ -16,18 +16,20 @@ interface SavingsOverTimeChartProps {
 }
 
 export function SavingsOverTimeChart({ data }: SavingsOverTimeChartProps) {
+  const { t, formatMoney } = useLanguage()
+
   const chartData = data.map((d) => ({
-    label: d.years === 1 ? 'År 1' : `År ${d.years}`,
+    label: `${t.results.yearPrefix} ${d.years}`,
     besparing: d.savings,
   }))
 
   return (
     <Card padding="lg">
-      <h3 className="text-base font-semibold text-primary">Besparing över tid</h3>
+      <h3 className="text-base font-semibold text-primary">{t.results.savingsOverTimeTitle}</h3>
       <p className="mt-1 text-sm text-muted">
-        Ackumulerad uppskattad besparing efter 1, 2 och 3 år
+        {t.results.savingsOverTimeSubtitle}
       </p>
-      <div className="mt-8 h-64" aria-label="Linjediagram: ackumulerad besparing över tid">
+      <div className="mt-8 h-64" aria-label={t.results.savingsOverTimeTitle}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
             <CartesianGrid {...chartAxis.grid} vertical={false} />
@@ -39,13 +41,13 @@ export function SavingsOverTimeChart({ data }: SavingsOverTimeChartProps) {
               tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
             />
             <Tooltip
-              formatter={(value) => formatSEK(Number(value))}
+              formatter={(value) => formatMoney(Number(value))}
               contentStyle={chartTooltipStyle}
             />
             <Line
               type="monotone"
               dataKey="besparing"
-              name="Ackumulerad besparing"
+              name={t.results.accumulatedSavingsSeries}
               stroke={chartColors.savings}
               strokeWidth={2}
               dot={{ fill: chartColors.savings, r: 4, strokeWidth: 0 }}

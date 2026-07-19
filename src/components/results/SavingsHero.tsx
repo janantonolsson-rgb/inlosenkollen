@@ -1,4 +1,4 @@
-import { formatSEK } from '../../lib/formatters'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 
 interface SavingsHeroProps {
@@ -8,19 +8,19 @@ interface SavingsHeroProps {
 }
 
 export function SavingsHero({ annualSavings, canRoute, isSimplifiedMode }: SavingsHeroProps) {
+  const { t, formatMoney } = useLanguage()
+
   if (isSimplifiedMode) {
     return (
       <Card padding="lg" variant="elevated">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted">
-          Förenklat läge
+          {t.results.simplifiedModeLabel}
         </p>
         <h2 className="mt-3 text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
-          Välj detaljerade priser för att se potentiell besparing
+          {t.results.simplifiedModeTitle}
         </h2>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted">
-          I förenklat läge visas er nuvarande beräknade kostnad baserat på genomsnittspriset
-          i steg 1. Lägg till priser per korttyp hos flera inlösare för en fullständig
-          routing-analys.
+          {t.results.simplifiedModeBody}
         </p>
       </Card>
     )
@@ -30,14 +30,13 @@ export function SavingsHero({ annualSavings, canRoute, isSimplifiedMode }: Savin
     return (
       <Card padding="lg" variant="elevated" className="text-center">
         <p className="text-xs font-semibold uppercase tracking-wider text-muted">
-          Ingen routing-data
+          {t.results.noRoutingLabel}
         </p>
         <h2 className="mt-3 text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
-          Lägg till inlösare för att se potentiell besparing
+          {t.results.noRoutingTitle}
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-muted">
-          Importera etablerade kortinlösare eller ange priser manuellt i steg 3 för en
-          fullständig routing-analys.
+          {t.results.noRoutingBody}
         </p>
       </Card>
     )
@@ -46,14 +45,13 @@ export function SavingsHero({ annualSavings, canRoute, isSimplifiedMode }: Savin
   return (
     <Card padding="lg" variant="elevated">
       <p className="text-xs font-semibold uppercase tracking-wider text-muted">
-        Uppskattad besparing
+        {t.results.estimatedSavingsLabel}
       </p>
       <h2 className="mt-3 text-3xl font-semibold tracking-tight text-success sm:text-4xl lg:text-5xl">
-        Potentiell årlig besparing: {formatSEK(annualSavings)}
+        {t.results.potentialAnnualSavingsPrefix} {formatMoney(annualSavings)}
       </h2>
       <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted">
-        Baserat på de priser och volymer du angivit. Faktisk besparing kan variera och är
-        inte garanterad.
+        {t.results.savingsDisclaimer}
       </p>
     </Card>
   )

@@ -9,7 +9,7 @@ import {
   YAxis,
 } from 'recharts'
 import { chartAxis, chartColors, chartTooltipStyle } from '../../lib/chartTheme'
-import { formatSEK } from '../../lib/formatters'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 
 interface BeforeAfterChartProps {
@@ -21,9 +21,11 @@ export function BeforeAfterChart({
   currentAnnualCost,
   routedAnnualCost,
 }: BeforeAfterChartProps) {
+  const { t, formatMoney } = useLanguage()
+
   const data = [
     {
-      name: 'Årskostnad',
+      name: t.metrics.currentCost,
       nuvarande: currentAnnualCost,
       medRouting: routedAnnualCost,
     },
@@ -31,11 +33,11 @@ export function BeforeAfterChart({
 
   return (
     <Card padding="lg">
-      <h3 className="text-base font-semibold text-primary">Före och efter</h3>
+      <h3 className="text-base font-semibold text-primary">{t.results.beforeAfterTitle}</h3>
       <p className="mt-1 text-sm text-muted">
-        Jämförelse av nuvarande inlösenkostnad och kostnad efter intelligent routing
+        {t.results.beforeAfterSubtitle}
       </p>
-      <div className="mt-8 h-64" aria-label="Stapeldiagram: före och efter routing">
+      <div className="mt-8 h-64" aria-label={t.results.beforeAfterTitle}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} barGap={12}>
             <CartesianGrid {...chartAxis.grid} vertical={false} />
@@ -47,20 +49,20 @@ export function BeforeAfterChart({
               tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
             />
             <Tooltip
-              formatter={(value) => formatSEK(Number(value))}
+              formatter={(value) => formatMoney(Number(value))}
               contentStyle={chartTooltipStyle}
             />
             <Legend wrapperStyle={{ fontSize: 13, paddingTop: 16 }} />
             <Bar
               dataKey="nuvarande"
-              name="Nuvarande inlösenkostnad"
+              name={t.results.currentCostSeries}
               fill={chartColors.current}
               radius={[6, 6, 0, 0]}
               maxBarSize={64}
             />
             <Bar
               dataKey="medRouting"
-              name="Kostnad efter routing"
+              name={t.results.routedCostSeries}
               fill={chartColors.routed}
               radius={[6, 6, 0, 0]}
               maxBarSize={64}

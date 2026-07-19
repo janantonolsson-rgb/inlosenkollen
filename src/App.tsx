@@ -6,8 +6,10 @@ import { PageContainer } from './components/layout/PageContainer'
 import { LeadForm } from './components/lead/LeadForm'
 import { ResultsSection } from './components/results/ResultsSection'
 import { ApmSection } from './components/marketing/ApmSection'
+import { FAQSection } from './components/marketing/FAQSection'
 import { HeroSection } from './components/marketing/HeroSection'
 import { HowItWorks } from './components/marketing/HowItWorks'
+import { TrustSection } from './components/marketing/TrustSection'
 import { Section, SectionHeader } from './components/ui/Section'
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext'
 
@@ -26,8 +28,8 @@ function AppContent() {
               align="center"
               className="mx-auto"
               eyebrow={t.nav.calculator}
-              title="Besparingskalkylator"
-              description="Fyll i era uppgifter i tre steg för att se en uppskattning av er potentiella besparing. Alla siffror är exempeldata tills ni anger egna värden."
+              title={t.calculator.sectionTitle}
+              description={t.calculator.sectionDescription}
             />
             <CalculatorWizard />
             <div className="mt-16">
@@ -40,6 +42,13 @@ function AppContent() {
           <PageContainer size="lg">
             <HowItWorks />
             <ApmSection />
+          </PageContainer>
+        </Section>
+
+        <Section>
+          <PageContainer size="lg" className="space-y-14">
+            <TrustSection />
+            <FAQSection />
           </PageContainer>
         </Section>
 

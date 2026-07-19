@@ -1,30 +1,33 @@
 import clsx from 'clsx'
 import type { PricingMode } from '../../types/calculator'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 interface PricingModeToggleProps {
   mode: PricingMode
   onChange: (mode: PricingMode) => void
 }
 
-const options: { value: PricingMode; label: string; description: string }[] = [
-  {
-    value: 'simplified',
-    label: 'Genomsnittspris',
-    description: 'Jag känner bara till mitt ungefärliga pris idag',
-  },
-  {
-    value: 'catalog',
-    label: 'Importera inlösare',
-    description: 'Välj etablerade aktörer med publicerade avgifter',
-  },
-  {
-    value: 'manual',
-    label: 'Detaljerade priser',
-    description: 'Ange exakta priser per korttyp hos flera inlösare',
-  },
-]
-
 export function PricingModeToggle({ mode, onChange }: PricingModeToggleProps) {
+  const { t } = useLanguage()
+
+  const options: { value: PricingMode; label: string; description: string }[] = [
+    {
+      value: 'simplified',
+      label: t.calculator.pricingModeSimplifiedLabel,
+      description: t.calculator.pricingModeSimplifiedDescription,
+    },
+    {
+      value: 'catalog',
+      label: t.calculator.pricingModeCatalogLabel,
+      description: t.calculator.pricingModeCatalogDescription,
+    },
+    {
+      value: 'manual',
+      label: t.calculator.pricingModeManualLabel,
+      description: t.calculator.pricingModeManualDescription,
+    },
+  ]
+
   return (
     <div
       className="grid gap-2 sm:grid-cols-3"

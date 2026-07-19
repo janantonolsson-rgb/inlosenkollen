@@ -1,4 +1,4 @@
-import { formatSEK } from '../../lib/formatters'
+import { useLanguage } from '../../i18n/LanguageContext'
 import type { CategoryRoutingResult } from '../../types/calculator'
 import { Badge } from '../ui/Badge'
 import { Card } from '../ui/Card'
@@ -9,20 +9,22 @@ interface RoutingTableProps {
 }
 
 function RoutingRow({ row }: { row: CategoryRoutingResult }) {
+  const { t, formatMoney } = useLanguage()
+
   return (
     <div className="rounded-lg border border-border p-4 sm:hidden">
       <p className="font-medium text-primary">{row.label}</p>
       <dl className="mt-3 space-y-2 text-sm">
         <div className="flex justify-between">
-          <dt className="text-muted">Årlig omsättning</dt>
-          <dd className="tabular-nums text-primary">{formatSEK(row.annualVolume)}</dd>
+          <dt className="text-muted">{t.results.annualVolumeColumn}</dt>
+          <dd className="tabular-nums text-primary">{formatMoney(row.annualVolume)}</dd>
         </div>
         <div className="flex justify-between">
-          <dt className="text-muted">Nuvarande kostnad</dt>
-          <dd className="tabular-nums text-primary">{formatSEK(row.currentCost)}</dd>
+          <dt className="text-muted">{t.results.currentCostColumn}</dt>
+          <dd className="tabular-nums text-primary">{formatMoney(row.currentCost)}</dd>
         </div>
         <div className="flex justify-between gap-4">
-          <dt className="text-muted">Inlösare</dt>
+          <dt className="text-muted">{t.results.acquirerColumn}</dt>
           <dd>
             <Badge variant="accent">
               {row.label} → {row.recommendedAcquirerName}
@@ -30,12 +32,12 @@ function RoutingRow({ row }: { row: CategoryRoutingResult }) {
           </dd>
         </div>
         <div className="flex justify-between">
-          <dt className="text-muted">Ny kostnad</dt>
-          <dd className="tabular-nums text-primary">{formatSEK(row.routedCost)}</dd>
+          <dt className="text-muted">{t.results.newCostColumn}</dt>
+          <dd className="tabular-nums text-primary">{formatMoney(row.routedCost)}</dd>
         </div>
         <div className="flex justify-between border-t border-border-subtle pt-2">
-          <dt className="font-medium text-primary">Besparing</dt>
-          <dd className="font-semibold tabular-nums text-success">{formatSEK(row.annualSavings)}</dd>
+          <dt className="font-medium text-primary">{t.results.annualSavingsColumn}</dt>
+          <dd className="font-semibold tabular-nums text-success">{formatMoney(row.annualSavings)}</dd>
         </div>
       </dl>
     </div>
@@ -43,14 +45,16 @@ function RoutingRow({ row }: { row: CategoryRoutingResult }) {
 }
 
 export function RoutingTable({ categories, canRoute }: RoutingTableProps) {
+  const { t, formatMoney } = useLanguage()
+
   if (!canRoute) return null
 
   return (
     <Card padding="none" variant="elevated" className="overflow-hidden">
       <div className="border-b border-border px-6 py-5">
-        <h3 className="text-base font-semibold text-primary">Rekommenderad routing</h3>
+        <h3 className="text-base font-semibold text-primary">{t.results.routingTableTitle}</h3>
         <p className="mt-1 text-sm text-muted">
-          Varje transaktionstyp routas till den inlösare som ger lägst beräknad kostnad
+          {t.results.routingTableSubtitle}
         </p>
       </div>
 
@@ -64,12 +68,12 @@ export function RoutingTable({ categories, canRoute }: RoutingTableProps) {
         <table className="w-full text-left text-sm">
           <thead className="sticky top-0 bg-surface-elevated">
             <tr className="border-b border-border text-xs text-muted">
-              <th className="px-6 py-3 font-medium">Transaktionstyp</th>
-              <th className="px-6 py-3 font-medium">Årlig omsättning</th>
-              <th className="px-6 py-3 font-medium">Nuvarande kostnad</th>
-              <th className="px-6 py-3 font-medium">Rekommenderad inlösare</th>
-              <th className="px-6 py-3 font-medium">Ny kostnad</th>
-              <th className="px-6 py-3 font-medium">Årlig besparing</th>
+              <th className="px-6 py-3 font-medium">{t.results.transactionTypeColumn}</th>
+              <th className="px-6 py-3 font-medium">{t.results.annualVolumeColumn}</th>
+              <th className="px-6 py-3 font-medium">{t.results.currentCostColumn}</th>
+              <th className="px-6 py-3 font-medium">{t.results.acquirerColumn}</th>
+              <th className="px-6 py-3 font-medium">{t.results.newCostColumn}</th>
+              <th className="px-6 py-3 font-medium">{t.results.annualSavingsColumn}</th>
             </tr>
           </thead>
           <tbody>
@@ -79,16 +83,16 @@ export function RoutingTable({ categories, canRoute }: RoutingTableProps) {
                 className="border-b border-border-subtle transition-colors last:border-0 hover:bg-surface"
               >
                 <td className="px-6 py-4 font-medium text-primary">{row.label}</td>
-                <td className="px-6 py-4 tabular-nums">{formatSEK(row.annualVolume)}</td>
-                <td className="px-6 py-4 tabular-nums">{formatSEK(row.currentCost)}</td>
+                <td className="px-6 py-4 tabular-nums">{formatMoney(row.annualVolume)}</td>
+                <td className="px-6 py-4 tabular-nums">{formatMoney(row.currentCost)}</td>
                 <td className="px-6 py-4">
                   <Badge variant="accent">
-              {row.label} → {row.recommendedAcquirerName}
-            </Badge>
+                    {row.label} → {row.recommendedAcquirerName}
+                  </Badge>
                 </td>
-                <td className="px-6 py-4 tabular-nums">{formatSEK(row.routedCost)}</td>
+                <td className="px-6 py-4 tabular-nums">{formatMoney(row.routedCost)}</td>
                 <td className="px-6 py-4 font-semibold tabular-nums text-success">
-                  {formatSEK(row.annualSavings)}
+                  {formatMoney(row.annualSavings)}
                 </td>
               </tr>
             ))}
