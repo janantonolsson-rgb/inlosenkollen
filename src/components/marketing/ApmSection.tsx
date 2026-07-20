@@ -1,32 +1,23 @@
+import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 import { SectionHeader } from '../ui/Section'
 
-const methods = [
-  {
-    name: 'Swish',
-    description: 'Populärt i Sverige med fast eller procentuell avgift. Jämförs separat från kortinlösen.',
-  },
-  {
-    name: 'Klarna',
-    description: 'Buy now, pay later och direktbetalningar med egna avgiftsmodeller per produkt.',
-  },
-  {
-    name: 'MobilePay',
-    description: 'Vanligt i Danmark och Finland. Ofta med annan prissättning än kortbetalningar.',
-  },
-  {
-    name: 'Lokala betalningsmetoder',
-    description: 'Trustly, Vipps, BankAxept m.fl. bör utvärderas separat utifrån volym och avtal.',
-  },
-]
-
 export function ApmSection() {
+  const { t } = useLanguage()
+
+  const methods = [
+    { name: 'Swish', description: t.apm.swish },
+    { name: 'Klarna', description: t.apm.klarna },
+    { name: 'MobilePay', description: t.apm.mobilePay },
+    { name: 'Trustly / Vipps / BankAxept', description: t.apm.localMethods },
+  ]
+
   return (
     <section className="mt-24">
       <SectionHeader
-        eyebrow="Övriga betalmetoder"
-        title="Alternativa betalningsmetoder"
-        description="Swish, Klarna, MobilePay och andra lokala betalningsmetoder ingår inte automatiskt i kalkylatorn. Dessa metoder har ofta olika prismodeller och bör jämföras separat utifrån er faktiska volym och avtal."
+        eyebrow={t.apm.eyebrow}
+        title={t.apm.title}
+        description={t.apm.description}
       />
 
       <div className="grid gap-4 sm:grid-cols-2">

@@ -131,6 +131,7 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     highlight: 'ca 1,6 % (uppskattning)',
     url: 'https://www.ecentric.co.za',
     applyUrl: 'https://www.ecentric.co.za',
+    applyLabel: 'Kontakta Ecentric för offert',
     pricing: {
       swedishDebit: { percent: 1.6, fixed: 0.2 },
       swedishCredit: { percent: 1.6, fixed: 0.2 },
@@ -149,6 +150,7 @@ export const acquirerCatalog: CatalogAcquirer[] = [
     highlight: 'ca 1,55 % (uppskattning)',
     url: 'https://www.tietoevry.com',
     applyUrl: 'https://www.tietoevry.com',
+    applyLabel: 'Kontakta Tietoevry för offert',
     pricing: {
       swedishDebit: { percent: 1.55, fixed: 0.2 },
       swedishCredit: { percent: 1.55, fixed: 0.2 },

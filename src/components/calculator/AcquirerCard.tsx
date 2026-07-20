@@ -1,5 +1,6 @@
 import type { AcquirerPricing, PricingCategory } from '../../types/calculator'
 import { PRICING_CATEGORY_LABELS } from '../../types/calculator'
+import { useLanguage } from '../../i18n/LanguageContext'
 import { cn } from '../../lib/cn'
 import { CurrencyInput } from './shared/CurrencyInput'
 import { PercentInput } from './shared/PercentInput'
@@ -18,9 +19,7 @@ interface AcquirerCardProps {
   name: string
   pricing: AcquirerPricing
   canRemove: boolean
-  showFixedFee?: boolean
-  isOpen: boolean
-  onToggle: () => void
+  showPricing: boolean
   onNameChange: (name: string) => void
   onRemove: () => void
   onPricingChange: (
@@ -34,13 +33,12 @@ export function AcquirerCard({
   name,
   pricing,
   canRemove,
-  showFixedFee = false,
-  isOpen,
-  onToggle,
+  showPricing,
   onNameChange,
   onRemove,
   onPricingChange,
 }: AcquirerCardProps) {
+  const { t } = useLanguage()
   const avgPercent =
     PRICING_CATEGORIES.reduce((sum, c) => sum + pricing[c].percent, 0) / PRICING_CATEGORIES.length
 
@@ -61,37 +59,27 @@ export function AcquirerCard({
           <button
             type="button"
             onClick={onRemove}
-            className="text-sm text-muted transition-colors hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="shrink-0 text-sm font-medium text-muted transition-colors hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
-            Ta bort
+            {t.catalog.removeButton}
           </button>
         )}
       </div>
 
-      <div className="flex items-center justify-between gap-4 px-5 py-3">
-        <p className="text-xs text-muted">
-          Snittavgift ca {avgPercent.toFixed(2).replace('.', ',')} % — 6 korttyper konfigurerade
+      {!showPricing && (
+        <p className="px-5 py-3 text-xs text-muted">
+          {t.misc.avgFeePrefix} {avgPercent.toFixed(2).replace('.', ',')} %
         </p>
-        <button
-          type="button"
-          onClick={onToggle}
-          className="shrink-0 text-xs font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          aria-expanded={isOpen}
-        >
-          {isOpen ? '− Dölj prisuppgifter' : 'Visa/redigera prisuppgifter'}
-        </button>
-      </div>
+      )}
 
-      {isOpen && (
-        <div className="overflow-x-auto border-t border-border-subtle">
+      {showPricing && (
+        <div className="overflow-x-auto">
           <table className="w-full min-w-[480px] text-sm">
             <thead>
               <tr className="border-b border-border text-left text-xs text-muted">
-                <th className="px-5 py-3 font-medium">Korttyp</th>
-                <th className="px-5 py-3 font-medium">Procent</th>
-                {showFixedFee && (
-                  <th className="px-5 py-3 font-medium text-muted-light">Fast avgift</th>
-                )}
+                <th className="px-5 py-3 font-medium">{t.misc.cardTypeColumn}</th>
+                <th className="px-5 py-3 font-medium">{t.misc.percentColumn}</th>
+                <th className="px-5 py-3 font-medium">{t.misc.fixedFeeColumn}</th>
               </tr>
             </thead>
             <tbody>
@@ -110,19 +98,17 @@ export function AcquirerCard({
                       onChange={(v) => onPricingChange(category, 'percent', v)}
                     />
                   </td>
-                  {showFixedFee && (
-                    <td className="px-5 py-2">
-                      <CurrencyInput
-                        id={`${name}-${category}-fixed`}
-                        label={PRICING_CATEGORY_LABELS[category]}
-                        hideLabel
-                        inputSize="sm"
-                        value={pricing[category].fixed}
-                        onChange={(v) => onPricingChange(category, 'fixed', v)}
-                        decimals
-                      />
-                    </td>
-                  )}
+                  <td className="px-5 py-2">
+                    <CurrencyInput
+                      id={`${name}-${category}-fixed`}
+                      label={PRICING_CATEGORY_LABELS[category]}
+                      hideLabel
+                      inputSize="sm"
+                      value={pricing[category].fixed}
+                      onChange={(v) => onPricingChange(category, 'fixed', v)}
+                      decimals
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>

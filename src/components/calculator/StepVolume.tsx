@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useCalculator } from '../../context/CalculatorContext'
 import { getAnnualTransactions } from '../../lib/calculations'
 import { validateVolume } from '../../lib/validation'
@@ -24,7 +23,6 @@ export function StepVolume() {
   const { volume } = state
   const annualTransactions = getAnnualTransactions(volume)
   const volumeError = validateVolume(volume.annualVolume, volume.averageOrderValue)
-  const [showAdvanced, setShowAdvanced] = useState(false)
 
   return (
     <Card padding="lg">
@@ -95,29 +93,14 @@ export function StepVolume() {
             </p>
           </div>
         </div>
-      </div>
-
-      <div className="mt-6">
-        <button
-          type="button"
-          onClick={() => setShowAdvanced((v) => !v)}
-          className="text-sm font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          aria-expanded={showAdvanced}
-        >
-          {showAdvanced ? t.calculator.hideFixedFees : t.calculator.showFixedFees}
-        </button>
-        {showAdvanced && (
-          <div className="mt-4 max-w-xs">
-            <CurrencyInput
-              id="currentFixedFee"
-              label={t.misc.fixedFeeLabel}
-              hint={t.misc.fixedFeeHint}
-              value={volume.currentFixedFee}
-              onChange={(v) => dispatch({ type: 'SET_VOLUME', payload: { currentFixedFee: v } })}
-              decimals
-            />
-          </div>
-        )}
+        <CurrencyInput
+          id="currentFixedFee"
+          label={t.misc.fixedFeeLabel}
+          hint={t.misc.fixedFeeHint}
+          value={volume.currentFixedFee}
+          onChange={(v) => dispatch({ type: 'SET_VOLUME', payload: { currentFixedFee: v } })}
+          decimals
+        />
       </div>
 
       {volumeError && (

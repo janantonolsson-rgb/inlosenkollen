@@ -13,8 +13,7 @@ export function StepAcquirers() {
   const isSimplified = state.pricingMode === 'simplified'
   const hasAcquirers = state.acquirers.length > 0
   const canCalculate = true
-  const [showFixedFee, setShowFixedFee] = useState(false)
-  const [openAcquirerId, setOpenAcquirerId] = useState<string | null>(null)
+  const [showDetailedPricing, setShowDetailedPricing] = useState(false)
 
   const handleCalculate = () => {
     dispatch({ type: 'SHOW_RESULTS', payload: true })
@@ -57,31 +56,18 @@ export function StepAcquirers() {
 
       {!isSimplified && hasAcquirers && (
         <div className="mt-8 space-y-6">
-          <div className="flex items-center justify-between gap-4">
-            <h3 className="text-sm font-semibold text-primary">
-              {state.pricingMode === 'catalog'
-                ? t.misc.importedAcquirersHeading
-                : t.misc.yourAcquirersHeading}
-            </h3>
-            <button
-              type="button"
-              onClick={() => setShowFixedFee((v) => !v)}
-              className="text-xs font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              {showFixedFee ? t.calculator.hideFixedFees : t.calculator.showFixedFees}
-            </button>
-          </div>
+          <h3 className="text-sm font-semibold text-primary">
+            {state.pricingMode === 'catalog'
+              ? t.misc.importedAcquirersHeading
+              : t.misc.yourAcquirersHeading}
+          </h3>
           {state.acquirers.map((acquirer) => (
             <AcquirerCard
               key={acquirer.id}
               id={acquirer.id}
               name={acquirer.name}
               pricing={acquirer.pricing}
-              showFixedFee={showFixedFee}
-              isOpen={openAcquirerId === acquirer.id}
-              onToggle={() =>
-                setOpenAcquirerId((current) => (current === acquirer.id ? null : acquirer.id))
-              }
+              showPricing={showDetailedPricing}
               canRemove={state.acquirers.length > 1}
               onNameChange={(name) =>
                 dispatch({
@@ -100,10 +86,34 @@ export function StepAcquirers() {
               }
             />
           ))}
+
+          <div className="flex flex-col items-start justify-between gap-3 rounded-lg border border-border-subtle bg-surface px-5 py-4 sm:flex-row sm:items-center">
+            <div>
+              <p className="text-sm font-medium text-primary">{t.misc.gotOwnQuotesTitle}</p>
+              <p className="mt-0.5 text-sm text-muted">{t.misc.gotOwnQuotesBody}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowDetailedPricing((v) => !v)}
+              className="shrink-0 rounded-lg border border-accent px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent-muted/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              {showDetailedPricing ? t.misc.hideDetailedPricesButton : t.misc.enterDetailedPricesButton}
+            </button>
+          </div>
+
+          {state.pricingMode === 'manual' && (
+            <button
+              type="button"
+              onClick={() => dispatch({ type: 'ADD_ACQUIRER' })}
+              className="flex w-full items-center justify-center rounded-lg border border-dashed border-border px-4 py-3 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              {t.misc.addAcquirerButton}
+            </button>
+          )}
         </div>
       )}
 
-      {state.pricingMode === 'manual' && (
+      {state.pricingMode === 'manual' && !hasAcquirers && (
         <button
           type="button"
           onClick={() => dispatch({ type: 'ADD_ACQUIRER' })}

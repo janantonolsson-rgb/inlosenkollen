@@ -135,6 +135,15 @@ export interface TranslationDict {
     developedBy: string
   }
   disclaimer: string
+  apm: {
+    eyebrow: string
+    title: string
+    description: string
+    swish: string
+    klarna: string
+    mobilePay: string
+    localMethods: string
+  }
   misc: {
     quickSelect: string
     customAmount: string
@@ -163,6 +172,16 @@ export interface TranslationDict {
     messageLabel: string
     messagePlaceholder: string
     attachmentLabel: string
+    backButton: string
+    nextButton: string
+    avgFeePrefix: string
+    cardTypeColumn: string
+    percentColumn: string
+    fixedFeeColumn: string
+    gotOwnQuotesTitle: string
+    gotOwnQuotesBody: string
+    enterDetailedPricesButton: string
+    hideDetailedPricesButton: string
     useExampleDataButton: string
     exampleDataDisclaimer: string
     totalShareLabel: string
@@ -199,7 +218,7 @@ export const translations: Record<Language, TranslationDict> = {
       acquirerExplainerTitle: 'Vad är en inlösare?',
       acquirerExplainer:
         'En inlösare är den bank eller betalpartner som hanterar kortbetalningen och betalar ut pengarna till företaget. Olika inlösare har olika priser beroende på korttyp och avtal, vilket gör att valet av inlösare kan påverka företagets kostnader betydligt.',
-      ctaPrimary: 'Beräkna er möjliga besparing',
+      ctaPrimary: 'Se hur mycket ni kan spara',
       ctaSecondary: 'Hur fungerar intelligent routing?',
       footnote:
         'Ett smart sätt för nordiska företag, butiker och kedjor att sänka kostnaderna för kortbetalningar i fysisk butik — utan att ändra kundupplevelsen i kassan.',
@@ -234,15 +253,15 @@ export const translations: Record<Language, TranslationDict> = {
       step1Title: 'Steg 1: Företagets betalningsvolym',
       step1Description:
         'Ange företagets nuvarande årliga kortomsättning och ungefärliga inlösenkostnad. Kör ni bara med en ungefärlig procentsats idag räcker det gott för en första uppskattning. Intelligent routing gör störst skillnad för företag och koncerner med hög omsättning.',
-      step2Title: 'Steg 2: Förfina beräkningen (valfritt)',
+      step2Title: 'Steg 2: Anpassa transaktionsmix',
       step2Description:
-        'Er transaktionsmix är redan förifylld med en genomsnittlig svensk kortmix, så ni kan gå vidare direkt. Vill ni ha en mer exakt beräkning? Det går snabbt att finjustera — klicka på "Använd detaljerad data" nedan.',
-      step2TimeHint: 'Tar mindre än 2 minuter',
-      useDetailedDataButton: 'Använd detaljerad data',
+        'Beräkningen bygger just nu på den genomsnittliga fördelningen av korttyper i Sverige. Ni kan gå vidare direkt, men vill ni få en mer exakt uppskattning kan ni justera fördelningen utifrån er egen statistik nedan.',
+      step2TimeHint: 'VALFRITT',
+      useDetailedDataButton: 'Anpassa med egna siffror',
       presetMixBadge: 'Genomsnittlig svensk kortmix (förifylld)',
       step3Title: 'Steg 3: Inlösenavtal',
       step3Description:
-        'Använd ert ungefärliga pris, importera etablerade inlösare med kända avgifter, eller ange exakta priser per korttyp om ni har dem.',
+        'Lägg in de inlösenpriser ni har fått från olika inlösare. För bästa resultat anger ni priser per korttyp, men ni kan även börja med ungefärliga nivåer.',
       annualVolume: 'Total kortomsättning per år',
       averageOrderValue: 'Genomsnittligt ordervärde (AoV)',
       annualTransactionsComputed: 'Antal transaktioner per år (beräknas automatiskt)',
@@ -264,9 +283,9 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Resultat',
       title: 'Er uppskattade besparing',
       description: 'Resultat baserat på angivna priser och årsvolymer. Alla siffror är uppskattningar.',
-      exampleDataTitle: 'Det här är en branschuppskattning – inte en faktisk kalkyl.',
+      exampleDataTitle: 'Vi kan se att beräkningen just nu bygger på genomsnittliga branschvärden.',
       exampleDataBody:
-        'Resultatet bygger just nu på allmänna branschpriser. Fyll i era egna uppgifter och jämför verkliga villkor från inlösare för att få en korrekt besparingsberäkning.',
+        'Resultatet är därför endast en uppskattning. Lägg in era egna aktuella kostnader och inlösenpriser för att få en mer korrekt beräkning av er möjliga besparing.',
       exampleDataDismiss: 'Jag förstår, visa resultatet ändå',
       estimatedSavingsLabel: 'Uppskattad besparing',
       potentialAnnualSavingsPrefix: 'Potentiell årlig besparing:',
@@ -309,12 +328,12 @@ export const translations: Record<Language, TranslationDict> = {
       tenYearSavings: 'Beräknad besparing över tio år',
     },
     leadForm: {
-      title: 'Vill du veta vad ni faktiskt kan spara?',
+      title: 'Vill ni veta vilka besparingsmöjligheter som finns?',
       description:
-        'Skicka in era nuvarande inlösenpriser och transaktionsvolymer så hjälper vi er att göra en mer detaljerad analys.',
+        'Skicka in era nuvarande inlösenpriser och transaktionsvolymer så gör vi en första bedömning av potentialen. Därefter hjälper vi er att ta nästa steg och jämföra alternativ utifrån era förutsättningar.',
       orgNumberLabel: 'Organisationsnummer',
       orgNumberPlaceholder: 't.ex. 556677-8899',
-      submit: 'Boka en kostnadsanalys',
+      submit: 'Kontakta oss för en kostnadsfri genomgång',
       submitting: 'Skickar...',
       thanksTitle: 'Tack för er förfrågan!',
       thanksBody: 'Vi återkommer inom kort för att boka en mer detaljerad kostnadsanalys.',
@@ -340,6 +359,16 @@ export const translations: Record<Language, TranslationDict> = {
     },
     disclaimer:
       'Beräkningen är en uppskattning och baseras på de uppgifter som anges. Faktiska kostnader och besparingar kan variera beroende på bland annat kortmix, interchange, scheme fees, inlösenavtal, valutaväxling, minimikostnader, teknisk uppsättning och andra avtalsvillkor. Beräkningen utgör inte ett erbjudande eller en garanti för ett visst pris eller en viss besparing.',
+    apm: {
+      eyebrow: 'Övriga betalmetoder',
+      title: 'Alternativa betalningsmetoder',
+      description:
+        'Swish, Klarna, MobilePay och andra alternativa betalningsmetoder ingår inte i kalkylatorn eftersom dessa normalt inte kan routas mellan flera inlösare. Eftersom det därför inte finns någon kostnadsbesparing att uppnå genom intelligent routing för dessa transaktioner, inkluderas de inte i kalkylatorns beräkningar. Tjänsterna kan självklart fortfarande användas parallellt med intelligent routing för kortbetalningar.',
+      swish: 'Populärt i Sverige med fast eller procentuell avgift. Ingår inte i kalkylatorns routing.',
+      klarna: 'Buy now, pay later och direktbetalningar med egna avgiftsmodeller per produkt.',
+      mobilePay: 'Vanligt i Danmark och Finland. Egen prissättning, separat från kortbetalningar.',
+      localMethods: 'Trustly, Vipps, BankAxept m.fl. kan användas parallellt, men routas inte i kalkylatorn.',
+    },
     misc: {
       quickSelect: 'Snabbval',
       customAmount: 'Annat belopp',
@@ -371,6 +400,17 @@ export const translations: Record<Language, TranslationDict> = {
       messageLabel: 'Meddelande',
       messagePlaceholder: 'Berätta gärna mer om er betalningsuppsättning...',
       attachmentLabel: 'Bifoga prislista eller faktura (valfritt)',
+      backButton: 'Tillbaka',
+      nextButton: 'Nästa',
+      avgFeePrefix: 'Snittavgift ca',
+      cardTypeColumn: 'Korttyp',
+      percentColumn: 'Procent',
+      fixedFeeColumn: 'Fast avgift',
+      gotOwnQuotesTitle: 'Har ni fått egna offerter?',
+      gotOwnQuotesBody:
+        'Om ni har fått prisuppgifter direkt från en eller flera inlösare kan ni ange dem här för en mer exakt beräkning.',
+      enterDetailedPricesButton: 'Ange detaljerade priser',
+      hideDetailedPricesButton: 'Dölj detaljerade priser',
       useExampleDataButton: 'Använd exempeldata',
       exampleDataDisclaimer:
         'Exempeldata representerar inte en specifik kund. Använd den som utgångspunkt och justera efter er faktiska transaktionsmix.',
@@ -402,7 +442,7 @@ export const translations: Record<Language, TranslationDict> = {
       acquirerExplainerTitle: 'What is an acquirer?',
       acquirerExplainer:
         'An acquirer is the bank or payment partner that processes the card payment and pays the funds out to the business. Different acquirers charge different prices depending on card type and agreement, so the choice of acquirer can significantly affect a company\u2019s costs.',
-      ctaPrimary: 'Calculate your potential savings',
+      ctaPrimary: 'See how much you could save',
       ctaSecondary: 'How does intelligent routing work?',
       footnote:
         'A smart way for Nordic companies, stores and chains to lower the cost of in-store card payments — without changing the checkout experience.',
@@ -437,15 +477,15 @@ export const translations: Record<Language, TranslationDict> = {
       step1Title: 'Step 1: Your company\u2019s payment volume',
       step1Description:
         'Enter your company\u2019s current annual card turnover and approximate acquiring cost. If you only have a rough percentage today, that\u2019s enough for a first estimate. Intelligent routing makes the biggest difference for companies and groups with high turnover.',
-      step2Title: 'Step 2: Refine the calculation (optional)',
+      step2Title: 'Step 2: Adjust transaction mix',
       step2Description:
-        'Your transaction mix is already pre-filled with an average Swedish card mix, so you can move on right away. Want a more precise calculation? It only takes a moment to fine-tune — click "Use detailed data" below.',
-      step2TimeHint: 'Takes less than 2 minutes',
-      useDetailedDataButton: 'Use detailed data',
+        'The calculation is currently based on the average distribution of card types in Sweden. You can move on right away, or adjust the distribution below using your own statistics for a more precise estimate.',
+      step2TimeHint: 'OPTIONAL',
+      useDetailedDataButton: 'Adjust with your own figures',
       presetMixBadge: 'Average Swedish card mix (pre-filled)',
       step3Title: 'Step 3: Acquiring agreements',
       step3Description:
-        'Use your approximate price, import established acquirers with known fees, or enter exact prices per card type if you have them.',
+        'Enter the acquiring prices you’ve received from different acquirers. For the best result, enter prices per card type, but you can also start with approximate levels.',
       annualVolume: 'Total card turnover per year',
       averageOrderValue: 'Average Order Value (AoV)',
       annualTransactionsComputed: 'Transactions per year (calculated automatically)',
@@ -467,9 +507,9 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Results',
       title: 'Your estimated savings',
       description: 'Results based on the prices and annual volumes provided. All figures are estimates.',
-      exampleDataTitle: 'This is an industry estimate – not an actual calculation.',
+      exampleDataTitle: 'We can see that the calculation is currently based on average industry values.',
       exampleDataBody:
-        'The result is currently based on general industry prices. Fill in your own details and compare real terms from acquirers to get an accurate savings calculation.',
+        'The result is therefore only an estimate. Enter your own actual costs and acquiring prices to get a more accurate calculation of your potential savings.',
       exampleDataDismiss: 'Got it, show the result anyway',
       estimatedSavingsLabel: 'Estimated savings',
       potentialAnnualSavingsPrefix: 'Potential annual savings:',
@@ -512,12 +552,12 @@ export const translations: Record<Language, TranslationDict> = {
       tenYearSavings: 'Estimated savings over ten years',
     },
     leadForm: {
-      title: 'Want to know what you could actually save?',
+      title: 'Want to know what savings opportunities exist?',
       description:
-        'Send us your current acquiring prices and transaction volumes and we\u2019ll help you with a more detailed analysis.',
+        'Send us your current acquiring prices and transaction volumes and we\u2019ll make an initial assessment of the potential. We\u2019ll then help you take the next step and compare options based on your situation.',
       orgNumberLabel: 'Organization/registration number',
       orgNumberPlaceholder: 'e.g. 556677-8899',
-      submit: 'Book a cost analysis',
+      submit: 'Contact us for a free review',
       submitting: 'Sending...',
       thanksTitle: 'Thank you for your inquiry!',
       thanksBody: 'We will be in touch shortly to book a more detailed cost analysis.',
@@ -543,6 +583,16 @@ export const translations: Record<Language, TranslationDict> = {
     },
     disclaimer:
       'This calculation is an estimate based on the information provided. Actual costs and savings may vary depending on, among other things, card mix, interchange, scheme fees, acquiring agreements, currency conversion, minimum costs, technical setup, and other contractual terms. This calculation does not constitute an offer or a guarantee of a specific price or saving.',
+    apm: {
+      eyebrow: 'Other payment methods',
+      title: 'Alternative payment methods',
+      description:
+        'Swish, Klarna, MobilePay and other alternative payment methods are not included in the calculator because they normally cannot be routed between several acquirers. Since there is therefore no cost saving to achieve through intelligent routing for these transactions, they are not included in the calculator’s calculations. These services can of course still be used alongside intelligent routing for card payments.',
+      swish: 'Popular in Sweden with a fixed or percentage fee. Not included in the calculator’s routing.',
+      klarna: 'Buy now, pay later and direct payments with their own fee models per product.',
+      mobilePay: 'Common in Denmark and Finland. Its own pricing, separate from card payments.',
+      localMethods: 'Trustly, Vipps, BankAxept, etc. can be used in parallel, but are not routed in the calculator.',
+    },
     misc: {
       quickSelect: 'Quick select',
       customAmount: 'Custom amount',
@@ -574,6 +624,17 @@ export const translations: Record<Language, TranslationDict> = {
       messageLabel: 'Message',
       messagePlaceholder: 'Feel free to tell us more about your payment setup...',
       attachmentLabel: 'Attach a price list or invoice (optional)',
+      backButton: 'Back',
+      nextButton: 'Next',
+      avgFeePrefix: 'Average fee approx.',
+      cardTypeColumn: 'Card type',
+      percentColumn: 'Percentage',
+      fixedFeeColumn: 'Fixed fee',
+      gotOwnQuotesTitle: 'Have you received your own quotes?',
+      gotOwnQuotesBody:
+        'If you have received pricing directly from one or more acquirers, you can enter it here for a more precise calculation.',
+      enterDetailedPricesButton: 'Enter detailed prices',
+      hideDetailedPricesButton: 'Hide detailed prices',
       useExampleDataButton: 'Use example data',
       exampleDataDisclaimer:
         'Example data does not represent a specific customer. Use it as a starting point and adjust it to your actual transaction mix.',
@@ -605,7 +666,7 @@ export const translations: Record<Language, TranslationDict> = {
       acquirerExplainerTitle: 'Hva er en innløser?',
       acquirerExplainer:
         'En innløser er banken eller betalingspartneren som håndterer kortbetalingen og utbetaler pengene til bedriften. Ulike innløsere har ulike priser avhengig av korttype og avtale, noe som gjør at valg av innløser kan påvirke bedriftens kostnader betydelig.',
-      ctaPrimary: 'Beregn deres mulige besparelse',
+      ctaPrimary: 'Se hvor mye dere kan spare',
       ctaSecondary: 'Hvordan fungerer intelligent ruting?',
       footnote:
         'En smart måte for nordiske bedrifter, butikker og kjeder å redusere kostnadene for kortbetaling i fysisk butikk — uten å endre kundeopplevelsen i kassen.',
@@ -640,15 +701,15 @@ export const translations: Record<Language, TranslationDict> = {
       step1Title: 'Steg 1: Bedriftens betalingsvolum',
       step1Description:
         'Angi bedriftens nåværende årlige kortomsetning og omtrentlige innløsningskostnad. Har dere bare en omtrentlig prosentsats i dag, er det godt nok for et første anslag. Intelligent ruting gir størst forskjell for bedrifter og konsern med høy omsetning.',
-      step2Title: 'Steg 2: Foredle beregningen (valgfritt)',
+      step2Title: 'Steg 2: Tilpass transaksjonsmiks',
       step2Description:
-        'Deres transaksjonsmiks er allerede forhåndsutfylt med en gjennomsnittlig svensk kortmiks, så dere kan gå videre med en gang. Vil dere ha en mer presis beregning? Det tar bare et øyeblikk å finjustere — klikk på "Bruk detaljerte data" nedenfor.',
-      step2TimeHint: 'Tar mindre enn 2 minutter',
-      useDetailedDataButton: 'Bruk detaljerte data',
+        'Beregningen bygger nå på den gjennomsnittlige fordelingen av korttyper i Sverige. Dere kan gå videre med en gang, eller justere fordelingen nedenfor ut fra egen statistikk for et mer presist anslag.',
+      step2TimeHint: 'VALGFRITT',
+      useDetailedDataButton: 'Tilpass med egne tall',
       presetMixBadge: 'Gjennomsnittlig svensk kortmiks (forhåndsutfylt)',
       step3Title: 'Steg 3: Innløsningsavtaler',
       step3Description:
-        'Bruk den omtrentlige prisen deres, importer etablerte innløsere med kjente gebyrer, eller angi eksakte priser per korttype hvis dere har dem.',
+        'Legg inn innløsningsprisene dere har fått fra ulike innløsere. For best resultat angir dere priser per korttype, men dere kan også starte med omtrentlige nivåer.',
       annualVolume: 'Total kortomsetning per år',
       averageOrderValue: 'Gjennomsnittlig ordreverdi (AOV)',
       annualTransactionsComputed: 'Antall transaksjoner per år (beregnes automatisk)',
@@ -670,9 +731,9 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Resultat',
       title: 'Deres estimerte besparelse',
       description: 'Resultat basert på oppgitte priser og årsvolum. Alle tall er estimater.',
-      exampleDataTitle: 'Dette er et bransjeestimat – ikke en faktisk beregning.',
+      exampleDataTitle: 'Vi kan se at beregningen nå bygger på gjennomsnittlige bransjeverdier.',
       exampleDataBody:
-        'Resultatet er nå basert på generelle bransjepriser. Fyll inn deres egne opplysninger og sammenlign reelle vilkår fra innløsere for å få en korrekt besparelsesberegning.',
+        'Resultatet er derfor kun et estimat. Legg inn deres egne, faktiske kostnader og innløsningspriser for å få en mer korrekt beregning av deres mulige besparelse.',
       exampleDataDismiss: 'Jeg forstår, vis resultatet likevel',
       estimatedSavingsLabel: 'Beregnet besparelse',
       potentialAnnualSavingsPrefix: 'Potensiell årlig besparelse:',
@@ -715,12 +776,12 @@ export const translations: Record<Language, TranslationDict> = {
       tenYearSavings: 'Beregnet besparelse over ti år',
     },
     leadForm: {
-      title: 'Vil du vite hva dere faktisk kan spare?',
+      title: 'Vil dere vite hvilke besparelsesmuligheter som finnes?',
       description:
-        'Send inn deres nåværende innløsningspriser og transaksjonsvolum, så hjelper vi dere med en mer detaljert analyse.',
+        'Send inn deres nåværende innløsningspriser og transaksjonsvolum, så gjør vi en første vurdering av potensialet. Deretter hjelper vi dere med å ta neste steg og sammenligne alternativer ut fra deres forutsetninger.',
       orgNumberLabel: 'Organisasjonsnummer',
       orgNumberPlaceholder: 'f.eks. 981 234 567',
-      submit: 'Bestill en kostnadsanalyse',
+      submit: 'Kontakt oss for en kostnadsfri gjennomgang',
       submitting: 'Sender...',
       thanksTitle: 'Takk for henvendelsen!',
       thanksBody: 'Vi tar kontakt snart for å avtale en mer detaljert kostnadsanalyse.',
@@ -746,6 +807,16 @@ export const translations: Record<Language, TranslationDict> = {
     },
     disclaimer:
       'Beregningen er et estimat basert på opplysningene som er oppgitt. Faktiske kostnader og besparelser kan variere avhengig av blant annet kortmiks, interchange, scheme fees, innløsningsavtaler, valutaveksling, minimumskostnader, teknisk oppsett og andre avtalevilkår. Beregningen utgjør ikke et tilbud eller en garanti for en bestemt pris eller besparelse.',
+    apm: {
+      eyebrow: 'Andre betalingsmetoder',
+      title: 'Alternative betalingsmetoder',
+      description:
+        'Swish, Klarna, MobilePay og andre alternative betalingsmetoder inngår ikke i kalkulatoren fordi disse normalt ikke kan rutes mellom flere innløsere. Siden det derfor ikke finnes noen kostnadsbesparelse å oppnå gjennom intelligent ruting for disse transaksjonene, inkluderes de ikke i kalkulatorens beregninger. Tjenestene kan selvsagt fortsatt brukes parallelt med intelligent ruting for kortbetalinger.',
+      swish: 'Populært i Sverige med fast eller prosentvis gebyr. Inngår ikke i kalkulatorens ruting.',
+      klarna: 'Buy now, pay later og direktebetalinger med egne gebyrmodeller per produkt.',
+      mobilePay: 'Vanlig i Danmark og Finland. Egen prising, separat fra kortbetalinger.',
+      localMethods: 'Trustly, Vipps, BankAxept m.fl. kan brukes parallelt, men rutes ikke i kalkulatoren.',
+    },
     misc: {
       quickSelect: 'Hurtigvalg',
       customAmount: 'Annet beløp',
@@ -777,6 +848,17 @@ export const translations: Record<Language, TranslationDict> = {
       messageLabel: 'Melding',
       messagePlaceholder: 'Fortell gjerne mer om betalingsoppsettet deres...',
       attachmentLabel: 'Legg ved prisliste eller faktura (valgfritt)',
+      backButton: 'Tilbake',
+      nextButton: 'Neste',
+      avgFeePrefix: 'Snittgebyr ca',
+      cardTypeColumn: 'Korttype',
+      percentColumn: 'Prosent',
+      fixedFeeColumn: 'Fast gebyr',
+      gotOwnQuotesTitle: 'Har dere fått egne tilbud?',
+      gotOwnQuotesBody:
+        'Hvis dere har fått prisopplysninger direkte fra én eller flere innløsere, kan dere angi dem her for en mer presis beregning.',
+      enterDetailedPricesButton: 'Angi detaljerte priser',
+      hideDetailedPricesButton: 'Skjul detaljerte priser',
       useExampleDataButton: 'Bruk eksempeldata',
       exampleDataDisclaimer:
         'Eksempeldata representerer ikke en spesifikk kunde. Bruk det som utgangspunkt og juster etter deres faktiske transaksjonsmiks.',
@@ -808,7 +890,7 @@ export const translations: Record<Language, TranslationDict> = {
       acquirerExplainerTitle: 'Hvad er en indløser?',
       acquirerExplainer:
         'En indløser er den bank eller betalingspartner, der håndterer kortbetalingen og udbetaler pengene til virksomheden. Forskellige indløsere har forskellige priser afhængigt af korttype og aftale, hvilket betyder at valget af indløser kan påvirke virksomhedens omkostninger betydeligt.',
-      ctaPrimary: 'Beregn jeres mulige besparelse',
+      ctaPrimary: 'Se hvor meget I kan spare',
       ctaSecondary: 'Hvordan fungerer intelligent routing?',
       footnote:
         'En smart måde for nordiske virksomheder, butikker og kæder at sænke omkostningerne ved kortbetaling i fysisk butik — uden at ændre kundeoplevelsen ved kassen.',
@@ -843,15 +925,15 @@ export const translations: Record<Language, TranslationDict> = {
       step1Title: 'Trin 1: Virksomhedens betalingsvolumen',
       step1Description:
         'Angiv virksomhedens nuværende årlige kortomsætning og omtrentlige indløsningsomkostning. Har I kun en omtrentlig procentsats i dag, er det godt nok til et første estimat. Intelligent routing gør størst forskel for virksomheder og koncerner med høj omsætning.',
-      step2Title: 'Trin 2: Forfin beregningen (valgfrit)',
+      step2Title: 'Trin 2: Tilpas transaktionsmix',
       step2Description:
-        'Jeres transaktionsmix er allerede forudfyldt med en gennemsnitlig svensk kortmiks, så I kan gå videre med det samme. Vil I have en mere præcis beregning? Det tager kun et øjeblik at finjustere — klik på "Brug detaljerede data" nedenfor.',
-      step2TimeHint: 'Tager mindre end 2 minutter',
-      useDetailedDataButton: 'Brug detaljerede data',
+        'Beregningen bygger nu på den gennemsnitlige fordeling af korttyper i Sverige. I kan gå videre med det samme, eller justere fordelingen nedenfor ud fra jeres egen statistik for et mere præcist estimat.',
+      step2TimeHint: 'VALGFRIT',
+      useDetailedDataButton: 'Tilpas med egne tal',
       presetMixBadge: 'Gennemsnitlig svensk kortmiks (forudfyldt)',
       step3Title: 'Trin 3: Indløsningsaftaler',
       step3Description:
-        'Brug jeres omtrentlige pris, importér etablerede indløsere med kendte gebyrer, eller angiv eksakte priser pr. korttype, hvis I har dem.',
+        'Indtast de indløsningspriser, I har modtaget fra forskellige indløsere. For det bedste resultat angiver I priser pr. korttype, men I kan også starte med omtrentlige niveauer.',
       annualVolume: 'Samlet kortomsætning pr. år',
       averageOrderValue: 'Gennemsnitlig ordreværdi (AOV)',
       annualTransactionsComputed: 'Antal transaktioner pr. år (beregnes automatisk)',
@@ -873,9 +955,9 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Resultat',
       title: 'Jeres estimerede besparelse',
       description: 'Resultat baseret på angivne priser og årsvolumener. Alle tal er estimater.',
-      exampleDataTitle: 'Dette er et branche-estimat – ikke en faktisk beregning.',
+      exampleDataTitle: 'Vi kan se, at beregningen lige nu bygger på gennemsnitlige branchetal.',
       exampleDataBody:
-        'Resultatet er lige nu baseret på generelle branchepriser. Udfyld jeres egne oplysninger og sammenlign reelle vilkår fra indløsere for at få en korrekt besparelsesberegning.',
+        'Resultatet er derfor kun et estimat. Angiv jeres egne, faktiske omkostninger og indløsningspriser for at få en mere korrekt beregning af jeres mulige besparelse.',
       exampleDataDismiss: 'Jeg forstår, vis resultatet alligevel',
       estimatedSavingsLabel: 'Beregnet besparelse',
       potentialAnnualSavingsPrefix: 'Potentiel årlig besparelse:',
@@ -918,12 +1000,12 @@ export const translations: Record<Language, TranslationDict> = {
       tenYearSavings: 'Beregnet besparelse over ti år',
     },
     leadForm: {
-      title: 'Vil du vide, hvad I faktisk kan spare?',
+      title: 'Vil I vide, hvilke besparelsesmuligheder der findes?',
       description:
-        'Send jeres nuværende indløsningspriser og transaktionsvolumener, så hjælper vi jer med en mere detaljeret analyse.',
+        'Send jeres nuværende indløsningspriser og transaktionsvolumener, så laver vi en første vurdering af potentialet. Derefter hjælper vi jer med at tage næste skridt og sammenligne alternativer ud fra jeres forudsætninger.',
       orgNumberLabel: 'CVR-nummer',
       orgNumberPlaceholder: 'f.eks. 12345678',
-      submit: 'Book en omkostningsanalyse',
+      submit: 'Kontakt os for en gratis gennemgang',
       submitting: 'Sender...',
       thanksTitle: 'Tak for jeres henvendelse!',
       thanksBody: 'Vi vender snart tilbage for at booke en mere detaljeret omkostningsanalyse.',
@@ -949,6 +1031,16 @@ export const translations: Record<Language, TranslationDict> = {
     },
     disclaimer:
       'Beregningen er et estimat baseret på de oplysninger, der er angivet. Faktiske omkostninger og besparelser kan variere afhængigt af blandt andet kortmiks, interchange, scheme fees, indløsningsaftaler, valutaveksling, minimumsomkostninger, teknisk opsætning og andre aftalevilkår. Beregningen udgør ikke et tilbud eller en garanti for en bestemt pris eller besparelse.',
+    apm: {
+      eyebrow: 'Andre betalingsmetoder',
+      title: 'Alternative betalingsmetoder',
+      description:
+        'Swish, Klarna, MobilePay og andre alternative betalingsmetoder indgår ikke i beregneren, da disse normalt ikke kan routes mellem flere indløsere. Da der derfor ikke er nogen omkostningsbesparelse at opnå gennem intelligent routing for disse transaktioner, indgår de ikke i beregnerens beregninger. Tjenesterne kan naturligvis stadig bruges parallelt med intelligent routing til kortbetalinger.',
+      swish: 'Populært i Sverige med fast eller procentvist gebyr. Indgår ikke i beregnerens routing.',
+      klarna: 'Buy now, pay later og direkte betalinger med egne gebyrmodeller pr. produkt.',
+      mobilePay: 'Almindeligt i Danmark og Finland. Egen prisfastsættelse, adskilt fra kortbetalinger.',
+      localMethods: 'Trustly, Vipps, BankAxept m.fl. kan bruges parallelt, men routes ikke i beregneren.',
+    },
     misc: {
       quickSelect: 'Hurtigvalg',
       customAmount: 'Andet beløb',
@@ -980,6 +1072,17 @@ export const translations: Record<Language, TranslationDict> = {
       messageLabel: 'Besked',
       messagePlaceholder: 'Fortæl os gerne mere om jeres betalingsopsætning...',
       attachmentLabel: 'Vedhæft prisliste eller faktura (valgfrit)',
+      backButton: 'Tilbage',
+      nextButton: 'Næste',
+      avgFeePrefix: 'Gennemsnitsgebyr ca.',
+      cardTypeColumn: 'Korttype',
+      percentColumn: 'Procent',
+      fixedFeeColumn: 'Fast gebyr',
+      gotOwnQuotesTitle: 'Har I fået jeres egne tilbud?',
+      gotOwnQuotesBody:
+        'Hvis I har fået prisoplysninger direkte fra én eller flere indløsere, kan I angive dem her for en mere præcis beregning.',
+      enterDetailedPricesButton: 'Angiv detaljerede priser',
+      hideDetailedPricesButton: 'Skjul detaljerede priser',
       useExampleDataButton: 'Brug eksempeldata',
       exampleDataDisclaimer:
         'Eksempeldata repræsenterer ikke en specifik kunde. Brug det som udgangspunkt og juster efter jeres faktiske transaktionsmiks.',
@@ -1011,7 +1114,7 @@ export const translations: Record<Language, TranslationDict> = {
       acquirerExplainerTitle: 'Mikä on maksunvälittäjä (acquirer)?',
       acquirerExplainer:
         'Maksunvälittäjä (acquirer) on pankki tai maksukumppani, joka käsittelee korttimaksun ja tilittää rahat yritykselle. Eri maksunvälittäjillä on erilaiset hinnat korttityypin ja sopimuksen mukaan, joten valinta voi vaikuttaa merkittävästi yrityksen kustannuksiin.',
-      ctaPrimary: 'Laskekaa mahdollinen säästönne',
+      ctaPrimary: 'Katso, paljonko voitte säästää',
       ctaSecondary: 'Miten älykäs reititys toimii?',
       footnote:
         'Fiksu tapa pohjoismaisille yrityksille, kaupoille ja ketjuille pienentää myymälässä tapahtuvien korttimaksujen kustannuksia — muuttamatta asiakaskokemusta kassalla.',
@@ -1046,15 +1149,15 @@ export const translations: Record<Language, TranslationDict> = {
       step1Title: 'Vaihe 1: Yrityksen maksuvolyymi',
       step1Description:
         'Anna yrityksenne nykyinen vuotuinen korttimyynti ja arvioitu vastaanottokustannus. Jos tiedätte vain karkean prosenttiluvun, se riittää ensimmäiseen arvioon. Älykäs reititys tuo suurimman hyödyn suuren liikevaihdon yrityksille ja konserneille.',
-      step2Title: 'Vaihe 2: Tarkenna laskelmaa (valinnainen)',
+      step2Title: 'Vaihe 2: Mukauta korttijakaumaa',
       step2Description:
-        'Korttijakaumanne on jo esitäytetty keskimääräisellä ruotsalaisella korttijakaumalla, joten voitte jatkaa suoraan. Haluatteko tarkemman laskelman? Hienosäätö vie vain hetken — klikatkaa alla olevaa "Käytä yksityiskohtaisia tietoja".',
-      step2TimeHint: 'Vie alle 2 minuuttia',
-      useDetailedDataButton: 'Käytä yksityiskohtaisia tietoja',
+        'Laskelma perustuu tällä hetkellä Ruotsin keskimääräiseen korttityyppijakaumaan. Voitte jatkaa suoraan, tai mukauttaa jakaumaa alla omien tietojenne perusteella tarkempaa arviota varten.',
+      step2TimeHint: 'VALINNAINEN',
+      useDetailedDataButton: 'Mukauta omilla luvuilla',
       presetMixBadge: 'Keskimääräinen ruotsalainen korttijakauma (esitäytetty)',
       step3Title: 'Vaihe 3: Vastaanottosopimukset',
       step3Description:
-        'Käyttäkää arvioitua hintaanne, tuokaa mukaan tunnettuja maksunvälittäjiä tiedossa olevin hinnoin, tai syöttäkää tarkat hinnat korttityypeittäin, jos ne ovat tiedossa.',
+        'Syöttäkää eri maksunvälittäjiltä saamanne vastaanottohinnat. Parhaan tuloksen saatte syöttämällä hinnat korttityypeittäin, mutta voitte aloittaa myös arvioiduilla tasoilla.',
       annualVolume: 'Korttimyynti yhteensä vuodessa',
       averageOrderValue: 'Keskimääräinen tilausarvo (AOV)',
       annualTransactionsComputed: 'Tapahtumien määrä vuodessa (lasketaan automaattisesti)',
@@ -1076,9 +1179,9 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Tulos',
       title: 'Arvioitu säästönne',
       description: 'Tulos perustuu annettuihin hintoihin ja vuosivolyymeihin. Kaikki luvut ovat arvioita.',
-      exampleDataTitle: 'Tämä on toimialan arvio – ei todellinen laskelma.',
+      exampleDataTitle: 'Näemme, että laskelma perustuu tällä hetkellä toimialan keskimääräisiin arvoihin.',
       exampleDataBody:
-        'Tulos perustuu tällä hetkellä yleisiin toimialan hintoihin. Täyttäkää omat tietonne ja vertailkaa maksunvälittäjien todellisia ehtoja saadaksenne tarkan säästölaskelman.',
+        'Tulos on siksi vain arvio. Syöttäkää omat todelliset kustannuksenne ja vastaanottohintanne saadaksenne tarkemman laskelman mahdollisesta säästöstänne.',
       exampleDataDismiss: 'Selvä, näytä tulos silti',
       estimatedSavingsLabel: 'Arvioitu säästö',
       potentialAnnualSavingsPrefix: 'Mahdollinen vuotuinen säästö:',
@@ -1121,12 +1224,12 @@ export const translations: Record<Language, TranslationDict> = {
       tenYearSavings: 'Arvioitu säästö kymmenessä vuodessa',
     },
     leadForm: {
-      title: 'Haluatko tietää, mitä voisitte oikeasti säästää?',
+      title: 'Haluatteko tietää, mitä säästömahdollisuuksia on olemassa?',
       description:
-        'Lähettäkää nykyiset vastaanottohintanne ja tapahtumavolyyminne, niin autamme teitä tarkemmassa analyysissä.',
+        'Lähettäkää nykyiset vastaanottohintanne ja tapahtumavolyyminne, niin teemme ensiarvion potentiaalista. Sen jälkeen autamme teitä ottamaan seuraavan askeleen ja vertailemaan vaihtoehtoja lähtökohtienne mukaan.',
       orgNumberLabel: 'Y-tunnus',
       orgNumberPlaceholder: 'esim. 1234567-8',
-      submit: 'Varaa kustannusanalyysi',
+      submit: 'Ota yhteyttä maksuttomaan katsaukseen',
       submitting: 'Lähetetään...',
       thanksTitle: 'Kiitos yhteydenotostanne!',
       thanksBody: 'Otamme pian yhteyttä varataksemme tarkemman kustannusanalyysin.',
@@ -1152,6 +1255,16 @@ export const translations: Record<Language, TranslationDict> = {
     },
     disclaimer:
       'Laskelma on arvio, joka perustuu annettuihin tietoihin. Todelliset kustannukset ja säästöt voivat vaihdella muun muassa korttijakauman, interchange-maksujen, korttiyhtiöiden maksujen, vastaanottosopimusten, valuutanvaihdon, vähimmäiskustannusten, teknisen toteutuksen ja muiden sopimusehtojen mukaan. Laskelma ei ole tarjous eikä takuu tietystä hinnasta tai säästöstä.',
+    apm: {
+      eyebrow: 'Muut maksutavat',
+      title: 'Vaihtoehtoiset maksutavat',
+      description:
+        'Swish, Klarna, MobilePay ja muut vaihtoehtoiset maksutavat eivät sisälly laskuriin, koska niitä ei yleensä voida reitittää usean maksunvälittäjän välillä. Koska näille tapahtumille ei siksi ole saavutettavissa kustannussäästöä älykkään reitityksen avulla, niitä ei sisällytetä laskurin laskelmiin. Palveluita voi tietysti silti käyttää rinnakkain älykkään korttimaksujen reitityksen kanssa.',
+      swish: 'Suosittu Ruotsissa kiinteällä tai prosentuaalisella maksulla. Ei sisälly laskurin reititykseen.',
+      klarna: 'Buy now, pay later ja suorat maksut, joilla on omat maksumallinsa tuotteittain.',
+      mobilePay: 'Yleinen Tanskassa ja Suomessa. Oma hinnoittelu, erillään korttimaksuista.',
+      localMethods: 'Trustly, Vipps, BankAxept ym. voidaan käyttää rinnakkain, mutta niitä ei reititetä laskurissa.',
+    },
     misc: {
       quickSelect: 'Pikavalinta',
       customAmount: 'Muu summa',
@@ -1183,6 +1296,17 @@ export const translations: Record<Language, TranslationDict> = {
       messageLabel: 'Viesti',
       messagePlaceholder: 'Kertokaa mielellään lisää maksujärjestelystänne...',
       attachmentLabel: 'Liitä hinnasto tai lasku (valinnainen)',
+      backButton: 'Takaisin',
+      nextButton: 'Seuraava',
+      avgFeePrefix: 'Keskimääräinen maksu n.',
+      cardTypeColumn: 'Korttityyppi',
+      percentColumn: 'Prosentti',
+      fixedFeeColumn: 'Kiinteä maksu',
+      gotOwnQuotesTitle: 'Oletteko saaneet omia tarjouksia?',
+      gotOwnQuotesBody:
+        'Jos olette saaneet hintatietoja suoraan yhdeltä tai useammalta maksunvälittäjältä, voitte syöttää ne tähän tarkempaa laskelmaa varten.',
+      enterDetailedPricesButton: 'Syötä yksityiskohtaiset hinnat',
+      hideDetailedPricesButton: 'Piilota yksityiskohtaiset hinnat',
       useExampleDataButton: 'Käytä esimerkkitietoja',
       exampleDataDisclaimer:
         'Esimerkkitiedot eivät edusta tiettyä asiakasta. Käyttäkää niitä lähtökohtana ja mukauttakaa todellisen korttijakaumanne mukaan.',

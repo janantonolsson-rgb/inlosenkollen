@@ -5,7 +5,7 @@ import type {
   TransactionMix,
   VolumeData,
 } from '../types/calculator'
-import type { CatalogAcquirer } from './acquirerCatalog'
+import { acquirerCatalog, type CatalogAcquirer } from './acquirerCatalog'
 
 function createId(): string {
   return crypto.randomUUID()
@@ -42,8 +42,6 @@ export const defaultMix: TransactionMix = {
 
 export const exampleMix: TransactionMix = { ...defaultMix }
 
-export const defaultAcquirers: Acquirer[] = []
-
 export function createAcquirerFromCatalog(entry: CatalogAcquirer): Acquirer {
   return {
     id: createId(),
@@ -52,6 +50,13 @@ export function createAcquirerFromCatalog(entry: CatalogAcquirer): Acquirer {
     pricing: structuredClone(entry.pricing),
   }
 }
+
+/**
+ * Alla relevanta inlösare i katalogen är valda från start, så användaren direkt
+ * ser värdet av att routa mellan flera alternativ. Man kan aktivt ta bort en
+ * inlösare man inte vill jämföra med.
+ */
+export const defaultAcquirers: Acquirer[] = acquirerCatalog.map(createAcquirerFromCatalog)
 
 export function createAcquirer(name: string): Acquirer {
   return {

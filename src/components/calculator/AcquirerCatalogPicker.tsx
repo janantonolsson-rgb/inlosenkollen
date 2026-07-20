@@ -50,7 +50,7 @@ export function AcquirerCatalogPicker({ acquirers, onImport }: AcquirerCatalogPi
               )}
               <div className="mt-2 flex items-center justify-between gap-2">
                 <p className="text-xs text-muted-light">{t.catalog.sourceLabel} {entry.source}</p>
-                {entry.url && (
+                {entry.url && entry.url !== entry.applyUrl && (
                   <a
                     href={entry.url}
                     target="_blank"
