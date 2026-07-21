@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Button } from '../ui/Button'
 import { PageContainer } from '../layout/PageContainer'
 import { useLanguage } from '../../i18n/LanguageContext'
@@ -9,6 +10,7 @@ const scrollTo = (id: string) => {
 
 export function HeroSection() {
   const { t } = useLanguage()
+  const [showAcquirerExplainer, setShowAcquirerExplainer] = useState(false)
 
   return (
     <section className="relative overflow-hidden border-b border-border bg-surface-elevated">
@@ -31,27 +33,33 @@ export function HeroSection() {
             {t.hero.subtitle}
           </p>
 
-          <div className="mx-auto mt-6 max-w-xl rounded-lg border border-border-subtle bg-surface px-4 py-3 text-left text-sm leading-relaxed text-muted">
-            <strong className="font-medium text-primary">{t.hero.acquirerExplainerTitle}</strong>{' '}
-            {t.hero.acquirerExplainer}
+          <div className="mx-auto mt-6 max-w-xl rounded-lg border border-border-subtle bg-surface text-left text-sm">
+            <button
+              type="button"
+              onClick={() => setShowAcquirerExplainer((v) => !v)}
+              className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left font-medium text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-expanded={showAcquirerExplainer}
+            >
+              {t.hero.acquirerExplainerTitle}
+              <svg
+                className={`h-4 w-4 shrink-0 text-muted transition-transform ${showAcquirerExplainer ? 'rotate-180' : ''}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {showAcquirerExplainer && (
+              <p className="border-t border-border-subtle px-4 py-3 leading-relaxed text-muted">
+                {t.hero.acquirerExplainer}
+              </p>
+            )}
           </div>
         </div>
 
-        <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border-subtle bg-surface p-6 sm:p-8">
-          <div className="text-center">
-            <h2 className="text-base font-semibold text-primary">
-              {t.howItWorks.diagramTitle}
-            </h2>
-            <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
-              {t.howItWorks.diagramSubtitle}
-            </p>
-          </div>
-          <div className="mt-6">
-            <RoutingIllustration />
-          </div>
-        </div>
-
-        <div className="mx-auto mt-12 flex max-w-2xl flex-col items-center">
+        <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center">
           <Button
             size="lg"
             className="px-10 py-4 text-lg shadow-lg transition-all duration-200 hover:scale-[1.02] hover:shadow-xl"
@@ -69,6 +77,20 @@ export function HeroSection() {
           <p className="mt-8 text-sm text-muted">
             {t.hero.footnote}
           </p>
+        </div>
+
+        <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-border-subtle bg-surface p-6 sm:p-8">
+          <div className="text-center">
+            <h2 className="text-base font-semibold text-primary">
+              {t.howItWorks.diagramTitle}
+            </h2>
+            <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
+              {t.howItWorks.diagramSubtitle}
+            </p>
+          </div>
+          <div className="mt-6">
+            <RoutingIllustration />
+          </div>
         </div>
       </PageContainer>
     </section>

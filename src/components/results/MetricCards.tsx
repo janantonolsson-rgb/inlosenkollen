@@ -1,7 +1,7 @@
 import { formatPercent } from '../../lib/formatters'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
-import { Metric, MetricGrid } from '../ui/Metric'
+import { Metric } from '../ui/Metric'
 
 interface MetricCardsProps {
   currentAnnualCost: number
@@ -13,8 +13,6 @@ interface MetricCardsProps {
 }
 
 export function MetricCards({
-  currentAnnualCost,
-  routedAnnualCost,
   annualSavings,
   percentSavings,
   threeYearSavings,
@@ -22,22 +20,30 @@ export function MetricCards({
 }: MetricCardsProps) {
   const { t, formatMoney } = useLanguage()
 
-  const metrics: { label: string; value: string; highlight?: boolean }[] = [
-    { label: t.metrics.currentCost, value: formatMoney(currentAnnualCost) },
-    { label: t.metrics.routedCost, value: formatMoney(routedAnnualCost) },
-    { label: t.metrics.annualSavings, value: formatMoney(annualSavings), highlight: true },
-    { label: t.metrics.percentSavings, value: formatPercent(percentSavings), highlight: true },
-    { label: t.metrics.threeYearSavings, value: formatMoney(threeYearSavings), highlight: true },
-    { label: t.metrics.tenYearSavings, value: formatMoney(tenYearSavings), highlight: true },
-  ]
-
   return (
-    <MetricGrid columns={3}>
-      {metrics.map((metric) => (
-        <Card key={metric.label} padding="sm">
-          <Metric label={metric.label} value={metric.value} highlight={metric.highlight} />
+    <div className="space-y-4">
+      {/* Rad 1: procentuell förbättring och ekonomisk effekt per år */}
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Card padding="sm">
+          <Metric label={t.metrics.percentSavings} value={formatPercent(percentSavings)} highlight />
         </Card>
-      ))}
-    </MetricGrid>
+        <Card padding="sm">
+          <Metric label={t.metrics.annualSavings} value={formatMoney(annualSavings)} highlight />
+        </Card>
+      </div>
+
+      {/* Rad 2: långsiktig påverkan över tid */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        <Card padding="sm">
+          <Metric label={t.metrics.oneYearSavings} value={formatMoney(annualSavings)} />
+        </Card>
+        <Card padding="sm">
+          <Metric label={t.metrics.threeYearSavings} value={formatMoney(threeYearSavings)} />
+        </Card>
+        <Card padding="sm">
+          <Metric label={t.metrics.tenYearSavings} value={formatMoney(tenYearSavings)} />
+        </Card>
+      </div>
+    </div>
   )
 }

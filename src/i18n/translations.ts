@@ -105,6 +105,7 @@ export interface TranslationDict {
     routedCost: string
     annualSavings: string
     percentSavings: string
+    oneYearSavings: string
     threeYearSavings: string
     tenYearSavings: string
   }
@@ -221,11 +222,11 @@ export const translations: Record<Language, TranslationDict> = {
       ctaPrimary: 'Se hur mycket ni kan spara',
       ctaSecondary: 'Hur fungerar intelligent routing?',
       footnote:
-        'Ett smart sätt för nordiska företag, butiker och kedjor att sänka kostnaderna för kortbetalningar i fysisk butik — utan att ändra kundupplevelsen i kassan.',
+        'Inlösenkollen har utvecklats för att hjälpa nordiska företag att förstå och minska sina kostnader för kortbetalningar i fysisk butik.',
     },
     howItWorks: {
       eyebrow: 'Så fungerar det',
-      title: 'Intelligent routing i tre steg',
+      title: 'Hur kommer vi igång med intelligent routing?',
       description:
         'Intelligent routing analyserar varje transaktion och väljer det inlösenavtal som ger bäst ekonomiskt utfall — baserat på era avtal och konfiguration.',
       intro:
@@ -234,7 +235,7 @@ export const translations: Record<Language, TranslationDict> = {
       whoTitle: 'Vem passar detta för?',
       diagramTitle: 'Så väljs den mest fördelaktiga inlösaren',
       diagramSubtitle:
-        'Varje transaktion analyseras individuellt och skickas till det inlösenavtal som ger lägst totalkostnad just för den korttypen.',
+        'Genom intelligent routing analyseras varje köp i realtid och styrs automatiskt till den inlösare som kan hantera betalningen till lägst totalkostnad.',
       valueTitle: 'Mer än bara lägre pris',
       valueSubtitle: 'Intelligent routing handlar om att sänka kostnaden — men värdet stannar inte där.',
       valueFootnote:
@@ -269,7 +270,7 @@ export const translations: Record<Language, TranslationDict> = {
       ctaCalculate: 'Visa min besparing',
       sectionTitle: 'Beräkna er möjliga besparing',
       sectionDescription:
-        'Fyll i era uppgifter — det tar mindre än 2 minuter. Alla fält är förifyllda med exempeldata så ni kan se hur det fungerar direkt.',
+        'Genom att ange era uppgifter nedan kan ni få en uppskattning av hur mycket ni kan spara genom intelligent routing.',
       pricingModeSimplifiedLabel: 'Genomsnittspris',
       pricingModeSimplifiedDescription: 'Jag känner bara till mitt ungefärliga pris idag',
       pricingModeCatalogLabel: 'Lägg till inlösare',
@@ -324,8 +325,9 @@ export const translations: Record<Language, TranslationDict> = {
       routedCost: 'Kostnad med intelligent routing',
       annualSavings: 'Besparing per år',
       percentSavings: 'Procentuell kostnadsminskning',
-      threeYearSavings: 'Beräknad besparing över tre år',
-      tenYearSavings: 'Beräknad besparing över tio år',
+      oneYearSavings: 'Besparing på 1 år',
+      threeYearSavings: 'Besparing på 3 år',
+      tenYearSavings: 'Besparing på 10 år',
     },
     leadForm: {
       title: 'Vill ni veta vilka besparingsmöjligheter som finns?',
@@ -445,11 +447,11 @@ export const translations: Record<Language, TranslationDict> = {
       ctaPrimary: 'See how much you could save',
       ctaSecondary: 'How does intelligent routing work?',
       footnote:
-        'A smart way for Nordic companies, stores and chains to lower the cost of in-store card payments — without changing the checkout experience.',
+        'Inlösenkollen was developed to help Nordic companies understand and reduce their costs for in-store card payments.',
     },
     howItWorks: {
       eyebrow: 'How it works',
-      title: 'Intelligent routing in three steps',
+      title: 'How do we get started with intelligent routing?',
       description:
         'Intelligent routing analyzes every transaction and selects the acquiring agreement that gives the best financial outcome — based on your agreements and configuration.',
       intro:
@@ -458,7 +460,7 @@ export const translations: Record<Language, TranslationDict> = {
       whoTitle: 'Who is this for?',
       diagramTitle: 'How the most favorable acquirer is chosen',
       diagramSubtitle:
-        'Every transaction is analyzed individually and sent to the acquiring agreement that gives the lowest total cost for that specific card type.',
+        'Through intelligent routing, every purchase is analyzed in real time and automatically directed to the acquirer that can handle the payment at the lowest total cost.',
       valueTitle: 'More than just a lower price',
       valueSubtitle: 'Intelligent routing is about cutting costs — but the value doesn\u2019t stop there.',
       valueFootnote:
@@ -493,7 +495,7 @@ export const translations: Record<Language, TranslationDict> = {
       ctaCalculate: 'Show my savings',
       sectionTitle: 'Calculate your potential savings',
       sectionDescription:
-        'Fill in your details — it takes less than 2 minutes. Every field is pre-filled with example data so you can see how it works right away.',
+        'By entering your details below, you can get an estimate of how much you could save through intelligent routing.',
       pricingModeSimplifiedLabel: 'Average price',
       pricingModeSimplifiedDescription: 'I only know my approximate price today',
       pricingModeCatalogLabel: 'Add acquirer',
@@ -548,8 +550,9 @@ export const translations: Record<Language, TranslationDict> = {
       routedCost: 'Cost with intelligent routing',
       annualSavings: 'Savings per year',
       percentSavings: 'Percentage cost reduction',
-      threeYearSavings: 'Estimated savings over three years',
-      tenYearSavings: 'Estimated savings over ten years',
+      oneYearSavings: 'Savings over 1 year',
+      threeYearSavings: 'Savings over 3 years',
+      tenYearSavings: 'Savings over 10 years',
     },
     leadForm: {
       title: 'Want to know what savings opportunities exist?',
@@ -669,11 +672,11 @@ export const translations: Record<Language, TranslationDict> = {
       ctaPrimary: 'Se hvor mye dere kan spare',
       ctaSecondary: 'Hvordan fungerer intelligent ruting?',
       footnote:
-        'En smart måte for nordiske bedrifter, butikker og kjeder å redusere kostnadene for kortbetaling i fysisk butikk — uten å endre kundeopplevelsen i kassen.',
+        'Inlösenkollen er utviklet for å hjelpe nordiske bedrifter med å forstå og redusere kostnadene sine for kortbetaling i fysisk butikk.',
     },
     howItWorks: {
       eyebrow: 'Slik fungerer det',
-      title: 'Intelligent ruting i tre steg',
+      title: 'Hvordan kommer vi i gang med intelligent ruting?',
       description:
         'Intelligent ruting analyserer hver transaksjon og velger innløsningsavtalen som gir best økonomisk utfall — basert på deres avtaler og konfigurasjon.',
       intro:
@@ -682,7 +685,7 @@ export const translations: Record<Language, TranslationDict> = {
       whoTitle: 'Hvem passer dette for?',
       diagramTitle: 'Slik velges den mest fordelaktige innløseren',
       diagramSubtitle:
-        'Hver transaksjon analyseres individuelt og sendes til innløsningsavtalen som gir lavest totalkostnad for nettopp den korttypen.',
+        'Gjennom intelligent ruting analyseres hvert kjøp i sanntid og styres automatisk til innløseren som kan håndtere betalingen til lavest totalkostnad.',
       valueTitle: 'Mer enn bare lavere pris',
       valueSubtitle: 'Intelligent ruting handler om å senke kostnaden — men verdien stopper ikke der.',
       valueFootnote:
@@ -717,7 +720,7 @@ export const translations: Record<Language, TranslationDict> = {
       ctaCalculate: 'Vis besparelsen min',
       sectionTitle: 'Beregn deres mulige besparelse',
       sectionDescription:
-        'Fyll inn opplysningene deres — det tar mindre enn 2 minutter. Alle felt er forhåndsutfylt med eksempeldata, så dere kan se hvordan det fungerer med en gang.',
+        'Ved å fylle inn opplysningene deres nedenfor kan dere få et anslag på hvor mye dere kan spare gjennom intelligent ruting.',
       pricingModeSimplifiedLabel: 'Gjennomsnittspris',
       pricingModeSimplifiedDescription: 'Jeg kjenner bare til den omtrentlige prisen i dag',
       pricingModeCatalogLabel: 'Legg til innløser',
@@ -772,8 +775,9 @@ export const translations: Record<Language, TranslationDict> = {
       routedCost: 'Kostnad med intelligent ruting',
       annualSavings: 'Besparelse per år',
       percentSavings: 'Prosentvis kostnadsreduksjon',
-      threeYearSavings: 'Beregnet besparelse over tre år',
-      tenYearSavings: 'Beregnet besparelse over ti år',
+      oneYearSavings: 'Besparelse over 1 år',
+      threeYearSavings: 'Besparelse over 3 år',
+      tenYearSavings: 'Besparelse over 10 år',
     },
     leadForm: {
       title: 'Vil dere vite hvilke besparelsesmuligheter som finnes?',
@@ -893,11 +897,11 @@ export const translations: Record<Language, TranslationDict> = {
       ctaPrimary: 'Se hvor meget I kan spare',
       ctaSecondary: 'Hvordan fungerer intelligent routing?',
       footnote:
-        'En smart måde for nordiske virksomheder, butikker og kæder at sænke omkostningerne ved kortbetaling i fysisk butik — uden at ændre kundeoplevelsen ved kassen.',
+        'Inlösenkollen er udviklet for at hjælpe nordiske virksomheder med at forstå og reducere deres omkostninger til kortbetaling i fysisk butik.',
     },
     howItWorks: {
       eyebrow: 'Sådan fungerer det',
-      title: 'Intelligent routing i tre trin',
+      title: 'Hvordan kommer vi i gang med intelligent routing?',
       description:
         'Intelligent routing analyserer hver transaktion og vælger den indløsningsaftale, der giver det bedste økonomiske resultat — baseret på jeres aftaler og konfiguration.',
       intro:
@@ -906,7 +910,7 @@ export const translations: Record<Language, TranslationDict> = {
       whoTitle: 'Hvem passer dette til?',
       diagramTitle: 'Sådan vælges den mest fordelagtige indløser',
       diagramSubtitle:
-        'Hver transaktion analyseres individuelt og sendes til den indløsningsaftale, der giver den laveste totalomkostning for netop den korttype.',
+        'Gennem intelligent routing analyseres hvert køb i realtid og styres automatisk til den indløser, der kan håndtere betalingen til den laveste totalomkostning.',
       valueTitle: 'Mere end bare lavere pris',
       valueSubtitle: 'Intelligent routing handler om at sænke omkostningen — men værdien stopper ikke der.',
       valueFootnote:
@@ -941,7 +945,7 @@ export const translations: Record<Language, TranslationDict> = {
       ctaCalculate: 'Vis min besparelse',
       sectionTitle: 'Beregn jeres mulige besparelse',
       sectionDescription:
-        'Udfyld jeres oplysninger — det tager mindre end 2 minutter. Alle felter er forudfyldt med eksempeldata, så I kan se, hvordan det fungerer med det samme.',
+        'Ved at angive jeres oplysninger nedenfor kan I få et estimat på, hvor meget I kan spare gennem intelligent routing.',
       pricingModeSimplifiedLabel: 'Gennemsnitspris',
       pricingModeSimplifiedDescription: 'Jeg kender kun min omtrentlige pris i dag',
       pricingModeCatalogLabel: 'Tilføj indløser',
@@ -996,8 +1000,9 @@ export const translations: Record<Language, TranslationDict> = {
       routedCost: 'Omkostning med intelligent routing',
       annualSavings: 'Besparelse pr. år',
       percentSavings: 'Procentvis omkostningsreduktion',
-      threeYearSavings: 'Beregnet besparelse over tre år',
-      tenYearSavings: 'Beregnet besparelse over ti år',
+      oneYearSavings: 'Besparelse over 1 år',
+      threeYearSavings: 'Besparelse over 3 år',
+      tenYearSavings: 'Besparelse over 10 år',
     },
     leadForm: {
       title: 'Vil I vide, hvilke besparelsesmuligheder der findes?',
@@ -1117,11 +1122,11 @@ export const translations: Record<Language, TranslationDict> = {
       ctaPrimary: 'Katso, paljonko voitte säästää',
       ctaSecondary: 'Miten älykäs reititys toimii?',
       footnote:
-        'Fiksu tapa pohjoismaisille yrityksille, kaupoille ja ketjuille pienentää myymälässä tapahtuvien korttimaksujen kustannuksia — muuttamatta asiakaskokemusta kassalla.',
+        'Inlösenkollen on kehitetty auttamaan pohjoismaisia yrityksiä ymmärtämään ja pienentämään myymälässä tapahtuvien korttimaksujen kustannuksia.',
     },
     howItWorks: {
       eyebrow: 'Näin se toimii',
-      title: 'Älykäs reititys kolmessa vaiheessa',
+      title: 'Miten pääsemme alkuun älykkäästä reitityksestä?',
       description:
         'Älykäs reititys analysoi jokaisen tapahtuman ja valitsee sopimuksen, joka antaa parhaan taloudellisen lopputuloksen — teidän sopimustenne ja asetustenne perusteella.',
       intro:
@@ -1130,7 +1135,7 @@ export const translations: Record<Language, TranslationDict> = {
       whoTitle: 'Kenelle tämä sopii?',
       diagramTitle: 'Näin edullisin maksunvälittäjä valitaan',
       diagramSubtitle:
-        'Jokainen tapahtuma analysoidaan erikseen ja lähetetään sopimukseen, joka tarjoaa alhaisimman kokonaiskustannuksen juuri kyseiselle korttityypille.',
+        'Älykkään reitityksen ansiosta jokainen ostos analysoidaan reaaliajassa ja ohjataan automaattisesti maksunvälittäjälle, joka voi käsitellä maksun alhaisimmalla kokonaiskustannuksella.',
       valueTitle: 'Muutakin kuin vain alhaisempi hinta',
       valueSubtitle: 'Älykäs reititys ei ole vain kustannusten pienentämistä — arvo ei lopu siihen.',
       valueFootnote:
@@ -1165,7 +1170,7 @@ export const translations: Record<Language, TranslationDict> = {
       ctaCalculate: 'Näytä säästöni',
       sectionTitle: 'Laskekaa mahdollinen säästönne',
       sectionDescription:
-        'Täyttäkää tietonne — se vie alle 2 minuuttia. Kaikki kentät on esitäytetty esimerkkitiedoilla, joten näette heti, miten se toimii.',
+        'Syöttämällä tietonne alle saatte arvion siitä, kuinka paljon voisitte säästää älykkään reitityksen avulla.',
       pricingModeSimplifiedLabel: 'Keskihinta',
       pricingModeSimplifiedDescription: 'Tiedän vain suunnilleen nykyisen hintani',
       pricingModeCatalogLabel: 'Lisää maksunvälittäjä',
@@ -1220,8 +1225,9 @@ export const translations: Record<Language, TranslationDict> = {
       routedCost: 'Kustannus älykkäällä reitityksellä',
       annualSavings: 'Säästö vuodessa',
       percentSavings: 'Prosentuaalinen kustannusten lasku',
-      threeYearSavings: 'Arvioitu säästö kolmessa vuodessa',
-      tenYearSavings: 'Arvioitu säästö kymmenessä vuodessa',
+      oneYearSavings: 'Säästö 1 vuodessa',
+      threeYearSavings: 'Säästö 3 vuodessa',
+      tenYearSavings: 'Säästö 10 vuodessa',
     },
     leadForm: {
       title: 'Haluatteko tietää, mitä säästömahdollisuuksia on olemassa?',
