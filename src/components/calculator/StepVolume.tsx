@@ -1,11 +1,13 @@
 import { useCalculator } from '../../context/CalculatorContext'
 import { getAnnualTransactions } from '../../lib/calculations'
+import { volumeEqualsDefault } from '../../lib/dataQuality'
 import { validateVolume } from '../../lib/validation'
 import { VOLUME_PRESETS } from '../../data/defaults'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { Card } from '../ui/Card'
 import { PresetChip, PresetChipGroup } from '../ui/PresetChip'
 import { CurrencyInput } from './shared/CurrencyInput'
+import { ExampleDataNotice } from './shared/ExampleDataNotice'
 import { PercentInput } from './shared/PercentInput'
 import { StepNavigation } from './shared/StepNavigation'
 
@@ -30,6 +32,12 @@ export function StepVolume() {
       <p className="mt-2 text-sm text-muted">
         {t.calculator.step1Description}
       </p>
+
+      {volumeEqualsDefault(state) && (
+        <div className="mt-6">
+          <ExampleDataNotice />
+        </div>
+      )}
 
       <div className="mt-8">
         <PresetChipGroup label={t.misc.quickSelect}>

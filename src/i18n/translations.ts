@@ -175,6 +175,7 @@ export interface TranslationDict {
     attachmentLabel: string
     backButton: string
     nextButton: string
+    headerContactButton: string
     avgFeePrefix: string
     cardTypeColumn: string
     percentColumn: string
@@ -267,7 +268,7 @@ export const translations: Record<Language, TranslationDict> = {
       averageOrderValue: 'Genomsnittligt ordervärde (AoV)',
       annualTransactionsComputed: 'Antal transaktioner per år (beräknas automatiskt)',
       currentFee: 'Nuvarande genomsnittlig procentuell inlösenavgift',
-      ctaCalculate: 'Visa min besparing',
+      ctaCalculate: 'Se hur mycket ni kan spara',
       sectionTitle: 'Beräkna er möjliga besparing',
       sectionDescription:
         'Genom att ange era uppgifter nedan kan ni få en uppskattning av hur mycket ni kan spara genom intelligent routing.',
@@ -284,7 +285,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Resultat',
       title: 'Er uppskattade besparing',
       description: 'Resultat baserat på angivna priser och årsvolymer. Alla siffror är uppskattningar.',
-      exampleDataTitle: 'Vi kan se att beräkningen just nu bygger på genomsnittliga branschvärden.',
+      exampleDataTitle: 'Ni har ännu inte uppdaterat informationen.',
       exampleDataBody:
         'Resultatet är därför endast en uppskattning. Lägg in era egna aktuella kostnader och inlösenpriser för att få en mer korrekt beräkning av er möjliga besparing.',
       exampleDataDismiss: 'Jag förstår, visa resultatet ändå',
@@ -404,6 +405,7 @@ export const translations: Record<Language, TranslationDict> = {
       attachmentLabel: 'Bifoga prislista eller faktura (valfritt)',
       backButton: 'Tillbaka',
       nextButton: 'Nästa',
+      headerContactButton: 'Kontakta oss',
       avgFeePrefix: 'Snittavgift ca',
       cardTypeColumn: 'Korttyp',
       percentColumn: 'Procent',
@@ -492,7 +494,7 @@ export const translations: Record<Language, TranslationDict> = {
       averageOrderValue: 'Average Order Value (AoV)',
       annualTransactionsComputed: 'Transactions per year (calculated automatically)',
       currentFee: 'Current average percentage acquiring fee',
-      ctaCalculate: 'Show my savings',
+      ctaCalculate: 'See how much you could save',
       sectionTitle: 'Calculate your potential savings',
       sectionDescription:
         'By entering your details below, you can get an estimate of how much you could save through intelligent routing.',
@@ -509,7 +511,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Results',
       title: 'Your estimated savings',
       description: 'Results based on the prices and annual volumes provided. All figures are estimates.',
-      exampleDataTitle: 'We can see that the calculation is currently based on average industry values.',
+      exampleDataTitle: 'You haven\u2019t updated the information yet.',
       exampleDataBody:
         'The result is therefore only an estimate. Enter your own actual costs and acquiring prices to get a more accurate calculation of your potential savings.',
       exampleDataDismiss: 'Got it, show the result anyway',
@@ -629,6 +631,7 @@ export const translations: Record<Language, TranslationDict> = {
       attachmentLabel: 'Attach a price list or invoice (optional)',
       backButton: 'Back',
       nextButton: 'Next',
+      headerContactButton: 'Contact us',
       avgFeePrefix: 'Average fee approx.',
       cardTypeColumn: 'Card type',
       percentColumn: 'Percentage',
@@ -717,7 +720,7 @@ export const translations: Record<Language, TranslationDict> = {
       averageOrderValue: 'Gjennomsnittlig ordreverdi (AOV)',
       annualTransactionsComputed: 'Antall transaksjoner per år (beregnes automatisk)',
       currentFee: 'Nåværende gjennomsnittlig prosentvis innløsningsgebyr',
-      ctaCalculate: 'Vis besparelsen min',
+      ctaCalculate: 'Se hvor mye dere kan spare',
       sectionTitle: 'Beregn deres mulige besparelse',
       sectionDescription:
         'Ved å fylle inn opplysningene deres nedenfor kan dere få et anslag på hvor mye dere kan spare gjennom intelligent ruting.',
@@ -734,7 +737,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Resultat',
       title: 'Deres estimerte besparelse',
       description: 'Resultat basert på oppgitte priser og årsvolum. Alle tall er estimater.',
-      exampleDataTitle: 'Vi kan se at beregningen nå bygger på gjennomsnittlige bransjeverdier.',
+      exampleDataTitle: 'Dere har ennå ikke oppdatert informasjonen.',
       exampleDataBody:
         'Resultatet er derfor kun et estimat. Legg inn deres egne, faktiske kostnader og innløsningspriser for å få en mer korrekt beregning av deres mulige besparelse.',
       exampleDataDismiss: 'Jeg forstår, vis resultatet likevel',
@@ -854,6 +857,7 @@ export const translations: Record<Language, TranslationDict> = {
       attachmentLabel: 'Legg ved prisliste eller faktura (valgfritt)',
       backButton: 'Tilbake',
       nextButton: 'Neste',
+      headerContactButton: 'Kontakt oss',
       avgFeePrefix: 'Snittgebyr ca',
       cardTypeColumn: 'Korttype',
       percentColumn: 'Prosent',
@@ -942,7 +946,7 @@ export const translations: Record<Language, TranslationDict> = {
       averageOrderValue: 'Gennemsnitlig ordreværdi (AOV)',
       annualTransactionsComputed: 'Antal transaktioner pr. år (beregnes automatisk)',
       currentFee: 'Nuværende gennemsnitlige procentvise indløsningsgebyr',
-      ctaCalculate: 'Vis min besparelse',
+      ctaCalculate: 'Se hvor meget I kan spare',
       sectionTitle: 'Beregn jeres mulige besparelse',
       sectionDescription:
         'Ved at angive jeres oplysninger nedenfor kan I få et estimat på, hvor meget I kan spare gennem intelligent routing.',
@@ -959,7 +963,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Resultat',
       title: 'Jeres estimerede besparelse',
       description: 'Resultat baseret på angivne priser og årsvolumener. Alle tal er estimater.',
-      exampleDataTitle: 'Vi kan se, at beregningen lige nu bygger på gennemsnitlige branchetal.',
+      exampleDataTitle: 'I har endnu ikke opdateret oplysningerne.',
       exampleDataBody:
         'Resultatet er derfor kun et estimat. Angiv jeres egne, faktiske omkostninger og indløsningspriser for at få en mere korrekt beregning af jeres mulige besparelse.',
       exampleDataDismiss: 'Jeg forstår, vis resultatet alligevel',
@@ -1079,6 +1083,7 @@ export const translations: Record<Language, TranslationDict> = {
       attachmentLabel: 'Vedhæft prisliste eller faktura (valgfrit)',
       backButton: 'Tilbage',
       nextButton: 'Næste',
+      headerContactButton: 'Kontakt os',
       avgFeePrefix: 'Gennemsnitsgebyr ca.',
       cardTypeColumn: 'Korttype',
       percentColumn: 'Procent',
@@ -1167,7 +1172,7 @@ export const translations: Record<Language, TranslationDict> = {
       averageOrderValue: 'Keskimääräinen tilausarvo (AOV)',
       annualTransactionsComputed: 'Tapahtumien määrä vuodessa (lasketaan automaattisesti)',
       currentFee: 'Nykyinen keskimääräinen prosentuaalinen vastaanottomaksu',
-      ctaCalculate: 'Näytä säästöni',
+      ctaCalculate: 'Katso, paljonko voitte säästää',
       sectionTitle: 'Laskekaa mahdollinen säästönne',
       sectionDescription:
         'Syöttämällä tietonne alle saatte arvion siitä, kuinka paljon voisitte säästää älykkään reitityksen avulla.',
@@ -1184,7 +1189,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Tulos',
       title: 'Arvioitu säästönne',
       description: 'Tulos perustuu annettuihin hintoihin ja vuosivolyymeihin. Kaikki luvut ovat arvioita.',
-      exampleDataTitle: 'Näemme, että laskelma perustuu tällä hetkellä toimialan keskimääräisiin arvoihin.',
+      exampleDataTitle: 'Ette ole vielä päivittäneet tietoja.',
       exampleDataBody:
         'Tulos on siksi vain arvio. Syöttäkää omat todelliset kustannuksenne ja vastaanottohintanne saadaksenne tarkemman laskelman mahdollisesta säästöstänne.',
       exampleDataDismiss: 'Selvä, näytä tulos silti',
@@ -1304,6 +1309,7 @@ export const translations: Record<Language, TranslationDict> = {
       attachmentLabel: 'Liitä hinnasto tai lasku (valinnainen)',
       backButton: 'Takaisin',
       nextButton: 'Seuraava',
+      headerContactButton: 'Ota yhteyttä',
       avgFeePrefix: 'Keskimääräinen maksu n.',
       cardTypeColumn: 'Korttityyppi',
       percentColumn: 'Prosentti',

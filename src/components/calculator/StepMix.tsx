@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useCalculator } from '../../context/CalculatorContext'
 import { getMixError, sumMix } from '../../lib/validation'
+import { mixEqualsDefault } from '../../lib/dataQuality'
 import { MIX_CATEGORY_LABELS, type MixCategory } from '../../types/calculator'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { Badge } from '../ui/Badge'
 import { Card } from '../ui/Card'
+import { ExampleDataNotice } from './shared/ExampleDataNotice'
 import { SliderField } from './shared/SliderField'
 import { StepNavigation } from './shared/StepNavigation'
 
@@ -43,6 +45,12 @@ export function StepMix() {
           {t.calculator.step2TimeHint}
         </Badge>
       </div>
+
+      {mixEqualsDefault(state) && (
+        <div className="mt-6">
+          <ExampleDataNotice />
+        </div>
+      )}
 
       {!showDetailed ? (
         <div className="mt-8 flex flex-col items-start gap-4 rounded-lg border border-border-subtle bg-surface px-5 py-5 sm:flex-row sm:items-center sm:justify-between">

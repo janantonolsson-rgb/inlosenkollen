@@ -107,7 +107,7 @@ export function Header() {
             className="hidden sm:inline-flex"
             onClick={() => scrollTo('kontakt')}
           >
-            {t.leadForm.submit}
+            {t.misc.headerContactButton}
           </Button>
 
           <button
@@ -169,7 +169,7 @@ export function Header() {
           </div>
 
           <Button className="mt-2 w-full" onClick={() => handleNavClick('#kontakt')}>
-            {t.leadForm.submit}
+            {t.misc.headerContactButton}
           </Button>
         </nav>
       </div>

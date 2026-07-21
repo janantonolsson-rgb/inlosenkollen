@@ -1,7 +1,7 @@
 import { defaultMix, defaultVolume } from '../data/defaults'
 import type { Acquirer, CalculatorState } from '../types/calculator'
 
-function volumeEqualsDefault(state: CalculatorState): boolean {
+export function volumeEqualsDefault(state: CalculatorState): boolean {
   const v = state.volume
   return (
     v.annualVolume === defaultVolume.annualVolume &&
@@ -11,7 +11,7 @@ function volumeEqualsDefault(state: CalculatorState): boolean {
   )
 }
 
-function mixEqualsDefault(state: CalculatorState): boolean {
+export function mixEqualsDefault(state: CalculatorState): boolean {
   const m = state.mix
   return (Object.keys(defaultMix) as (keyof typeof defaultMix)[]).every(
     (key) => m[key] === defaultMix[key],
