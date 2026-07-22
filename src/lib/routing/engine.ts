@@ -1,116 +1,83 @@
-import type { Acquirer, FeeStructure, MixCategory, PricingCategory } from '../../types/calculator'
-import { calculateCategoryCost, getFeeForCategory } from '../calculations'
+import type {
+  Acquirer,
+  AcquirerPricing,
+  CurrentAgreement,
+  PricingCategory,
+} from '../../types/calculator'
+import { allInPercent } from '../calculations'
+
+export const CURRENT_ACQUIRER_ID = 'current-acquirer'
+export const CURRENT_ACQUIRER_NAME = 'Nuvarande inlösare'
 
 export interface RoutingContext {
-  mixCategory: MixCategory
   pricingCategory: PricingCategory
   categoryVolume: number
   categoryTransactions: number
   acquirers: Acquirer[]
-  /**
-   * Kundens nuvarande, oförändrade pris. Detta MÅSTE alltid finnas med som ett
-   * routingalternativ (affärsregel: intelligent routing får aldrig öka kostnaden).
-   * Genom att alltid inkludera detta som en kandidat i MIN()-jämförelsen blir det
-   * matematiskt omöjligt för routing_cost att bli högre än current_cost.
-   */
-  currentFee: FeeStructure
+  /** Kundens nuvarande pris (per kategori om detailed, annars blended). */
+  currentFee: { percent: number; fixed: number }
+  /** Multiplikator på markup (från volymband). */
+  markupMultiplier: number
 }
 
 export interface RoutingDecision {
   acquirerId: string
   acquirerName: string
   cost: number
-  ruleApplied: string
-  /** true om det billigaste alternativet var att behålla nuvarande inlösare. */
   keptCurrent: boolean
 }
 
-export interface RoutingRule {
-  id: string
-  priority: number
-  apply: (ctx: RoutingContext) => RoutingDecision | null
-}
-
-export const CURRENT_ACQUIRER_ID = 'current-acquirer'
-export const CURRENT_ACQUIRER_NAME = 'Nuvarande inlösare (oförändrat)'
-
 /**
- * Returnerar en säker, ändlig kostnad för en given avgiftsstruktur.
- * Om priset saknas, är NaN, eller negativt (korrupt/felaktig data) returneras
- * Infinity så att alternativet aldrig kan väljas som "billigast" av misstag —
- * hellre utesluta ett misstänkt pris än att råka rekommendera en dyrare inlösare.
+ * Affärsregel: intelligent routing får aldrig öka kundens kostnad. Nuvarande
+ * pris är alltid en kandidat i MIN()-jämförelsen, så routed cost ≤ current cost
+ * per kategori (och därmed totalt).
  */
-function safeCategoryCost(
-  volume: number,
-  transactions: number,
-  fee: FeeStructure | undefined | null,
-): number {
-  if (
-    !fee ||
-    typeof fee.percent !== 'number' ||
-    typeof fee.fixed !== 'number' ||
-    Number.isNaN(fee.percent) ||
-    Number.isNaN(fee.fixed) ||
-    fee.percent < 0 ||
-    fee.fixed < 0
-  ) {
-    return Number.POSITIVE_INFINITY
-  }
-  const cost = calculateCategoryCost(volume, transactions, fee)
-  return Number.isFinite(cost) ? cost : Number.POSITIVE_INFINITY
-}
+export function routeCategory(ctx: RoutingContext): RoutingDecision {
+  const currentCost =
+    (ctx.categoryVolume * ctx.currentFee.percent) / 100 + ctx.categoryTransactions * ctx.currentFee.fixed
 
-/**
- * Default rule: route to the cheapest option for this category, where the
- * candidates are every konfigurerad inlösare PLUS kundens nuvarande pris.
- * Eftersom nuvarande pris alltid är en kandidat kan resultatet aldrig bli dyrare
- * än att stå kvar hos nuvarande inlösare.
- */
-export const lowestCostRule: RoutingRule = {
-  id: 'lowest-cost',
-  priority: 100,
-  apply(ctx: RoutingContext): RoutingDecision | null {
-    const currentCost = safeCategoryCost(ctx.categoryVolume, ctx.categoryTransactions, ctx.currentFee)
-
-    let best: RoutingDecision = {
-      acquirerId: CURRENT_ACQUIRER_ID,
-      acquirerName: CURRENT_ACQUIRER_NAME,
-      cost: currentCost,
-      ruleApplied: 'lowest-cost',
-      keptCurrent: true,
-    }
-
-    for (const acquirer of ctx.acquirers) {
-      const fee = getFeeForCategory(acquirer, ctx.pricingCategory)
-      const cost = safeCategoryCost(ctx.categoryVolume, ctx.categoryTransactions, fee)
-
-      if (cost < best.cost) {
-        best = {
-          acquirerId: acquirer.id,
-          acquirerName: acquirer.name,
-          cost,
-          ruleApplied: 'lowest-cost',
-          keptCurrent: false,
-        }
-      }
-    }
-
-    return best
-  },
-}
-
-export const defaultRoutingRules: RoutingRule[] = [lowestCostRule]
-
-export function routeTransaction(
-  ctx: RoutingContext,
-  rules: RoutingRule[] = defaultRoutingRules,
-): RoutingDecision {
-  const sortedRules = [...rules].sort((a, b) => a.priority - b.priority)
-
-  for (const rule of sortedRules) {
-    const decision = rule.apply(ctx)
-    if (decision) return decision
+  let best: RoutingDecision = {
+    acquirerId: CURRENT_ACQUIRER_ID,
+    acquirerName: CURRENT_ACQUIRER_NAME,
+    cost: Number.isFinite(currentCost) ? currentCost : Number.POSITIVE_INFINITY,
+    keptCurrent: true,
   }
 
-  throw new Error('No routing rule could determine an acquirer')
+  for (const acquirer of ctx.acquirers) {
+    const fee = acquirer.pricing[ctx.pricingCategory]
+    if (!fee || !Number.isFinite(fee.markup) || fee.markup < 0) continue
+    const pct = (allInPercent({
+      interchange: fee.interchange,
+      scheme: fee.scheme,
+      markup: fee.markup * ctx.markupMultiplier,
+    }) ) / 100
+    const cost = ctx.categoryVolume * pct + ctx.categoryTransactions * fee.fixed
+    if (Number.isFinite(cost) && cost < best.cost) {
+      best = { acquirerId: acquirer.id, acquirerName: acquirer.name, cost, keptCurrent: false }
+    }
+  }
+
+  if (!Number.isFinite(best.cost)) best.cost = 0
+  return best
+}
+
+export function getCurrentFeeForCategory(
+  current: CurrentAgreement,
+  category: PricingCategory,
+): { percent: number; fixed: number } {
+  if (current.mode === 'detailed' && current.detailed?.[category]) {
+    return current.detailed[category]!
+  }
+  return current.blended ?? { percent: 0, fixed: 0 }
+}
+
+/** Hjälp för tester: returnera skalad prissättning för en kategori. */
+export function scaledFee(pricing: AcquirerPricing, category: PricingCategory, multiplier: number) {
+  const f = pricing[category]
+  return {
+    interchange: f.interchange,
+    scheme: f.scheme,
+    markup: f.markup * multiplier,
+    fixed: f.fixed,
+  }
 }
