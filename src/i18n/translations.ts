@@ -35,8 +35,37 @@ export interface TranslationDict {
     title: string
     body: string
   }
+  trustBar: {
+    developedForLabel: string
+    independentLine: string
+    experienceLine: string
+  }
   faq: {
     title: string
+  }
+  pdfReport: {
+    downloadButton: string
+    documentTitle: string
+    documentSubtitle: string
+    summaryHeading: string
+    summaryPotentialLabel: string
+    prerequisitesHeading: string
+    annualVolumeLabel: string
+    averageOrderValueLabel: string
+    transactionCountLabel: string
+    currentFeeLabel: string
+    optimizationHeading: string
+    currentCostLabel: string
+    routedCostLabel: string
+    differenceLabel: string
+    factorsHeading: string
+    factorCardMix: string
+    factorInternational: string
+    factorCurrentAgreements: string
+    factorAvailableAcquirers: string
+    disclaimerHeading: string
+    disclaimerBody: string
+    generatedLabel: string
   }
   calculator: {
     step1Title: string
@@ -73,6 +102,12 @@ export interface TranslationDict {
     exampleDataDismiss: string
     estimatedSavingsLabel: string
     potentialAnnualSavingsPrefix: string
+    perYearSuffix: string
+    basedOnLabel: string
+    basedOnVolume: string
+    basedOnMix: string
+    basedOnFees: string
+    ctaReview: string
     savingsDisclaimer: string
     simplifiedModeLabel: string
     simplifiedModeTitle: string
@@ -238,7 +273,7 @@ export const translations: Record<Language, TranslationDict> = {
       diagramSubtitle:
         'Genom intelligent routing analyseras varje köp i realtid och styrs automatiskt till den inlösare som kan hantera betalningen till lägst totalkostnad.',
       valueTitle: 'Mer än bara lägre pris',
-      valueSubtitle: 'Intelligent routing handlar om att sänka kostnaden — men värdet stannar inte där.',
+      valueSubtitle: 'Intelligent routing handlar om att sänka kostnaden, men värdet stannar inte där.',
       valueFootnote:
         'Möjligheterna beror på kundens avtal, tekniska uppsättning, marknad och vilka betalningsmetoder som stöds. Alla transaktioner kan inte alltid routas till valfri inlösare.',
       ctaButton: 'Prova kalkylatorn',
@@ -248,13 +283,43 @@ export const translations: Record<Language, TranslationDict> = {
       body:
         'Inlösenkollen utvecklades för att hjälpa nordiska företag att få bättre insikt i sina betalningskostnader och förstå hur de kan optimera sina betalflöden. Inlösenkollen erbjuder inga egna inlösenavtal, utan informerar företag om hur de kan skapa bättre förutsättningar genom ökad transparens, större konkurrens mellan inlösare och smartare betalflöden. Ni behåller själva full kontroll över vilka avtal ni väljer.',
     },
+    trustBar: {
+      developedForLabel: 'Utvecklad för:',
+      independentLine: 'Oberoende analys av era betalningskostnader.',
+      experienceLine: 'Utvecklad baserat på erfarenhet från den nordiska betalningsmarknaden.',
+    },
     faq: {
       title: 'Vanliga frågor',
+    },
+    pdfReport: {
+      downloadButton: 'Ladda ner PDF-rapport',
+      documentTitle: 'Inlösenkollen',
+      documentSubtitle: 'Preliminär analys av kortbetalningskostnader',
+      summaryHeading: 'Sammanfattning',
+      summaryPotentialLabel: 'Uppskattad besparingspotential',
+      prerequisitesHeading: 'Företagets förutsättningar',
+      annualVolumeLabel: 'Årlig kortomsättning',
+      averageOrderValueLabel: 'Genomsnittligt ordervärde',
+      transactionCountLabel: 'Antal transaktioner per år',
+      currentFeeLabel: 'Nuvarande inlösenkostnad',
+      optimizationHeading: 'Möjlig optimering',
+      currentCostLabel: 'Nuvarande uppskattad kostnad',
+      routedCostLabel: 'Möjlig kostnad med intelligent routing',
+      differenceLabel: 'Potentiell skillnad',
+      factorsHeading: 'Faktorer som påverkar resultatet',
+      factorCardMix: 'Kortmix',
+      factorInternational: 'Internationella kort',
+      factorCurrentAgreements: 'Nuvarande avtal',
+      factorAvailableAcquirers: 'Tillgängliga inlösare',
+      disclaimerHeading: 'Viktigt att veta',
+      disclaimerBody:
+        'Detta är en indikativ analys baserad på angivna uppgifter, inte en garanti för ett visst pris eller en viss besparing. Faktiska kostnader och besparingar kan variera beroende på bland annat kortmix, interchange, scheme fees, inlösenavtal och andra avtalsvillkor.',
+      generatedLabel: 'Genererad',
     },
     calculator: {
       step1Title: 'Steg 1: Företagets betalningsvolym',
       step1Description:
-        'Ange företagets nuvarande årliga kortomsättning och ungefärliga inlösenkostnad. Kör ni bara med en ungefärlig procentsats idag räcker det gott för en första uppskattning. Intelligent routing gör störst skillnad för företag och koncerner med hög omsättning.',
+        'Ange företagets årliga kortomsättning och vad ni betalar för kortinlösen idag.',
       step2Title: 'Steg 2: Anpassa transaktionsmix',
       step2Description:
         'Beräkningen bygger just nu på den genomsnittliga fördelningen av korttyper i Sverige. Ni kan gå vidare direkt, men vill ni få en mer exakt uppskattning kan ni justera fördelningen utifrån er egen statistik nedan.',
@@ -289,8 +354,14 @@ export const translations: Record<Language, TranslationDict> = {
       exampleDataBody:
         'Resultatet är därför endast en uppskattning. Lägg in era egna aktuella kostnader och inlösenpriser för att få en mer korrekt beräkning av er möjliga besparing.',
       exampleDataDismiss: 'Jag förstår, visa resultatet ändå',
-      estimatedSavingsLabel: 'Uppskattad besparing',
+      estimatedSavingsLabel: 'Er uppskattade potential',
       potentialAnnualSavingsPrefix: 'Potentiell årlig besparing:',
+      perYearSuffix: '/år',
+      basedOnLabel: 'Baserat på:',
+      basedOnVolume: 'Er kortomsättning',
+      basedOnMix: 'Er transaktionsmix',
+      basedOnFees: 'Era nuvarande avgifter',
+      ctaReview: 'Få en kostnadsfri genomgång av era möjligheter',
       savingsDisclaimer:
         'Baserat på de priser och volymer du angivit. Faktisk besparing kan variera och är inte garanterad.',
       simplifiedModeLabel: 'Förenklat läge',
@@ -366,7 +437,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Övriga betalmetoder',
       title: 'Alternativa betalningsmetoder',
       description:
-        'Swish, Klarna, MobilePay och andra alternativa betalningsmetoder ingår inte i kalkylatorn eftersom dessa normalt inte kan routas mellan flera inlösare. Eftersom det därför inte finns någon kostnadsbesparing att uppnå genom intelligent routing för dessa transaktioner, inkluderas de inte i kalkylatorns beräkningar. Tjänsterna kan självklart fortfarande användas parallellt med intelligent routing för kortbetalningar.',
+        'Swish, Klarna, MobilePay och andra alternativa betalningsmetoder ingår inte i kalkylatorn eftersom de normalt inte kan routas mellan flera inlösare. Intelligent routing gäller därför endast kortbetalningar. Alternativa betalmetoder kan självklart användas parallellt.',
       swish: 'Populärt i Sverige med fast eller procentuell avgift. Ingår inte i kalkylatorns routing.',
       klarna: 'Buy now, pay later och direktbetalningar med egna avgiftsmodeller per produkt.',
       mobilePay: 'Vanligt i Danmark och Finland. Egen prissättning, separat från kortbetalningar.',
@@ -474,13 +545,43 @@ export const translations: Record<Language, TranslationDict> = {
       body:
         'Inlösenkollen was developed to help Nordic companies gain better insight into their payment costs and understand how they can optimize their payment flows. Inlösenkollen does not offer any acquiring agreements of its own — it informs companies about how to create better conditions through increased transparency, greater competition between acquirers, and smarter payment flows. You retain full control over which agreements you choose.',
     },
+    trustBar: {
+      developedForLabel: 'Developed for:',
+      independentLine: 'An independent analysis of your payment costs.',
+      experienceLine: 'Built on experience from the Nordic payments market.',
+    },
     faq: {
       title: 'Frequently asked questions',
+    },
+    pdfReport: {
+      downloadButton: 'Download PDF report',
+      documentTitle: 'Inlösenkollen',
+      documentSubtitle: 'Preliminary analysis of card payment costs',
+      summaryHeading: 'Summary',
+      summaryPotentialLabel: 'Estimated savings potential',
+      prerequisitesHeading: 'Company details',
+      annualVolumeLabel: 'Annual card turnover',
+      averageOrderValueLabel: 'Average order value',
+      transactionCountLabel: 'Transactions per year',
+      currentFeeLabel: 'Current acquiring cost',
+      optimizationHeading: 'Potential optimization',
+      currentCostLabel: 'Current estimated cost',
+      routedCostLabel: 'Possible cost with intelligent routing',
+      differenceLabel: 'Potential difference',
+      factorsHeading: 'Factors affecting the result',
+      factorCardMix: 'Card mix',
+      factorInternational: 'International cards',
+      factorCurrentAgreements: 'Current agreements',
+      factorAvailableAcquirers: 'Available acquirers',
+      disclaimerHeading: 'Important to know',
+      disclaimerBody:
+        'This is an indicative analysis based on the information provided, not a guarantee of a specific price or saving. Actual costs and savings may vary depending on, among other things, card mix, interchange, scheme fees, acquiring agreements, and other contractual terms.',
+      generatedLabel: 'Generated',
     },
     calculator: {
       step1Title: 'Step 1: Your company\u2019s payment volume',
       step1Description:
-        'Enter your company\u2019s current annual card turnover and approximate acquiring cost. If you only have a rough percentage today, that\u2019s enough for a first estimate. Intelligent routing makes the biggest difference for companies and groups with high turnover.',
+        'Enter your company\u2019s annual card turnover and what you currently pay for card acquiring.',
       step2Title: 'Step 2: Adjust transaction mix',
       step2Description:
         'The calculation is currently based on the average distribution of card types in Sweden. You can move on right away, or adjust the distribution below using your own statistics for a more precise estimate.',
@@ -515,8 +616,14 @@ export const translations: Record<Language, TranslationDict> = {
       exampleDataBody:
         'The result is therefore only an estimate. Enter your own actual costs and acquiring prices to get a more accurate calculation of your potential savings.',
       exampleDataDismiss: 'Got it, show the result anyway',
-      estimatedSavingsLabel: 'Estimated savings',
+      estimatedSavingsLabel: 'Your estimated potential',
       potentialAnnualSavingsPrefix: 'Potential annual savings:',
+      perYearSuffix: '/year',
+      basedOnLabel: 'Based on:',
+      basedOnVolume: 'Your card turnover',
+      basedOnMix: 'Your transaction mix',
+      basedOnFees: 'Your current fees',
+      ctaReview: 'Get a free review of your opportunities',
       savingsDisclaimer:
         'Based on the prices and volumes you provided. Actual savings may vary and are not guaranteed.',
       simplifiedModeLabel: 'Simplified mode',
@@ -592,7 +699,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Other payment methods',
       title: 'Alternative payment methods',
       description:
-        'Swish, Klarna, MobilePay and other alternative payment methods are not included in the calculator because they normally cannot be routed between several acquirers. Since there is therefore no cost saving to achieve through intelligent routing for these transactions, they are not included in the calculator’s calculations. These services can of course still be used alongside intelligent routing for card payments.',
+        'Swish, Klarna, MobilePay and other alternative payment methods are not included in the calculator because they normally cannot be routed between several acquirers. Intelligent routing therefore only applies to card payments. Alternative payment methods can of course still be used in parallel.',
       swish: 'Popular in Sweden with a fixed or percentage fee. Not included in the calculator’s routing.',
       klarna: 'Buy now, pay later and direct payments with their own fee models per product.',
       mobilePay: 'Common in Denmark and Finland. Its own pricing, separate from card payments.',
@@ -700,13 +807,43 @@ export const translations: Record<Language, TranslationDict> = {
       body:
         'Inlösenkollen ble utviklet for å hjelpe nordiske bedrifter med bedre innsikt i sine betalingskostnader og forstå hvordan de kan optimalisere betalingsflytene sine. Inlösenkollen tilbyr ingen egne innløsningsavtaler, men informerer bedrifter om hvordan de kan skape bedre forutsetninger gjennom økt gjennomsiktighet, større konkurranse mellom innløsere og smartere betalingsflyter. Dere beholder selv full kontroll over hvilke avtaler dere velger.',
     },
+    trustBar: {
+      developedForLabel: 'Utviklet for:',
+      independentLine: 'Uavhengig analyse av deres betalingskostnader.',
+      experienceLine: 'Utviklet basert på erfaring fra det nordiske betalingsmarkedet.',
+    },
     faq: {
       title: 'Ofte stilte spørsmål',
+    },
+    pdfReport: {
+      downloadButton: 'Last ned PDF-rapport',
+      documentTitle: 'Inlösenkollen',
+      documentSubtitle: 'Foreløpig analyse av kortbetalingskostnader',
+      summaryHeading: 'Sammendrag',
+      summaryPotentialLabel: 'Beregnet besparelsespotensial',
+      prerequisitesHeading: 'Bedriftens forutsetninger',
+      annualVolumeLabel: 'Årlig kortomsetning',
+      averageOrderValueLabel: 'Gjennomsnittlig ordreverdi',
+      transactionCountLabel: 'Antall transaksjoner per år',
+      currentFeeLabel: 'Nåværende innløsningskostnad',
+      optimizationHeading: 'Mulig optimalisering',
+      currentCostLabel: 'Nåværende beregnede kostnad',
+      routedCostLabel: 'Mulig kostnad med intelligent ruting',
+      differenceLabel: 'Potensiell forskjell',
+      factorsHeading: 'Faktorer som påvirker resultatet',
+      factorCardMix: 'Kortmiks',
+      factorInternational: 'Internasjonale kort',
+      factorCurrentAgreements: 'Nåværende avtaler',
+      factorAvailableAcquirers: 'Tilgjengelige innløsere',
+      disclaimerHeading: 'Viktig å vite',
+      disclaimerBody:
+        'Dette er en indikativ analyse basert på oppgitte opplysninger, ikke en garanti for en bestemt pris eller besparelse. Faktiske kostnader og besparelser kan variere avhengig av blant annet kortmiks, interchange, scheme fees, innløsningsavtaler og andre avtalevilkår.',
+      generatedLabel: 'Generert',
     },
     calculator: {
       step1Title: 'Steg 1: Bedriftens betalingsvolum',
       step1Description:
-        'Angi bedriftens nåværende årlige kortomsetning og omtrentlige innløsningskostnad. Har dere bare en omtrentlig prosentsats i dag, er det godt nok for et første anslag. Intelligent ruting gir størst forskjell for bedrifter og konsern med høy omsetning.',
+        'Angi bedriftens årlige kortomsetning og hva dere betaler for kortinnløsning i dag.',
       step2Title: 'Steg 2: Tilpass transaksjonsmiks',
       step2Description:
         'Beregningen bygger nå på den gjennomsnittlige fordelingen av korttyper i Sverige. Dere kan gå videre med en gang, eller justere fordelingen nedenfor ut fra egen statistikk for et mer presist anslag.',
@@ -741,8 +878,14 @@ export const translations: Record<Language, TranslationDict> = {
       exampleDataBody:
         'Resultatet er derfor kun et estimat. Legg inn deres egne, faktiske kostnader og innløsningspriser for å få en mer korrekt beregning av deres mulige besparelse.',
       exampleDataDismiss: 'Jeg forstår, vis resultatet likevel',
-      estimatedSavingsLabel: 'Beregnet besparelse',
+      estimatedSavingsLabel: 'Deres beregnede potensial',
       potentialAnnualSavingsPrefix: 'Potensiell årlig besparelse:',
+      perYearSuffix: '/år',
+      basedOnLabel: 'Basert på:',
+      basedOnVolume: 'Deres kortomsetning',
+      basedOnMix: 'Deres transaksjonsmiks',
+      basedOnFees: 'Deres nåværende gebyrer',
+      ctaReview: 'Få en kostnadsfri gjennomgang av mulighetene deres',
       savingsDisclaimer:
         'Basert på prisene og volumene du har oppgitt. Faktisk besparelse kan variere og er ikke garantert.',
       simplifiedModeLabel: 'Forenklet modus',
@@ -818,7 +961,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Andre betalingsmetoder',
       title: 'Alternative betalingsmetoder',
       description:
-        'Swish, Klarna, MobilePay og andre alternative betalingsmetoder inngår ikke i kalkulatoren fordi disse normalt ikke kan rutes mellom flere innløsere. Siden det derfor ikke finnes noen kostnadsbesparelse å oppnå gjennom intelligent ruting for disse transaksjonene, inkluderes de ikke i kalkulatorens beregninger. Tjenestene kan selvsagt fortsatt brukes parallelt med intelligent ruting for kortbetalinger.',
+        'Swish, Klarna, MobilePay og andre alternative betalingsmetoder inngår ikke i kalkulatoren fordi de normalt ikke kan rutes mellom flere innløsere. Intelligent ruting gjelder derfor kun kortbetalinger. Alternative betalingsmetoder kan selvsagt brukes parallelt.',
       swish: 'Populært i Sverige med fast eller prosentvis gebyr. Inngår ikke i kalkulatorens ruting.',
       klarna: 'Buy now, pay later og direktebetalinger med egne gebyrmodeller per produkt.',
       mobilePay: 'Vanlig i Danmark og Finland. Egen prising, separat fra kortbetalinger.',
@@ -926,13 +1069,43 @@ export const translations: Record<Language, TranslationDict> = {
       body:
         'Inlösenkollen blev udviklet for at hjælpe nordiske virksomheder med bedre indsigt i deres betalingsomkostninger og forstå, hvordan de kan optimere deres betalingsflows. Inlösenkollen tilbyder ingen egne indløsningsaftaler, men informerer virksomheder om, hvordan de kan skabe bedre forudsætninger gennem øget gennemsigtighed, større konkurrence mellem indløsere og smartere betalingsflows. I beholder selv fuld kontrol over, hvilke aftaler I vælger.',
     },
+    trustBar: {
+      developedForLabel: 'Udviklet til:',
+      independentLine: 'Uafhængig analyse af jeres betalingsomkostninger.',
+      experienceLine: 'Udviklet på baggrund af erfaring fra det nordiske betalingsmarked.',
+    },
     faq: {
       title: 'Ofte stillede spørgsmål',
+    },
+    pdfReport: {
+      downloadButton: 'Download PDF-rapport',
+      documentTitle: 'Inlösenkollen',
+      documentSubtitle: 'Foreløbig analyse af kortbetalingsomkostninger',
+      summaryHeading: 'Sammenfatning',
+      summaryPotentialLabel: 'Estimeret besparelsespotentiale',
+      prerequisitesHeading: 'Virksomhedens forudsætninger',
+      annualVolumeLabel: 'Årlig kortomsætning',
+      averageOrderValueLabel: 'Gennemsnitlig ordreværdi',
+      transactionCountLabel: 'Antal transaktioner pr. år',
+      currentFeeLabel: 'Nuværende indløsningsomkostning',
+      optimizationHeading: 'Mulig optimering',
+      currentCostLabel: 'Nuværende estimerede omkostning',
+      routedCostLabel: 'Mulig omkostning med intelligent routing',
+      differenceLabel: 'Potentiel forskel',
+      factorsHeading: 'Faktorer, der påvirker resultatet',
+      factorCardMix: 'Kortmix',
+      factorInternational: 'Internationale kort',
+      factorCurrentAgreements: 'Nuværende aftaler',
+      factorAvailableAcquirers: 'Tilgængelige indløsere',
+      disclaimerHeading: 'Vigtigt at vide',
+      disclaimerBody:
+        'Dette er en indikativ analyse baseret på de angivne oplysninger, ikke en garanti for en bestemt pris eller besparelse. Faktiske omkostninger og besparelser kan variere afhængigt af blandt andet kortmix, interchange, scheme fees, indløsningsaftaler og andre aftalevilkår.',
+      generatedLabel: 'Genereret',
     },
     calculator: {
       step1Title: 'Trin 1: Virksomhedens betalingsvolumen',
       step1Description:
-        'Angiv virksomhedens nuværende årlige kortomsætning og omtrentlige indløsningsomkostning. Har I kun en omtrentlig procentsats i dag, er det godt nok til et første estimat. Intelligent routing gør størst forskel for virksomheder og koncerner med høj omsætning.',
+        'Angiv virksomhedens årlige kortomsætning og hvad I betaler for kortindløsning i dag.',
       step2Title: 'Trin 2: Tilpas transaktionsmix',
       step2Description:
         'Beregningen bygger nu på den gennemsnitlige fordeling af korttyper i Sverige. I kan gå videre med det samme, eller justere fordelingen nedenfor ud fra jeres egen statistik for et mere præcist estimat.',
@@ -967,8 +1140,14 @@ export const translations: Record<Language, TranslationDict> = {
       exampleDataBody:
         'Resultatet er derfor kun et estimat. Angiv jeres egne, faktiske omkostninger og indløsningspriser for at få en mere korrekt beregning af jeres mulige besparelse.',
       exampleDataDismiss: 'Jeg forstår, vis resultatet alligevel',
-      estimatedSavingsLabel: 'Beregnet besparelse',
+      estimatedSavingsLabel: 'Jeres beregnede potentiale',
       potentialAnnualSavingsPrefix: 'Potentiel årlig besparelse:',
+      perYearSuffix: '/år',
+      basedOnLabel: 'Baseret på:',
+      basedOnVolume: 'Jeres kortomsætning',
+      basedOnMix: 'Jeres transaktionsmix',
+      basedOnFees: 'Jeres nuværende gebyrer',
+      ctaReview: 'Få en gratis gennemgang af jeres muligheder',
       savingsDisclaimer:
         'Baseret på de priser og volumener, du har angivet. Faktisk besparelse kan variere og er ikke garanteret.',
       simplifiedModeLabel: 'Forenklet tilstand',
@@ -1044,7 +1223,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Andre betalingsmetoder',
       title: 'Alternative betalingsmetoder',
       description:
-        'Swish, Klarna, MobilePay og andre alternative betalingsmetoder indgår ikke i beregneren, da disse normalt ikke kan routes mellem flere indløsere. Da der derfor ikke er nogen omkostningsbesparelse at opnå gennem intelligent routing for disse transaktioner, indgår de ikke i beregnerens beregninger. Tjenesterne kan naturligvis stadig bruges parallelt med intelligent routing til kortbetalinger.',
+        'Swish, Klarna, MobilePay og andre alternative betalingsmetoder indgår ikke i beregneren, da de normalt ikke kan routes mellem flere indløsere. Intelligent routing gælder derfor kun kortbetalinger. Alternative betalingsmetoder kan naturligvis bruges parallelt.',
       swish: 'Populært i Sverige med fast eller procentvist gebyr. Indgår ikke i beregnerens routing.',
       klarna: 'Buy now, pay later og direkte betalinger med egne gebyrmodeller pr. produkt.',
       mobilePay: 'Almindeligt i Danmark og Finland. Egen prisfastsættelse, adskilt fra kortbetalinger.',
@@ -1152,13 +1331,43 @@ export const translations: Record<Language, TranslationDict> = {
       body:
         'Inlösenkollen kehitettiin auttamaan pohjoismaisia yrityksiä saamaan parempi käsitys maksukustannuksistaan ja ymmärtämään, miten ne voivat optimoida maksuvirtojaan. Inlösenkollen ei tarjoa omia vastaanottosopimuksia, vaan kertoo yrityksille, miten ne voivat luoda paremmat edellytykset lisääntyneen läpinäkyvyyden, maksunvälittäjien välisen suuremman kilpailun ja älykkäämpien maksuvirtojen kautta. Säilytätte itse täyden hallinnan siitä, mitä sopimuksia valitsette.',
     },
+    trustBar: {
+      developedForLabel: 'Kehitetty:',
+      independentLine: 'Riippumaton analyysi maksukustannuksistanne.',
+      experienceLine: 'Kehitetty pohjoismaisen maksualan kokemuksen pohjalta.',
+    },
     faq: {
       title: 'Usein kysytyt kysymykset',
+    },
+    pdfReport: {
+      downloadButton: 'Lataa PDF-raportti',
+      documentTitle: 'Inlösenkollen',
+      documentSubtitle: 'Alustava analyysi korttimaksukustannuksista',
+      summaryHeading: 'Yhteenveto',
+      summaryPotentialLabel: 'Arvioitu säästöpotentiaali',
+      prerequisitesHeading: 'Yrityksen lähtötiedot',
+      annualVolumeLabel: 'Vuotuinen korttimyynti',
+      averageOrderValueLabel: 'Keskimääräinen tilausarvo',
+      transactionCountLabel: 'Tapahtumia vuodessa',
+      currentFeeLabel: 'Nykyinen vastaanottokustannus',
+      optimizationHeading: 'Mahdollinen optimointi',
+      currentCostLabel: 'Nykyinen arvioitu kustannus',
+      routedCostLabel: 'Mahdollinen kustannus älykkäällä reitityksellä',
+      differenceLabel: 'Mahdollinen ero',
+      factorsHeading: 'Tulokseen vaikuttavat tekijät',
+      factorCardMix: 'Korttijakauma',
+      factorInternational: 'Kansainväliset kortit',
+      factorCurrentAgreements: 'Nykyiset sopimukset',
+      factorAvailableAcquirers: 'Käytettävissä olevat maksunvälittäjät',
+      disclaimerHeading: 'Tärkeää tietää',
+      disclaimerBody:
+        'Tämä on suuntaa antava analyysi annettujen tietojen perusteella, ei takuu tietystä hinnasta tai säästöstä. Todelliset kustannukset ja säästöt voivat vaihdella muun muassa korttijakauman, interchange-maksujen, korttiyhtiöiden maksujen, vastaanottosopimusten ja muiden sopimusehtojen mukaan.',
+      generatedLabel: 'Luotu',
     },
     calculator: {
       step1Title: 'Vaihe 1: Yrityksen maksuvolyymi',
       step1Description:
-        'Anna yrityksenne nykyinen vuotuinen korttimyynti ja arvioitu vastaanottokustannus. Jos tiedätte vain karkean prosenttiluvun, se riittää ensimmäiseen arvioon. Älykäs reititys tuo suurimman hyödyn suuren liikevaihdon yrityksille ja konserneille.',
+        'Anna yrityksenne vuotuinen korttimyynti ja mitä maksatte tällä hetkellä kortinvälityksestä.',
       step2Title: 'Vaihe 2: Mukauta korttijakaumaa',
       step2Description:
         'Laskelma perustuu tällä hetkellä Ruotsin keskimääräiseen korttityyppijakaumaan. Voitte jatkaa suoraan, tai mukauttaa jakaumaa alla omien tietojenne perusteella tarkempaa arviota varten.',
@@ -1193,8 +1402,14 @@ export const translations: Record<Language, TranslationDict> = {
       exampleDataBody:
         'Tulos on siksi vain arvio. Syöttäkää omat todelliset kustannuksenne ja vastaanottohintanne saadaksenne tarkemman laskelman mahdollisesta säästöstänne.',
       exampleDataDismiss: 'Selvä, näytä tulos silti',
-      estimatedSavingsLabel: 'Arvioitu säästö',
+      estimatedSavingsLabel: 'Arvioitu potentiaalinne',
       potentialAnnualSavingsPrefix: 'Mahdollinen vuotuinen säästö:',
+      perYearSuffix: '/vuosi',
+      basedOnLabel: 'Perustuu:',
+      basedOnVolume: 'Korttimyyntiinne',
+      basedOnMix: 'Korttijakaumaanne',
+      basedOnFees: 'Nykyisiin maksuihinne',
+      ctaReview: 'Varatkaa maksuton katsaus mahdollisuuksistanne',
       savingsDisclaimer:
         'Perustuu antamiinne hintoihin ja volyymeihin. Todellinen säästö voi vaihdella eikä ole taattu.',
       simplifiedModeLabel: 'Yksinkertaistettu tila',
@@ -1270,7 +1485,7 @@ export const translations: Record<Language, TranslationDict> = {
       eyebrow: 'Muut maksutavat',
       title: 'Vaihtoehtoiset maksutavat',
       description:
-        'Swish, Klarna, MobilePay ja muut vaihtoehtoiset maksutavat eivät sisälly laskuriin, koska niitä ei yleensä voida reitittää usean maksunvälittäjän välillä. Koska näille tapahtumille ei siksi ole saavutettavissa kustannussäästöä älykkään reitityksen avulla, niitä ei sisällytetä laskurin laskelmiin. Palveluita voi tietysti silti käyttää rinnakkain älykkään korttimaksujen reitityksen kanssa.',
+        'Swish, Klarna, MobilePay ja muut vaihtoehtoiset maksutavat eivät sisälly laskuriin, koska niitä ei yleensä voida reitittää usean maksunvälittäjän välillä. Älykäs reititys koskee siksi vain korttimaksuja. Vaihtoehtoisia maksutapoja voi tietysti käyttää rinnakkain.',
       swish: 'Suosittu Ruotsissa kiinteällä tai prosentuaalisella maksulla. Ei sisälly laskurin reititykseen.',
       klarna: 'Buy now, pay later ja suorat maksut, joilla on omat maksumallinsa tuotteittain.',
       mobilePay: 'Yleinen Tanskassa ja Suomessa. Oma hinnoittelu, erillään korttimaksuista.',

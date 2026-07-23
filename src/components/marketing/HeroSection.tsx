@@ -33,30 +33,28 @@ export function HeroSection() {
             {t.hero.subtitle}
           </p>
 
-          <div className="mx-auto mt-6 max-w-xl rounded-lg border border-border-subtle bg-surface text-left text-sm">
-            <button
-              type="button"
-              onClick={() => setShowAcquirerExplainer((v) => !v)}
-              className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left font-medium text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-expanded={showAcquirerExplainer}
+          <button
+            type="button"
+            onClick={() => setShowAcquirerExplainer((v) => !v)}
+            className="mx-auto mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-accent decoration-accent/40 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            aria-expanded={showAcquirerExplainer}
+          >
+            {t.hero.acquirerExplainerTitle}
+            <svg
+              className={`h-3.5 w-3.5 shrink-0 transition-transform ${showAcquirerExplainer ? 'rotate-180' : ''}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
             >
-              {t.hero.acquirerExplainerTitle}
-              <svg
-                className={`h-4 w-4 shrink-0 text-muted transition-transform ${showAcquirerExplainer ? 'rotate-180' : ''}`}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {showAcquirerExplainer && (
-              <p className="border-t border-border-subtle px-4 py-3 leading-relaxed text-muted">
-                {t.hero.acquirerExplainer}
-              </p>
-            )}
-          </div>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {showAcquirerExplainer && (
+            <p className="mx-auto mt-3 max-w-xl text-left text-sm leading-relaxed text-muted">
+              {t.hero.acquirerExplainer}
+            </p>
+          )}
         </div>
 
         <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center">

@@ -9,6 +9,7 @@ import { ApmSection } from './components/marketing/ApmSection'
 import { FAQSection } from './components/marketing/FAQSection'
 import { HeroSection } from './components/marketing/HeroSection'
 import { HowItWorks } from './components/marketing/HowItWorks'
+import { TrustBar } from './components/marketing/TrustBar'
 import { TrustSection } from './components/marketing/TrustSection'
 import { Section, SectionHeader } from './components/ui/Section'
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext'
@@ -21,6 +22,7 @@ function AppContent() {
       <Header />
       <main>
         <HeroSection />
+        <TrustBar />
 
         <Section id="kalkylator">
           <PageContainer size="md">

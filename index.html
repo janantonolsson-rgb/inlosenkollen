@@ -6,18 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Beräkna hur mycket ert företag potentiellt kan spara genom intelligent routing av kortbetalningar mellan flera inlösare."
+      content="Inlösenkollen hjälper nordiska företag förstå och sänka sina inlösenkostnader för kortbetalningar genom intelligent routing och multi acquirer routing mellan flera inlösare."
     />
+    <link rel="canonical" href="https://new-aquirer-independent-fee-calc.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Inlösenkollen – Sänk era kostnader för kortbetalningar" />
+    <meta property="og:description" content="Se hur mycket ni kan spara på era kortinlösenkostnader genom intelligent routing mellan flera inlösare." />
+    <meta property="og:locale" content="sv_SE" />
+    <meta name="twitter:card" content="summary" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Inlösenkollen – Intelligent betalningsrouting</title>
+    <title>Inlösenkollen – Sänk era kostnader för kortbetalningar</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Inlösenkollen",
+      "url": "https://new-aquirer-independent-fee-calc.vercel.app/",
+      "description": "Inlösenkollen hjälper företag förstå och optimera sina kostnader för kortbetalningar, kortinlösen och intelligent routing mellan flera inlösare."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Inlösenkollen",
+      "url": "https://new-aquirer-independent-fee-calc.vercel.app/"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Inlösenkollen – Besparingskalkylator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "description": "Kalkylator som uppskattar besparingspotentialen med intelligent routing och multi acquirer routing för kortbetalningar.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SEK" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Måste vi byta betalterminaler?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Det beror på er nuvarande lösning. Intelligent routing kräver stöd för flera inlösare." }
+        },
+        {
+          "@type": "Question",
+          "name": "Är detta bara för stora företag?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Nej, men värdet ökar med företagets kortvolym eftersom större betalningsvolymer ger större besparingspotential." }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan vi behålla vår nuvarande inlösare?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ja, intelligent routing fungerar med både befintliga och nya inlösenavtal parallellt." }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur lång tid tar en implementation?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Själva aktiveringen kan normalt ske på några minuter givet en kompatibel betalningslösning; att samla in och jämföra offerter tar längre tid." }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <div hidden aria-hidden="true">
+      Inlösenkollen är ett verktyg för företag som vill förstå och optimera sina kostnader för
+      kortbetalningar. Kalkylatorn analyserar potentialen med intelligent routing och
+      multi-acquirer routing för att hjälpa företag minska sina betalningskostnader.
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

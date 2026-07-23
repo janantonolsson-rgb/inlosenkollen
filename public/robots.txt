@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://new-aquirer-independent-fee-calc.vercel.app/sitemap.xml

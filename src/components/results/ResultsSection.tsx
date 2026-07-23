@@ -66,9 +66,10 @@ export function ResultsSection() {
       )}
 
       <SavingsHero
-        annualSavings={results.annualSavings}
-        canRoute={results.canRoute}
-        isSimplifiedMode={results.isSimplifiedMode}
+        volume={state.volume}
+        mix={state.mix}
+        results={results}
+        acquirerCount={state.acquirers.length}
       />
 
       {showFullResults && (
